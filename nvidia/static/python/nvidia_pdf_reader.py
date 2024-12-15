@@ -5,7 +5,6 @@ import PyPDF2
 
 load_dotenv()
 
-# print(f"Current Working Directory: {os.getcwd()}")
 
 # Initialize the OpenAI client with NVIDIA's base URL and API key
 client = OpenAI(
