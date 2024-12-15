@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/edit/closebrackets.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}"> 
+
+
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static '/styles/home.css' %}" />
+    <title>Explanator AI</title>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
+    </header>
+    <nav>
+      {% comment %} <a href="{% url 'ai' %}">ARTIFICIAL INTELLIGENCE</a> {% endcomment %}
+      <a href="{% url 'datasets' %}">DATASETS</a>
+      <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
+      <a href="{% url 'local_models' %}">LOCAL MODELS</a>
+      <a href="{% url 'api_models' %}">API MODELS</a>
+    </nav>
+    <main>
+      <div class="content">
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>ALIBABA MODELS</h2>
+            <a href="{% url 'alibaba' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/local_models/alibaba/qwen2_1.5b.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>META MODELS</h2>
+            <a href="{% url 'meta' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/local_models/meta/llama3.2_1b.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>OPENAI MODELS</h2>
+            <a href="{% url 'openai' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/local_models/openai/gpt2_xl_1.5b.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GOOGLE MODELS</h2>
+            <a title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/local_models/google/bert_txt_reader.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>CUSTOM MODELS</h2>
+            <a href="{% url 'custom_models' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/local_models/custom_models/wp_ft_with_gpt2.py' %}"></div>
+        </div>
+      </div>
+
+      <div id="markdown-preview">
+        <h3>DOCUMENTATION</h3>
+        <div id="markdown-data-container" data-markdown-url="{% static 'markdown/local_models.md' %}"></div>
+      </div>
+    </main>
+
+    <footer>{% include 'includes/footer.html' %}</footer>
+
+    <script src="{% static 'scripts/home.js' %}"></script>
+  </body>
+</html>

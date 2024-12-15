@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/edit/closebrackets.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
+
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static '/styles/home.css' %}" />
+    <title>Explanator AI</title>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
+    </header>
+    <nav>
+      <a href="{% url 'gemini' %}">GEMINI</a>
+      <a href="{% url 'gemini_url_reader' %}">GEMINI URL READER</a>
+      <a href="{% url 'gemini_txt_reader' %}">GEMINI TXT READER</a>
+      <a href="{% url 'gemini_csv_reader' %}">GEMINI CSV READER</a>
+      <a href="{% url 'gemini_json_reader' %}">GEMINI JSON READER</a>
+      <a href="{% url 'gemini_pdf_reader' %}">GEMINI PDF READER</a>
+      <a href="{% url 'gemini_raw_dataset_reader' %}">GEMINI RAW DATASET READER</a>
+    </nav>
+    <main>
+      <div class="content">
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI API</h2>
+            <a href="{% url 'gemini' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI URL READER</h2>
+            <a href="{% url 'gemini_url_reader' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_url_reader.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI TXT READER</h2>
+            <a href="{% url 'gemini_txt_reader' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_txt_reader.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI CSV READER</h2>
+            <a href="{% url 'gemini_csv_reader' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_csv_reader.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI JSON READER</h2>
+            <a href="{% url 'gemini_json_reader' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_json_reader.py' %}"></div>
+        </div>
+        <div class="code-box">
+          <div id="codeBox-above-space">
+            <h2>GEMINI PDF READER</h2>
+            <a href="{% url 'gemini_pdf_reader' %}" title="Go to link">
+              <button type="button" title="link" class="link-btn">
+                <i class="fa-solid fa-up-right-from-square"></i>
+              </button>
+            </a>
+          </div>
+          <textarea id="python-code-editor" style="display: none"></textarea>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_pdf_reader.py' %}"></div>
+        </div>
+      </div>
+
+      <div id="markdown-preview">
+        <h3>DOCUMENTATION</h3>
+        <div id="markdown-data-container" data-markdown-url="{% static 'markdown/gemini.md' %}"></div>
+      </div>
+    </main>
+
+    <footer>{% include 'includes/footer.html' %}</footer>
+
+    <script src="{% static 'scripts/home.js' %}"></script>
+  </body>
+</html>
