@@ -14,7 +14,6 @@ models = {
     "5": "nvidia/nemotron-4-340b-instruct",
     # "6": "google/gemma-2-9b-it",
 }
-
 # Prompt user to select a model
 print("Select a model:")
 for key, value in models.items():
