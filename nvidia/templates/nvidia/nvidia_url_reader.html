@@ -37,7 +37,10 @@
       href="{% static 'assets/favicon/favicon.ico' %}"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="{% static '/styles/nvidia.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static '/styles/nvidia_docs_analyzer.css' %}"
+    />
     <title>NVIDIA URL READER</title>
   </head>
   <body>
@@ -72,8 +75,13 @@
             </div>
           </div>
           <div class="chat-input-container">
-            <label for="input_file"><i class="fa-solid fa-upload"></i></label>
-            <input type="file" id="input_file" name="input_file" />
+            <div class="file-upload-container">
+              <label for="input_file" class="upload-label">
+                <i class="fa-solid fa-paperclip"></i>
+              </label>
+              <input type="file" id="input_file" name="input_file" />
+              <span id="file-name"></span>
+            </div>
 
             <textarea
               id="user-input"
@@ -112,5 +120,6 @@
 
     <script src="{% static 'scripts/script.js' %}"></script>
     <script src="{% static 'scripts/nvidia_url_reader.js' %}"></script>
+    <script src="{% static 'scripts/nvidia_docs_analyzer.js' %}"></script>
   </body>
 </html>

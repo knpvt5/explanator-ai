@@ -264,7 +264,7 @@ nav a:hover {
 
 .chat-input-container {
   display: flex;
-  padding: 15px;
+  padding: 10px;
   background-color: #242430;
   border: 1px solid #ccc;
   border-radius: 10px;
