@@ -34,8 +34,6 @@ client = OpenAI(
     api_key=os.getenv("NVIDIA_API")
 )
 
-
-
 # Function to extract text from CSV files
 def extract_all_files_data():
     all_data = []  # List to store combined data from all files
@@ -46,6 +44,9 @@ def extract_all_files_data():
         all_data.append({
             'text_content': text_content
         })
+    print(f"Total text data from {text_file}: {text_content}")
+    print("="*100 + "\n")
+    
     
     # Parsing CSV files
     for csv_file in csv_files:
@@ -56,7 +57,8 @@ def extract_all_files_data():
                 for CSVrow in CSVreader:
                     csvData.append(CSVrow)
             print(f"Total CSV data from {csv_file}: {csvData}")
-            all_data.extend(csvData)  # Append the data to the main list
+            print("="*100 + "\n")
+            all_data.append(csvData)  # Append the data to the main list
         except Exception as e:
             print(f"Error reading CSV file {csv_file}: {e}")
 
@@ -69,7 +71,8 @@ def extract_all_files_data():
                 for JSONrow in JSONreader:
                     jsonData.append(JSONrow)
             print(f"Total JSON data from {json_file}: {jsonData}")
-            all_data.extend(jsonData)
+            print("="*100 + "\n")
+            all_data.append(jsonData)
         except Exception as e:
             print(f"Error reading JSON file {json_file}: {e}")
             
@@ -86,10 +89,12 @@ def extract_all_files_data():
                 'url': url,
                 'text_content': cleaned_text
             })
-            all_data.extend(urlsData)
+            all_data.append(urlsData)
             print(f"Total URLs data from {url}: {urlsData}")
+            print("="*100 + "\n")
         except Exception as e:
             print(f"Error fetching {url}: {e}")
+
             
     # parsing PDF files
     for pdf_data in pdf_files:
@@ -103,20 +108,22 @@ def extract_all_files_data():
                 pdfData.append({
                     'pdf_data': text,
                 })
-            all_data.extend(pdfData)
             print(f"Total PDF data from {pdf_data}: {pdfData}")
+            print("="*100 + "\n")
+            all_data.append(pdfData)
         except Exception as e:
             print(f"Error reading PDF file {pdf_data}: {e}")
             
     
-        return all_data 
+    return all_data 
 
 # Extract text from CSV files
 all_files_data = extract_all_files_data()
 print("\nAll Files Extracted Successfully!")
 # Convert combined data to text/string format for the model
 all_files_data_str = "\n".join([str(row) for row in all_files_data])
-print(f"Analyzing text with length: {len(all_files_data)}")
+print(f"Analyzing text with length: {len(all_files_data_str)}")
+print("all data", all_files_data_str)
 
 
 if not all_files_data_str:
