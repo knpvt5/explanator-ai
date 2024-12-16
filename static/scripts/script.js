@@ -130,8 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-
 // Initialize CodeMirror for Markdown Editor
 const markdownPreviewDiv = document.getElementById("markdown-preview");
 const dataContainer = document.getElementById("markdown-data-container");
