@@ -17,3 +17,4 @@ staticfiles/
 
 #wp-data and data
 data/
+tests/

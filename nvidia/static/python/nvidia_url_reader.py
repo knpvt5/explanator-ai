@@ -37,8 +37,7 @@ models = {
     "2": "meta/llama-3.3-70b-instruct",
     "3": "mistralai/mixtral-8x7b-instruct-v0.1",
     "4": "nv-mistralai/mistral-nemo-12b-instruct",
-    "5": "nvidia/nemotron-4-340b-instruct",
-    # "6": "google/gemma-2-9b-it",
+    # "5": "nvidia/nemotron-4-340b-instruct",
 }
 
 # Prompt user to select a model

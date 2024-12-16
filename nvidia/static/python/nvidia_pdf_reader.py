@@ -12,7 +12,6 @@ models = {
     # "3": "mistralai/mixtral-8x7b-instruct-v0.1",
     "4": "nv-mistralai/mistral-nemo-12b-instruct",
     # "5": "nvidia/nemotron-4-340b-instruct",
-    # "6": "google/gemma-2-9b-it",
 }
 
 # Prompt user to select a model
