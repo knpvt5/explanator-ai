@@ -42,7 +42,8 @@ txt_path = "./static/data/wp-txt-data/about-me.txt"
 with open(txt_path, 'r', encoding='utf-8') as file:
     # Read the entire content of the file
     txt_content = file.read()
-    print("Text read successfully.")
+print("Text read successfully.")
+print(f"Analyzing text with length: {len(txt_content)}")
 
 if not txt_content:
     print("Failed to extract text from the txt. Please check the file path and content.")
