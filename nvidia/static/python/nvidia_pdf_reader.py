@@ -49,6 +49,7 @@ def extract_pdf_text(pdf_path):
 # Ask for PDF file path and extract the text
 pdf_path = "./static/data/wp-pdf-data/wp.pdf"
 pdf_text = extract_pdf_text(pdf_path)
+print(f"Analyzing text with length: {len(pdf_text)}")
 
 print("\nPDF Text Extracted Successfully!")
 

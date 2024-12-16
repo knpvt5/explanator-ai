@@ -66,6 +66,7 @@ def extract_json_text(json_files):
 
 # Extract text from json files
 json_text = extract_json_text(json_files)
+print(f"Analyzing text with length: {len(json_text)}")
 
 if not json_text:
     print("Failed to extract text from the JSON. Please check the file paths and content.")

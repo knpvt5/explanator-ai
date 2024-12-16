@@ -65,6 +65,7 @@ def extract_csv_text(csv_files):
 
 # Extract text from CSV files
 csv_text = extract_csv_text(csv_files)
+print(f"Analyzing text with length: {len(csv_text)}")
 
 if not csv_text:
     print("Failed to extract text from the CSV. Please check the file paths and content.")

@@ -83,6 +83,7 @@ print("\nCSV Text Extracted Successfully!")
 
 # Convert combined data to text format for the model
 csv_text_data_str = "\n".join([str(row) for row in csv_txt_data])  # Convert list of dictionaries to a string
+print(f"Analyzing text with length: {len(csv_text_data_str)}")
 
 while True:
     # Take user input for the question

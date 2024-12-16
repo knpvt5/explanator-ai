@@ -85,6 +85,8 @@ def extract_all_text(urls):
 
 # calling function
 website_text = extract_all_text(urls)
+print(f"Analyzing text with length: {len(website_text)}")
+
 
 print("Extracted Text successfully from the Website:")
 print(website_text)
