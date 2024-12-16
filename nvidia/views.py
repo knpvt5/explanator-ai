@@ -58,6 +58,9 @@ def generate_stream_responses(response):
             chunk_content = chunk.choices[0].delta.content
             yield f"data: {json.dumps({'chunk': chunk_content})}\n\n"
 
+# default model
+model_name="nvidia/llama-3.1-nemotron-70b-instruct"
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def nvidia_api(request):
@@ -65,17 +68,22 @@ def nvidia_api(request):
     try:
         # Parse the JSON payload
         data = json.loads(request.body.decode('utf-8'))
-        user_input = data.get("question")
-        
+        user_input = data.get("userInput")
+        model_name = data.get("model")
+
         if not user_input:
             return JsonResponse({"error": "No Question Provided."}, status=400)
+
+        if not model_name:
+            model_name="nvidia/llama-3.1-nemotron-70b-instruct"
+            print(model_name)
 
         if not client:
             return JsonResponse({"error": "Service not available"}, status=503)
 
         # Create a streaming chat completion request
         response = client.chat.completions.create(
-            model="nvidia/llama-3.1-nemotron-70b-instruct",
+            model=model_name,
             messages=[
                 {"role": "system", "content": "You are a helpful AI assistant."},
                 {"role": "user", "content": user_input}

@@ -3,6 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const messagesContainer = chatBox.querySelector(".chat-messages");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
+    const selectModel = document.querySelector('.select-model select');
+    
+
+    let selectedModel = selectModel.value; // Set initial global model
+
+    selectModel.addEventListener('change', (e) => {
+        selectedModel = e.target.options[e.target.selectedIndex].textContent; 
+        // console.log(selectedModel)
+    });
 
     const backendAPI = "/nvidia/nvidia-api/";
 
@@ -11,23 +20,20 @@ document.addEventListener("DOMContentLoaded", () => {
         messageBox.classList.add("chat-message", sender);
         messageBox.textContent = message;
         messagesContainer.appendChild(messageBox);
-        autoScroll()
+        autoScroll();
         return messageBox;
     };
 
     let userIsScrolling = false;
-    // Add an event listener to detect when the user scrolls manually
     messagesContainer.addEventListener('scroll', () => {
-        // Check if the user has scrolled up from the bottom
         if (messagesContainer.scrollTop < messagesContainer.scrollHeight - messagesContainer.clientHeight - 50) {
-            userIsScrolling = true; 
+            userIsScrolling = true;
         } else {
-            userIsScrolling = false; 
+            userIsScrolling = false;
         }
     });
-    // auto-scrolling function
+
     function autoScroll() {
-        // Check if the user is not scrolling
         if (!userIsScrolling) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -36,13 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendMessage = async () => {
         const question = userInput.value.trim();
 
-        // Add user message
         appendMessage("user", question);
-
-        // Create bot message container
         const botMessageBox = appendMessage("bot", "Generating...");
 
-        // Disable input during processing
         userInput.disabled = true;
         sendButton.disabled = true;
 
@@ -54,14 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
                 },
-                body: JSON.stringify({ question }),
+                body: JSON.stringify({ 
+                    userInput: question,
+                    model: selectedModel, 
+                }),
             });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Use EventSource for streaming
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let responseText = '';
@@ -80,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (jsonData.chunk) {
                                 responseText += jsonData.chunk;
                                 botMessageBox.innerHTML = marked.parse(responseText);
-                                autoScroll()
+                                autoScroll();
                             }
                         } catch (parseError) {
                             console.error('JSON parsing error:', parseError);
@@ -95,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } finally {
             userInput.value = "";
             userInput.disabled = false;
-            sendButton.disabled = true;
+            sendButton.disabled = false;
             userInput.focus();
-            if(window.innerWidth < 768) {
+            if (window.innerWidth < 768) {
                 userInput.blur();
             }
         }
@@ -129,11 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         hideSuggestionBox();
         userInput.value = "";
-
     });
 
     userInput.addEventListener("keydown", (e) => {
-        // Handle Enter key without Shift 
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
@@ -141,6 +143,4 @@ document.addEventListener("DOMContentLoaded", () => {
             userInput.value = "";
         }
     });
-
-
 });

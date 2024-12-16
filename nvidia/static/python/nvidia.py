@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv(override=True)
-# print(os.getenv("NVIDIA_API")) 
 
 #model options
 models = {
@@ -48,7 +47,7 @@ while True:
 
     # Create a completion request with the user question
     completion = client.chat.completions.create(
-        model=model_name,
+        model= model_name,
         messages=[
             {"role": "system", "content": " your are an AI assistant."},
             {"role": "user", "content": user_input}

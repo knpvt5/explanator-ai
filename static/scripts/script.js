@@ -83,18 +83,53 @@ document.querySelectorAll(".suggested-question").forEach((question) => {
 
 
 // Chat Box Update
-const chatBoxTextarea = document.querySelector(".chat-box textarea");
-chatBoxTextarea.addEventListener("input", (event) => {
-    const userInput = event.target.value;
-    const existingCode = pythonEditor.getValue();
+document.addEventListener("DOMContentLoaded", () => {
+    const selectModel = document.querySelector('.select-model');
+    const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
-    // Update `user_question` in CodeMirror
-    const updatedCode = existingCode.replace(
-        /user_input = .*/,
-        `user_input = "${userInput}"`
-    );
-    pythonEditor.setValue(updatedCode);
+    chatBoxTextarea.addEventListener('input', (event) => {
+        const userInput = event.target.value;
+
+        const existingCode = pythonEditor.getValue();
+        const updatedCode = existingCode.replace(
+            /user_input = .*/,
+            `user_input = "${userInput}"`
+        );
+        // Save the current cursor and scroll positions
+        const cursorPosition = pythonEditor.getCursor();
+        const scrollPosition = pythonEditor.getScrollInfo().top;
+
+        // Set the updated code
+        pythonEditor.setValue(updatedCode);
+
+        // Restore cursor and scroll positions
+        pythonEditor.setCursor(cursorPosition);
+        pythonEditor.scrollTo(0, scrollPosition);
+    });
+
+    selectModel.addEventListener('change', (event) => {
+        const selectedModel = event.target.options[event.target.selectedIndex].textContent;
+        console.log(selectedModel);
+
+        const existingCode = pythonEditor.getValue();
+        const updatedCode = existingCode.replace(
+            /model\s*=\s* .*/,  
+            `model = "${selectedModel}"`  
+        );
+        // Save the current cursor and scroll positions
+        const cursorPosition = pythonEditor.getCursor();
+        const scrollPosition = pythonEditor.getScrollInfo().top;
+
+        // Set the updated code
+        pythonEditor.setValue(updatedCode);
+
+        // Restore cursor and scroll positions
+        pythonEditor.setCursor(cursorPosition);
+        pythonEditor.scrollTo(0, scrollPosition);
+    });
+
 });
+
 
 
 // Initialize CodeMirror for Markdown Editor
