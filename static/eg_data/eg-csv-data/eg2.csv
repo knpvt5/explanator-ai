@@ -1,0 +1,6 @@
+﻿Label,Content
+"Introduction","This is an example of mulitiple files to demonstrate how you can easily add multiples files and in the list use the provided code."
+"Instructions for Developer","As a developer, simply copy the code and paste it into your Python IDE."
+"NVIDIA API Key","To get a free NVIDIA API key, visit https://build.nvidia.com/explore/discover."
+"Update Directory Path","Once you have the API key, you just need to update the directory path to the document you want to analyze."
+"Conclusion","and you're all set to start analyzing. Thank you!"

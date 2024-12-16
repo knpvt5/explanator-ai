@@ -10,22 +10,22 @@ import PyPDF2
 # Load environment variables
 load_dotenv()
 
-text_file = "static/data/wp-txt-data/about-me.txt"
+text_file = "static/eg_data/eg-txt-data/eg.txt"
 
-urls = ['https://wealthpsychology.in/index.html',
-    'https://wealthpsychology.in/blog/',
+urls = ['https://example.com/',
+    'https://www.iana.org/help/example-domains',
     ]
 
 # List to store rows as dictionaries
-csv_files = ['static/data/wp-csv-data/wp-pages.csv',
-            'static/data/wp-csv-data/wp-home.csv', 
+csv_files = ['static/eg_data/eg-csv-data/eg1.csv',
+            'static/eg_data/eg-csv-data/eg2.csv', 
             ]
 
-json_files = ['static/data/wp-json-data/wp-pages.json',
-                'static/data/wp-json-data/wp-home.json',
+json_files = ['static/eg_data/eg-json-data/eg1.json',
+                'static/eg_data/eg-json-data/eg2.json',
                 ]
 
-pdf_files = ["./static/data/wp-pdf-data/wp.pdf",]
+pdf_files = ["./static/eg_data/eg-pdf-data/eg.pdf",]
 
 
 # Initialize the OpenAI client with NVIDIA's base URL and API key
