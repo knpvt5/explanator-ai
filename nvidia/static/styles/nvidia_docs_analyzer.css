@@ -110,13 +110,21 @@ nav a:hover {
 }
 
 .chat-box {
+  display: flex;
+  flex-direction: column;
   height: 600px;
   background-color: #333;
   border-radius: 10px;
   padding: 10px;
   resize: vertical;
-  display: flex;
-  flex-direction: column;
+  /* overflow-y: auto; */
+}
+
+.chat-box::-webkit-resizer {
+  width: 20px;
+  height: 20px;
+  background-color: #666;
+  cursor: ns-resize;
 }
 
 .chat-box h2 {
@@ -271,53 +279,51 @@ nav a:hover {
   margin-top: 20px;
 }
 
-.file-upload-container{
-    border-right: 1px solid #ccc;
+.file-upload-container {
+  border-right: 1px solid #ccc;
 }
 
 /* Hide the actual file input */
 #input_file {
-    display: none;
+  display: none;
 }
 
 /* Style the label to make it look like a button */
 .upload-label {
-    display: inline-block;
-    margin-right: 5px;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-right: 5px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 /* Change background color on hover */
 .upload-label:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* Icon inside the label */
 .upload-label i {
-    margin-right: 8px;
-    font-size: 18px;
-    vertical-align: middle;
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: middle;
 }
 
 /* File name display */
 #file-name {
-    display: inline-block;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    padding: 3px;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #eee;
+  display: inline-block;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #eee;
 }
-
-
 
 .chat-input-container textarea {
   width: 100%;
