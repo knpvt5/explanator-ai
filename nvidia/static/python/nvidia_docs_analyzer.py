@@ -27,6 +27,29 @@ json_files = ['static/eg_data/eg-json-data/eg1.json',
 
 pdf_files = ["./static/eg_data/eg-pdf-data/eg.pdf",]
 
+#model options
+models = {
+    "1": "nvidia/llama-3.1-nemotron-70b-instruct",
+    "2": "meta/llama-3.3-70b-instruct",
+    "3": "nv-mistralai/mistral-nemo-12b-instruct",
+}
+
+# Prompt user to select a model
+print("Select a model:")
+for key, value in models.items():
+    print(f"{key}. {value}")
+
+# Validate user input in a loop
+while True:
+    model_choice = input("\nEnter the number corresponding to the model: ")
+    if model_choice in models:
+        model_name = models[model_choice]
+        break
+    else:
+        print("Invalid choice. Please enter a valid number.")
+
+print("Using model:", model_name)
+
 # Initialize the OpenAI client with NVIDIA's base URL and API key
 client = OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
@@ -172,7 +195,7 @@ while True:
     try:
         # Create a completion request with the user question and extracted CSV text as context
         completion = client.chat.completions.create(
-            model="nvidia/llama-3.1-nemotron-70b-instruct",
+            model=model_name,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant. Only answer based on the provided data. Do not answer any questions that are not based on the data."},
                 {"role": "assistant", "content": "I will only answer questions only based on the provided data."},
