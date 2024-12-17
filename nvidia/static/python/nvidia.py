@@ -10,7 +10,9 @@ models = {
     "2": "meta/llama-3.3-70b-instruct",
     "3": "mistralai/mixtral-8x7b-instruct-v0.1",
     "4": "nv-mistralai/mistral-nemo-12b-instruct",
-    "5": "nvidia/nemotron-4-340b-instruct",
+    "5": "mistralai/mixtral-8x22b-instruct-v0.1",
+    "6": "nvidia/nemotron-4-340b-instruct",
+    "7": "microsoft/phi-3-mini-128k-instruct",
 }
 # Prompt user to select a model
 print("Select a model:")
