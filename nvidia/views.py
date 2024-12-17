@@ -131,42 +131,15 @@ def nvidia_url_reader_api(request):
 @require_http_methods(["POST"])
 def nvidia_docs_analyzer_api(request):
 
-        
     files = ["static/eg_data/eg-txt-data/eg.txt",
                 "static/eg_data/eg-csv-data/eg1.csv",
                 "static/eg_data/eg-json-data/eg1.json",
                 "static/eg_data/eg-pdf-data/eg.pdf",
                 ]
+    
+    # try:
+        
 
-    #model options
-    models = {
-        "1": "nvidia/llama-3.1-nemotron-70b-instruct",
-        "2": "meta/llama-3.3-70b-instruct",
-        "3": "nv-mistralai/mistral-nemo-12b-instruct",
-        "4": "microsoft/phi-3-mini-128k-instruct",
-    }
-
-    # Prompt user to select a model
-    print("Select a model:")
-    for key, value in models.items():
-        print(f"{key}. {value}")
-
-    # Validate user input in a loop
-    while True:
-        model_choice = input("\nEnter the number corresponding to the model: ")
-        if model_choice in models:
-            model_name = models[model_choice]
-            break
-        else:
-            print("Invalid choice. Please enter a valid number.")
-
-    print("Using model:", model_name)
-
-    # Initialize the OpenAI client with NVIDIA's base URL and API key
-    client = OpenAI(
-        base_url="https://integrate.api.nvidia.com/v1",
-        api_key=os.getenv("NVIDIA_API")
-    )
 
     # Function to extract text from CSV files
     def extract_all_files_data():
@@ -193,8 +166,6 @@ def nvidia_docs_analyzer_api(request):
             else:
                 continue
 
-        
-        
         # Parsing CSV files
         for csv_file in files:
             if csv_file.endswith(".csv"):
