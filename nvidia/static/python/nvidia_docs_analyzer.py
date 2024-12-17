@@ -195,9 +195,9 @@ while True:
     try:
         # Create a completion request with the user question and extracted CSV text as context
         completion = client.chat.completions.create(
-            model=model_name,
+            model= model_name,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant. Only answer based on the provided data. Do not answer any questions that are not based on the data."},
+                {"role": "system", "content": "You are a helpful assistant. Only answer based on the provided data. Do not answer any questions that are not based on the data provided."},
                 {"role": "assistant", "content": "I will only answer questions only based on the provided data."},
                 {"role": "system", "content": f"Data:\n{all_files_data_str}"},
                 {"role": "user", "content": user_question}
