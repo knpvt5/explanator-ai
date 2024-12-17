@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({ 
                     userInput: question,
-                    model: selectedModel, 
+                    modelName: selectedModel, 
                 }),
             });
 

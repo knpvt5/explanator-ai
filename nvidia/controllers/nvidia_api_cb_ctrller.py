@@ -6,14 +6,13 @@ def handle_nvidia_api_cb_request(request, client, generate_stream_responses):
         # Parse the JSON payload
         data = json.loads(request.body.decode('utf-8'))
         user_input = data.get("userInput")
-        model_name = data.get("model")
+        model_name = data.get("modelName")
 
         if not user_input:
             return JsonResponse({"error": "No Question Provided."}, status=400)
 
         if not model_name:
             model_name = "nvidia/llama-3.1-nemotron-70b-instruct"
-            print(model_name)
 
         if not client:
             return JsonResponse({"error": "Service not available"}, status=503)
