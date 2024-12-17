@@ -10,22 +10,11 @@ import PyPDF2
 # Load environment variables
 load_dotenv()
 
-text_files = ["static/eg_data/eg-txt-data/eg.txt",]
-
-urls = ['https://example.com/',
-    'https://www.iana.org/help/example-domains',
-    ]
-
-# List to store rows as dictionaries
-csv_files = ['static/eg_data/eg-csv-data/eg1.csv',
-            'static/eg_data/eg-csv-data/eg2.csv', 
+files = ["static/eg_data/eg-txt-data/eg.txt",
+            "static/eg_data/eg-csv-data/eg1.csv",
+            "static/eg_data/eg-json-data/eg1.json",
+            "static/eg_data/eg-pdf-data/eg.pdf",
             ]
-
-json_files = ['static/eg_data/eg-json-data/eg1.json',
-                'static/eg_data/eg-json-data/eg2.json',
-                ]
-
-pdf_files = ["./static/eg_data/eg-pdf-data/eg.pdf",]
 
 #model options
 models = {
@@ -61,111 +50,99 @@ def extract_all_files_data():
     all_data = []  
     
     # Parsing text files
-    for text_file in text_files:
-        if not text_file or not os.path.exists(text_file): 
-            print(f"Text file {text_file} does not exist or is incorrect path, skipping...")
-            print("="*100 + "\n")
-            continue  
+    for text_file in files:
+        if text_file.endswith(".txt"):
+            if not text_file or not os.path.exists(text_file): 
+                print(f"Text file {text_file} does not exist or is incorrect path, skipping...")
+                print("="*100 + "\n")
+                continue  
 
-        try:
-            with open(text_file, 'r', encoding='utf-8') as textFile:
-                text_content = textFile.read()
-                all_data.append({
-                    'text_content': text_content
-                })
-            print(f"Total text data from {text_file}: {text_content}")
-            print("="*100 + "\n")
-        except Exception as e:
-            print(f"Error reading text file {text_file}: {e}")
+            try:
+                with open(text_file, 'r', encoding='utf-8') as textFile:
+                    text_content = textFile.read()
+                    all_data.append({
+                        'text_content': text_content
+                    })
+                print(f"Total text data from {text_file}: {text_content}")
+                print("="*100 + "\n")
+            except Exception as e:
+                print(f"Error reading text file {text_file}: {e}")
+        else:
+            continue
 
     
     
     # Parsing CSV files
-    for csv_file in csv_files:
-        if not csv_file or not os.path.exists(csv_file): 
-            print(f"CSV file {csv_file} does not exist or is incorrect path, skipping...")
-            print("="*100 + "\n")
+    for csv_file in files:
+        if csv_file.endswith(".csv"):
+            if not csv_file or not os.path.exists(csv_file): 
+                print(f"CSV file {csv_file} does not exist or is incorrect path, skipping...")
+                print("="*100 + "\n")
+                continue
+            
+            csvData = []
+            try:
+                with open(csv_file, 'r', encoding='utf-8') as file:
+                    CSVreader = csv.DictReader(file)
+                    for CSVrow in CSVreader:
+                        csvData.append(CSVrow)
+                print(f"Total CSV data from {csv_file}: {csvData}")
+                print("="*100 + "\n")
+                all_data.append(csvData)  # Append the data to the main list
+            except Exception as e:
+                print(f"Error reading CSV file {csv_file}: {e}")
+        else:
             continue
-        
-        csvData = []
-        try:
-            with open(csv_file, 'r', encoding='utf-8') as file:
-                CSVreader = csv.DictReader(file)
-                for CSVrow in CSVreader:
-                    csvData.append(CSVrow)
-            print(f"Total CSV data from {csv_file}: {csvData}")
-            print("="*100 + "\n")
-            all_data.append(csvData)  # Append the data to the main list
-        except Exception as e:
-            print(f"Error reading CSV file {csv_file}: {e}")
 
     # Parsing JSON files
-    for json_file in json_files:
-        if not json_file or not os.path.exists(json_file): 
-            print(f"JSON file {json_file} does not exist or is incorrect path, skipping...")
-            print("="*100 + "\n")
-            continue  
-        
-        jsonData = []
-        try:
-            with open(json_file, 'r', encoding='utf-8') as jsonFile:
-                JSONreader = json.load(jsonFile)
-                for JSONrow in JSONreader:
-                    jsonData.append(JSONrow)
-            print(f"Total JSON data from {json_file}: {jsonData}")
-            print("="*100 + "\n")
-            all_data.append(jsonData)
-        except Exception as e:
-            print(f"Error reading JSON file {json_file}: {e}")
+    for json_file in files:
+        if json_file.endswith(".json"):
+            if not json_file or not os.path.exists(json_file): 
+                print(f"JSON file {json_file} does not exist or is incorrect path, skipping...")
+                print("="*100 + "\n")
+                continue  
             
-    # Parsing URLs   
-    for url in urls:
-        if not url: 
-            print(f"URL {url} is incorrect, skipping...")
-            print("="*100 + "\n")
-            continue  
-        
-        urlsData = []
-        try:
-            response  = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            text = soup.get_text(separator="\n")
-            cleaned_text = "\n".join(line.strip() for line in text.splitlines() if line.strip())
-            # formatted_text = "\n\n".join(cleaned_text)
-            urlsData.append({
-                'url': url,
-                'text_content': cleaned_text
-            })
-            all_data.append(urlsData)
-            print(f"Total URLs data from {url}: {urlsData}")
-            print("="*100 + "\n")
-        except Exception as e:
-            print(f"Error fetching {url}: {e}")
+            jsonData = []
+            try:
+                with open(json_file, 'r', encoding='utf-8') as jsonFile:
+                    JSONreader = json.load(jsonFile)
+                    for JSONrow in JSONreader:
+                        jsonData.append(JSONrow)
+                print(f"Total JSON data from {json_file}: {jsonData}")
+                print("="*100 + "\n")
+                all_data.append(jsonData)
+            except Exception as e:
+                print(f"Error reading JSON file {json_file}: {e}")
+        else:
+            continue
 
             
     # parsing PDF files
-    for pdf_data in pdf_files:
-        if not pdf_data or not os.path.exists(pdf_data): 
-            print(f"PDF file {pdf_data} does not exist or is incorrect path, skipping...")
-            print("="*100 + "\n")
-            continue  
-        
-        pdfData = []
-        try:
-            with open(pdf_data, 'rb') as file:
-                reader = PyPDF2.PdfReader(file)
-                text = ""
-                for page in reader.pages:
-                    text += page.extract_text()  # Extract text from each page
-                pdfData.append({
-                    'pdf_data': text,
-                })
-            print(f"Total PDF data from {pdf_data}: {pdfData}")
-            print("="*100 + "\n")
-            all_data.append(pdfData)
-        except Exception as e:
-            print(f"Error reading PDF file {pdf_data}: {e}")
+    for pdf_file in files:
+        if pdf_file.endswith(".pdf"):
+            if not pdf_file or not os.path.exists(pdf_file): 
+                print(f"PDF file {pdf_file} does not exist or is incorrect path, skipping...")
+                print("="*100 + "\n")
+                continue  
             
+            pdfData = []
+            try:
+                with open(pdf_file, 'rb') as file:
+                    reader = PyPDF2.PdfReader(file)
+                    text = ""
+                    for page in reader.pages:
+                        text += page.extract_text()  # Extract text from each page
+                    pdfData.append({
+                        'pdf_data': text,
+                    })
+                print(f"Total PDF data from {pdf_file}: {pdfData}")
+                print("="*100 + "\n")
+                all_data.append(pdfData)
+            except Exception as e:
+                print(f"Error reading PDF file {pdf_file}: {e}")
+        else:
+            continue
+                
     
     return all_data 
 
