@@ -33,6 +33,7 @@ function uploadFile() {
             })
             .catch(error => {
                 console.error('Error:', error);
+                alert("Failed to upload file", error)
             });
     } else {
         alert("Please select a file to upload.");

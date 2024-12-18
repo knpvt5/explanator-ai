@@ -12,10 +12,15 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
     files = []
     
     try:
-        data = json.loads(request.body.decode('utf-8'))
-        user_input = data.get("userInput")
-        model_name = data.get("modelName")
-        
+        if(request.content_type == "application/json"):
+            data = json.loads(request.body.decode('utf-8'))
+            user_input = data.get("userInput")
+            model_name = data.get("modelName")
+            
+        elif(request.content_type == "multipart/form-data"):
+            files = request.FILES.getlist('input_file')
+            
+            
         if not user_input:
             return JsonResponse({"error": "No Question Provided."}, status=400)
 
