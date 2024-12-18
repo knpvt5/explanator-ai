@@ -13,11 +13,11 @@ load_dotenv()
 files_input = input("Enter the file path or leave blank for default files: ")
 
 if not files_input:
-    files = ["static/eg_data/eg-txt-data/eg.txt",
-                "static/eg_data/eg-csv-data/eg1.csv",
-                "static/eg_data/eg-json-data/eg1.json",
-                "static/eg_data/eg-pdf-data/eg.pdf",
-                "static/eg_data/eg-txt-data/eg.txt",
+    files = ["static/eg_data/eg-txt-data/eg1.txt",
+                "static/eg_data/eg-csv-data/eg11.csv",
+                "static/eg_data/eg-json-data/eg11.json",
+                "static/eg_data/eg-pdf-data/eg1.pdf",
+                "static/eg_data/eg-txt-data/eg1.txt",
                 ]
 else:
     files = [file.strip() for file in files_input.split(',')]
@@ -61,11 +61,6 @@ def extract_all_files_data():
     for file in files:
         if file.endswith(".txt"):
             text_file = file
-            if not text_file or not os.path.exists(text_file): 
-                print(f"Text file {text_file} does not exist or is incorrect path, skipping...")
-                print("="*100 + "\n")
-                continue  
-
             try:
                 with open(text_file, 'r', encoding='utf-8') as textFile:
                     text_content = textFile.read()
@@ -79,11 +74,6 @@ def extract_all_files_data():
                 
         elif file.endswith(".csv"):
             csv_file = file
-            if not csv_file or not os.path.exists(csv_file): 
-                print(f"CSV file {csv_file} does not exist or is incorrect path, skipping...")
-                print("="*100 + "\n")
-                continue
-            
             csvData = []
             try:
                 with open(csv_file, 'r', encoding='utf-8') as file:
@@ -98,11 +88,6 @@ def extract_all_files_data():
                 
         elif file.endswith(".csv"):
             json_file = file
-            if not json_file or not os.path.exists(json_file): 
-                print(f"JSON file {json_file} does not exist or is incorrect path, skipping...")
-                print("="*100 + "\n")
-                continue  
-            
             jsonData = []
             try:
                 with open(json_file, 'r', encoding='utf-8') as jsonFile:
@@ -117,11 +102,6 @@ def extract_all_files_data():
                 
         elif file.endswith(".pdf"):
             pdf_file = file
-            if not pdf_file or not os.path.exists(pdf_file): 
-                print(f"PDF file {pdf_file} does not exist or is incorrect path, skipping...")
-                print("="*100 + "\n")
-                continue  
-            
             pdfData = []
             try:
                 with open(pdf_file, 'rb') as file:
