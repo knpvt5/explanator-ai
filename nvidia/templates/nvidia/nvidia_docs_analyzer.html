@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static '/styles/nvidia.css' %}" />
+    <link rel="stylesheet" href="{% static '/styles/nvidia_docs_analyzer.css' %}" />
     <title>NVIDIA</title>
   </head>
   <body>
@@ -43,6 +43,14 @@
             </div>
           </div>
           <div class="chat-input-container">
+            <div class="file-upload-container">
+              <label for="input_file" class="upload-label">
+                <i class="fa-solid fa-paperclip"></i>
+              </label>
+              <input type="file" id="input_file" name="input_file" multiple />
+              <span id="file-name"></span>
+            </div>
+
             <textarea id="user-input" placeholder="Ask any Question here..."></textarea>
             <button id="send-button"><i class="fa-solid fa-arrow-up"></i></button>
           </div>
@@ -78,5 +86,6 @@
 
     <script src="{% static 'scripts/script.js' %}"></script>
     <script src="{% static 'scripts/nvidia_docs_analyzer.js' %}"></script>
+    <script src="{% static 'scripts/nvidia_input_file.js' %}"></script>
   </body>
 </html>

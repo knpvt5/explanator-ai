@@ -70,7 +70,12 @@ nav a:hover {
 .CodeMirror {
   border: 1px solid #ccc;
   border-radius: 5px;
-  height: 500px;
+  min-height: 520px;
+  resize: vertical;
+}
+.CodeMirror-vscrollbar,
+.CodeMirror-hscrollbar{
+  width: 0px;
 }
 
 .code-box {
@@ -327,10 +332,6 @@ nav a:hover {
   overflow-x: auto; */
 }
 
-.CodeMirror-vscrollbar,
-.CodeMirror-hscrollbar{
-  width: 0px;
-}
 
 .chat-input-container textarea {
   width: 100%;
