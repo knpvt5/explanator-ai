@@ -279,9 +279,9 @@ nav a:hover {
   margin-top: 20px;
 }
 
-.file-upload-container {
+/* .file-upload-container {
   border-right: 1px solid #ccc;
-}
+} */
 
 /* Hide the actual file input */
 #input_file {
@@ -326,7 +326,6 @@ nav a:hover {
   /* width: 50px;
   overflow-x: auto; */
 }
-
 
 .chat-input-container textarea {
   width: 100%;
