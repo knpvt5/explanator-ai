@@ -48,10 +48,10 @@ document.querySelectorAll(".suggested-question").forEach((question) => {
 
 
     question.addEventListener("click", function () {
-        const question = this.textContent.trim(); // Get the clicked question's text
+        const question = this.textContent.trim(); 
         const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
-        chatBoxTextarea.value = question; // Set the text area value to the question
+        chatBoxTextarea.value = question; 
 
         // Manually trigger the input event
         const inputEvent = new Event("input", { bubbles: true });
