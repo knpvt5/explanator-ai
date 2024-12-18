@@ -332,6 +332,11 @@ nav a:hover {
   overflow-x: auto; */
 }
 
+/* #file-name::-webkit-scrollbar{
+  width: 5px;
+  color: #fff;
+} */
+
 
 .chat-input-container textarea {
   width: 100%;

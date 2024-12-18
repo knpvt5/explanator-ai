@@ -6,14 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- CodeMirror CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
 
     <!-- CodeMirror JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
@@ -21,38 +15,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/edit/closebrackets.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'styles/footer.css' %}"
-    />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
-    <link
-      rel="icon"
-      href="{% static 'assets/favicon/favicon.ico' %}"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/styles/home.css' %}" />
     <title>Explanator AI</title>
   </head>
   <body>
     <header>
-      <a href="{% url 'home' %}"
-        ><img
-          id="brand-logo"
-          src="{% static 'assets/logo/eai.webp' %}"
-          alt="brand-logo"
-      /></a>
+      <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
       <a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a>
       <a href="{% url 'nvidia_docs_analyzer' %}">NVIDIA DOCS ANALYZER</a>
-      <a href="{% url 'nvidia_url_reader' %}">NVIDIA URL READER</a>
     </nav>
     <main>
       <div class="content">
@@ -66,10 +43,7 @@
             </a>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div
-            id="python-data-container"
-            data-python-url="{% static 'python/nvidia.py' %}"
-          ></div>
+          <div id="python-data-container" data-python-url="{% static 'python/nvidia.py' %}"></div>
         </div>
         <div class="code-box">
           <div id="codeBox-above-space">
@@ -81,34 +55,13 @@
             </a>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div
-            id="python-data-container"
-            data-python-url="{% static 'python/nvidia_docs_analyzer.py' %}"
-          ></div>
-        </div>
-        <div class="code-box">
-          <div id="codeBox-above-space">
-            <h2>NVIDIA URL READER</h2>
-            <a href="{% url 'nvidia_url_reader' %}" title="Go to link">
-              <button type="button" title="link" class="link-btn">
-                <i class="fa-solid fa-up-right-from-square"></i>
-              </button>
-            </a>
-          </div>
-          <textarea id="python-code-editor" style="display: none"></textarea>
-          <div
-            id="python-data-container"
-            data-python-url="{% static 'python/nvidia_url_reader.py' %}"
-          ></div>
+          <div id="python-data-container" data-python-url="{% static 'python/nvidia_docs_analyzer.py' %}"></div>
         </div>
       </div>
 
       <div id="markdown-preview">
         <h3>DOCUMENTATION</h3>
-        <div
-          id="markdown-data-container"
-          data-markdown-url="{% static 'markdown/nvidia.md' %}"
-        ></div>
+        <div id="markdown-data-container" data-markdown-url="{% static 'markdown/nvidia.md' %}"></div>
       </div>
     </main>
 
