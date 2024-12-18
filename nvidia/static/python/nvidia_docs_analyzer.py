@@ -153,7 +153,8 @@ def extract_all_files_data():
     
     return all_data 
 
-# Extract text from files
+# Extract text from CSV files
+all_files_data_str = ""
 all_files_data = extract_all_files_data()
 if all_files_data:
     all_files_data_str = "\n".join([str(row) for row in all_files_data])
@@ -167,10 +168,10 @@ else:
 
 while True:
     # Take user input for the question
-    user_question = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
+    user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
     # Exit the loop if the user types 'exit' or 'q'
-    if user_question.lower() in ['exit', 'q']:
+    if user_input.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
@@ -182,7 +183,7 @@ while True:
                 {"role": "system", "content": "You are a helpful assistant. Only answer based on the provided data. Do not answer any questions that are not based on the data provided."},
                 {"role": "assistant", "content": "I will only answer questions only based on the provided data."},
                 {"role": "system", "content": f"Data:\n{all_files_data_str}"},
-                {"role": "user", "content": user_question}
+                {"role": "user", "content": user_input}
             ],
             temperature=0.5,
             top_p=0.7,

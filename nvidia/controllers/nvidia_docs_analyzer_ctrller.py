@@ -14,7 +14,8 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                 "static/eg_data/eg-pdf-data/eg.pdf",
                 ] """
                 
-    files = ["C:/Users/karan_pnrp70e/Desktop/econnomic.pdf"]
+    # files = ["C:/Users/karan_pnrp70e/Desktop/econnomic.pdf"]
+    files = [""]
 
     
     try:
@@ -27,7 +28,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
 
         if not model_name:
             model_name = "nvidia/llama-3.1-nemotron-70b-instruct"
-            print(model_name)
+            # print(model_name)
 
         if not client:
             return JsonResponse({"error": "Service not available"}, status=503)
@@ -101,7 +102,6 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                 else:
                     continue
 
-                    
             # parsing PDF files
             for pdf_file in files:
                 if pdf_file.endswith(".pdf"):
@@ -132,6 +132,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
             return all_data 
 
         # Extract text from files
+        all_files_data_str = ""
         all_files_data = extract_all_files_data()
         if all_files_data:
             all_files_data_str = "\n".join([str(row) for row in all_files_data])
