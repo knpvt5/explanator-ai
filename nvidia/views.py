@@ -33,11 +33,11 @@ except Exception as e:
 def nvidia(request):
     return render(request, 'nvidia/nvidia.html')
 
+def nvidia_api_cb(request):
+    return render(request, 'nvidia/nvidia_api_cb.html')
+
 def nvidia_docs_analyzer(request):
     return render(request, 'nvidia/nvidia_docs_analyzer.html')
-
-def nvidia_api_chatbots(request):
-    return render(request, 'nvidia/nvidia_api_chatbots.html')
 
 def nvidia_url_reader(request):
     return render(request, 'nvidia/nvidia_url_reader.html')

@@ -3,7 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.nvidia, name='nvidia'),
-    path('nvidia-api-chatbots/', views.nvidia_api_chatbots, name='nvidia_api_chatbots'), 
+    
+    path('nvidia-api-cb/', views.nvidia_api_cb, name='nvidia_api_cb'), 
+    
+    # path('nvidia-api-chatbots/', views.nvidia_api_chatbots, name='nvidia_api_chatbots'), 
+    
     path('nvidia-api/', views.nvidia_api, name='nvidia_api'), 
     
     path('nvidia-docs-analyzer/', views.nvidia_docs_analyzer, name='nvidia_docs_analyzer'),
