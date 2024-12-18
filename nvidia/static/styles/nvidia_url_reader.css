@@ -327,6 +327,11 @@ nav a:hover {
   overflow-x: auto; */
 }
 
+.CodeMirror-vscrollbar,
+.CodeMirror-hscrollbar{
+  width: 0px;
+}
+
 .chat-input-container textarea {
   width: 100%;
   min-height: 100px;

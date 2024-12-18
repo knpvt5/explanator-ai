@@ -155,10 +155,8 @@ all_files_data_str = "\n".join([str(row) for row in all_files_data])
 print(f"Analyzing text with length: {len(all_files_data_str)}")
 print("all data", all_files_data_str)
 
-
 if not all_files_data_str:
-    print("Failed to extract text from the CSV. Please check the file paths and content.")
-    exit()
+    print("No data provided, continuing without any file...")
 
 
 while True:
