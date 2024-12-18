@@ -318,12 +318,15 @@ nav a:hover {
 #file-name {
   display: inline-block;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding: 3px;
   border-radius: 5px;
   font-size: 14px;
   color: #eee;
+  /* width: 50px;
+  overflow-x: auto; */
 }
+
 
 .chat-input-container textarea {
   width: 100%;
