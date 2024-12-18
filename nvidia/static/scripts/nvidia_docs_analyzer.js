@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } finally {
             userInput.value = "";
             userInput.disabled = false;
-            sendButton.disabled = false;
+            sendButton.disabled = userInput.trim() === "";
             userInput.focus();
             if (window.innerWidth < 768) {
                 userInput.blur();
