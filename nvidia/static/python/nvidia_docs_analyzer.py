@@ -10,11 +10,17 @@ import PyPDF2
 # Load environment variables
 load_dotenv()
 
-files = ["static/eg_data/eg-txt-data/eg.txt",
-            "static/eg_data/eg-csv-data/eg1.csv",
-            "static/eg_data/eg-json-data/eg1.json",
-            "static/eg_data/eg-pdf-data/eg.pdf",
-            ]
+files_input = input("Enter the file path or leave blank for default files: ")
+
+if not files_input:
+    files = ["static/eg_data/eg-txt-data/eg.txt",
+                "static/eg_data/eg-csv-data/eg1.csv",
+                "static/eg_data/eg-json-data/eg1.json",
+                "static/eg_data/eg-pdf-data/eg.pdf",
+                ]
+else:
+    files = [file.strip() for file in files_input.split(',')]
+
 
 #model options
 models = {
@@ -147,16 +153,16 @@ def extract_all_files_data():
     
     return all_data 
 
-# Extract text from CSV files
+# Extract text from files
 all_files_data = extract_all_files_data()
-print("\nAll Files Extracted Successfully!")
-# Convert combined data to text/string format for the model
-all_files_data_str = "\n".join([str(row) for row in all_files_data])
-print(f"Analyzing text with length: {len(all_files_data_str)}")
-print("all data", all_files_data_str)
-
-if not all_files_data_str:
-    print("No data provided, continuing without any file...")
+if all_files_data:
+    all_files_data_str = "\n".join([str(row) for row in all_files_data])
+    print("\nExtracted", len(all_files_data_str), "Character Successfully!")
+    print("all data", all_files_data_str)
+    if not all_files_data_str:
+        print("No data provided, continuing without any file...")
+else:
+    print("No data extracted. continuing without any Data provided...")
 
 
 while True:

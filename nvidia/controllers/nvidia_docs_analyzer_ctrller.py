@@ -8,11 +8,14 @@ import os
 import asyncio
 
 def handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses):
-    files = ["static/eg_data/eg-txt-data/eg.txt",
+    """ files = ["static/eg_data/eg-txt-data/eg.txt",
                 "static/eg_data/eg-csv-data/eg1.csv",
                 "static/eg_data/eg-json-data/eg1.json",
                 "static/eg_data/eg-pdf-data/eg.pdf",
-                ]
+                ] """
+                
+    files = ["C:/Users/karan_pnrp70e/Desktop/econnomic.pdf"]
+
     
     try:
         data = json.loads(request.body.decode('utf-8'))
@@ -29,7 +32,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
         if not client:
             return JsonResponse({"error": "Service not available"}, status=503)
 
-        # Function to extract text from CSV files
+        # Function to extract text from files
         def extract_all_files_data():
             all_data = []  
             
@@ -128,18 +131,16 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
             
             return all_data 
 
-        # Extract text from CSV files
+        # Extract text from files
         all_files_data = extract_all_files_data()
-        print("\nAll Files Extracted Successfully!")
-        # Convert combined data to text/string format for the model
-        all_files_data_str = "\n".join([str(row) for row in all_files_data])
-        print(f"Analyzing text with length: {len(all_files_data_str)}")
-        print("all data", all_files_data_str)
-
-
-        if not all_files_data_str:
-            print("Failed to extract text from the CSV. Please check the file paths and content.")
-            exit()
+        if all_files_data:
+            all_files_data_str = "\n".join([str(row) for row in all_files_data])
+            print("\nExtracted", len(all_files_data_str), "Character Successfully!")
+            print("all data", all_files_data_str)
+            if not all_files_data_str:
+                print("No data provided, continuing without any file...")
+        else:
+            print("No data extracted. continuing without any Data provided...")
 
             
         # Create a completion request with the user question and extracted CSV text as context

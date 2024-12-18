@@ -44,10 +44,10 @@
           </div>
           <div class="chat-input-container">
             <div class="file-upload-container">
-              <label for="input_file" class="upload-label">
+              <label for="input_file" class="upload-label" >
                 <i class="fa-solid fa-paperclip"></i>
               </label>
-              <input type="file" id="input_file" name="input_file" />
+              <input type="file" id="input_file" name="input_file" multiple />
               <span id="file-name"></span>
             </div>
 
@@ -89,6 +89,6 @@
 
     <script src="{% static 'scripts/script.js' %}"></script>
     <script src="{% static 'scripts/nvidia_url_reader.js' %}"></script>
-    <script src="{% static 'scripts/nvidia_url_reader2.js' %}"></script>
+    <script src="{% static 'scripts/nvidia_input_file.js' %}"></script>
   </body>
 </html>
