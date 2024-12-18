@@ -9,8 +9,7 @@ import asyncio
 
 def handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses):
     
-    files = ["C:/Users/karan_pnrp70e/Desktop/econnomic.pdf"]
-    # files = []
+    files = []
     
     try:
         data = json.loads(request.body.decode('utf-8'))

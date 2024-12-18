@@ -1,6 +1,8 @@
 const inputFile = document.getElementById("input_file");
 const fileNameSpan = document.getElementById("file-name");
 
+const backendAPI = "/nvidia/nvidia-docs-analyzer-api/";
+
 inputFile.addEventListener("change", function () {
     fileNameSpan.style.cssText = `
         width: 50px;
@@ -11,6 +13,7 @@ inputFile.addEventListener("change", function () {
     if (file) {
         fileNameSpan.textContent = file.name;
     }
+    uploadFile()
 });
 
 function uploadFile() {
@@ -20,7 +23,7 @@ function uploadFile() {
     if (file) {
         formData.append("input_file", file);
 
-        fetch('/upload/', {
+        fetch(backendAPI, {
             method: 'POST',
             body: formData,
         })
