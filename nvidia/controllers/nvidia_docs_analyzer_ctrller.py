@@ -9,7 +9,7 @@ import asyncio
 
 def handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses):
     
-    files = []
+    files = ["C:/Users/karan_pnrp70e/Desktop/econnomic.pdf"]
     
     try:
         if(request.content_type == "application/json"):
@@ -36,8 +36,9 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
             all_data = []  
             
             # Parsing text files
-            for text_file in files:
-                if text_file.endswith(".txt"):
+            for file in files:
+                if file.endswith(".txt"):
+                    text_file = file
                     if not text_file or not os.path.exists(text_file): 
                         print(f"Text file {text_file} does not exist or is incorrect path, skipping...")
                         print("="*100 + "\n")
@@ -53,12 +54,9 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                         print("="*100 + "\n")
                     except Exception as e:
                         print(f"Error reading text file {text_file}: {e}")
-                else:
-                    continue
-
-            # Parsing CSV files
-            for csv_file in files:
-                if csv_file.endswith(".csv"):
+                        
+                elif file.endswith(".csv"):
+                    csv_file = file
                     if not csv_file or not os.path.exists(csv_file): 
                         print(f"CSV file {csv_file} does not exist or is incorrect path, skipping...")
                         print("="*100 + "\n")
@@ -75,12 +73,9 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                         all_data.append(csvData)  # Append the data to the main list
                     except Exception as e:
                         print(f"Error reading CSV file {csv_file}: {e}")
-                else:
-                    continue
-
-            # Parsing JSON files
-            for json_file in files:
-                if json_file.endswith(".json"):
+                        
+                elif file.endswith(".csv"):
+                    json_file = file
                     if not json_file or not os.path.exists(json_file): 
                         print(f"JSON file {json_file} does not exist or is incorrect path, skipping...")
                         print("="*100 + "\n")
@@ -97,12 +92,9 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                         all_data.append(jsonData)
                     except Exception as e:
                         print(f"Error reading JSON file {json_file}: {e}")
-                else:
-                    continue
-
-            # parsing PDF files
-            for pdf_file in files:
-                if pdf_file.endswith(".pdf"):
+                        
+                elif file.endswith(".pdf"):
+                    pdf_file = file
                     if not pdf_file or not os.path.exists(pdf_file): 
                         print(f"PDF file {pdf_file} does not exist or is incorrect path, skipping...")
                         print("="*100 + "\n")
@@ -123,11 +115,8 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                         all_data.append(pdfData)
                     except Exception as e:
                         print(f"Error reading PDF file {pdf_file}: {e}")
-                else:
-                    continue
-                        
-            
-            return all_data 
+
+            return all_data
 
         # Extract text from files
         all_files_data_str = ""

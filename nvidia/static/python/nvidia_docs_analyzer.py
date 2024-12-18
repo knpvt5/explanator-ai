@@ -17,6 +17,7 @@ if not files_input:
                 "static/eg_data/eg-csv-data/eg1.csv",
                 "static/eg_data/eg-json-data/eg1.json",
                 "static/eg_data/eg-pdf-data/eg.pdf",
+                "static/eg_data/eg-txt-data/eg.txt",
                 ]
 else:
     files = [file.strip() for file in files_input.split(',')]
@@ -57,8 +58,9 @@ def extract_all_files_data():
     all_data = []  
     
     # Parsing text files
-    for text_file in files:
-        if text_file.endswith(".txt"):
+    for file in files:
+        if file.endswith(".txt"):
+            text_file = file
             if not text_file or not os.path.exists(text_file): 
                 print(f"Text file {text_file} does not exist or is incorrect path, skipping...")
                 print("="*100 + "\n")
@@ -74,14 +76,9 @@ def extract_all_files_data():
                 print("="*100 + "\n")
             except Exception as e:
                 print(f"Error reading text file {text_file}: {e}")
-        else:
-            continue
-
-    
-    
-    # Parsing CSV files
-    for csv_file in files:
-        if csv_file.endswith(".csv"):
+                
+        elif file.endswith(".csv"):
+            csv_file = file
             if not csv_file or not os.path.exists(csv_file): 
                 print(f"CSV file {csv_file} does not exist or is incorrect path, skipping...")
                 print("="*100 + "\n")
@@ -98,12 +95,9 @@ def extract_all_files_data():
                 all_data.append(csvData)  # Append the data to the main list
             except Exception as e:
                 print(f"Error reading CSV file {csv_file}: {e}")
-        else:
-            continue
-
-    # Parsing JSON files
-    for json_file in files:
-        if json_file.endswith(".json"):
+                
+        elif file.endswith(".csv"):
+            json_file = file
             if not json_file or not os.path.exists(json_file): 
                 print(f"JSON file {json_file} does not exist or is incorrect path, skipping...")
                 print("="*100 + "\n")
@@ -120,13 +114,9 @@ def extract_all_files_data():
                 all_data.append(jsonData)
             except Exception as e:
                 print(f"Error reading JSON file {json_file}: {e}")
-        else:
-            continue
-
-            
-    # parsing PDF files
-    for pdf_file in files:
-        if pdf_file.endswith(".pdf"):
+                
+        elif file.endswith(".pdf"):
+            pdf_file = file
             if not pdf_file or not os.path.exists(pdf_file): 
                 print(f"PDF file {pdf_file} does not exist or is incorrect path, skipping...")
                 print("="*100 + "\n")
@@ -147,10 +137,7 @@ def extract_all_files_data():
                 all_data.append(pdfData)
             except Exception as e:
                 print(f"Error reading PDF file {pdf_file}: {e}")
-        else:
-            continue
-                
-    
+
     return all_data 
 
 # Extract text from CSV files
