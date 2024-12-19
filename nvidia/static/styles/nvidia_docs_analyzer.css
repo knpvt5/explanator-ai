@@ -332,6 +332,10 @@ nav a:hover {
   overflow-x: auto; */
 }
 
+#file-name::-webkit-scrollbar {
+  display: none;
+}
+
 #remove-file{
   color: #fff;
   border: 1px solid #fff;
