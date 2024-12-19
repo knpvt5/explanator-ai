@@ -285,7 +285,7 @@ nav a:hover {
 }
 
 /* .file-upload-container {
-  border-right: 1px solid #ccc;
+  border: 1px solid #ccc;
 } */
 
 /* Hide the actual file input */
@@ -330,6 +330,25 @@ nav a:hover {
   color: #eee;
   /* width: 50px;
   overflow-x: auto; */
+}
+
+#remove-file{
+  color: #fff;
+  border: 1px solid #fff;
+  width: fit-content;
+  height: fit-content;
+  background: #000;
+  font-size: medium;
+  padding: 0px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: none;
+}
+
+#remove-file:hover{
+  background: #fff;
+  color: #000;
 }
 
 /* #file-name::-webkit-scrollbar{

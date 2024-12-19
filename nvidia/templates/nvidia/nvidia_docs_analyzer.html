@@ -46,8 +46,9 @@
               <label for="input_file" class="upload-label">
                 <i class="fa-solid fa-paperclip"></i>
               </label>
-              <input type="file" id="input_file" name="input_file" multiple />
+              <input type="file" id="input_file" name="input_file" multiple accept=".txt,.csv,.json,.pdf" />
               <span id="file-name"></span>
+              <button id="remove-file" aria-label="Remove file" title= "Remove file">x</button>
             </div>
 
             <textarea id="user-input" placeholder="Ask any Question here..."></textarea>
