@@ -20,4 +20,3 @@ data/
 tests/
 
 #database
-db.sqlite3
