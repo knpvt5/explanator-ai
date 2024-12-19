@@ -95,21 +95,23 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                             
                     elif filename.endswith(".csv"):
                         try:
-                            from io import StringIO
-                            csv_data = file.read().decode('utf-8')
-                            csv_file = StringIO(csv_data)
-                            CSVreader = csv.DictReader(csv_file)
-                            csvData = [row for row in CSVreader]
-                            all_data.append(csvData)
+                            csvData = []
+                            with open(file_path, 'r', encoding='utf-8') as file:
+                                CSVreader = csv.DictReader(file)
+                                for CSVrow in CSVreader:
+                                    csvData.append(CSVrow)
+                            print(f"Total CSV data from {file_name}: {csvData}")
+                            print("="*100 + "\n")
+                            all_data.append(csvData) 
                         except Exception as e:
-                            print(f"Error reading CSV file {filename}: {e}")
-                        
+                            print(f"Error reading CSV file {file_name}: {e}")
+                            
                     elif filename.endswith(".json"):
                         try:
                             json_data = json.loads(file.read().decode('utf-8'))
                             all_data.append(json_data)
                         except Exception as e:
-                            print(f"Error reading JSON file {filename}: {e}")
+                            print(f"Error reading JSON file {file_name}: {e}")
                         
                     elif filename.endswith(".pdf"):
                         try:
