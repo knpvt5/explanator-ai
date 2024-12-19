@@ -17,12 +17,15 @@ inputFile.addEventListener("change", function () {
     const file = inputFile.files[0];
     const maxFileSize = 5 * 1024 * 1024; // 5 MB
 
-    if (file.size > maxFileSize) {
-        alert("File size exceeds the 5 MB limit!");
-        this.value = "";
-    }
+    
     if (file) {
         fileNameSpan.textContent = file.name;
+    }
+    if (file.size > maxFileSize) {
+        alert("File size exceeds the 5 MB limit!");
+        inputFile.value = "";
+        fileNameSpan.style.display = "none";
+        removeFile.style.display = "none";
     }
     uploadFile();
 });
