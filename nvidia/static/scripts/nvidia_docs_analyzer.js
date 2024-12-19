@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const responseText = await response.text();
+                throw new Error('HTTP error! status: ' + response.status + ' Response: ' + responseText);
             }
 
             const reader = response.body.getReader();
