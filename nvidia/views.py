@@ -63,34 +63,12 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 @require_http_methods(["POST"])
 def nvidia_docs_analyzer_api(request):
-    try:
+    # for debugging
         print("Request received")
         print("Request method:", request.method)
         print("Content type:", request.content_type)
         print("Files:", request.FILES)
         
-        # Check if this is a file upload request
-        if request.FILES:
-            files = request.FILES.getlist('input_file')
-            print("Processing file upload")
-            if not files:
-                return JsonResponse({"error": "No files provided."}, status=400)
-            return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
-            
-        # Check if this is a JSON request
-        elif request.content_type == 'application/json':
-            print("Processing JSON request")
-            return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
-            
-        else:
-            return JsonResponse({
-                "error": "Invalid request format"
-            }, status=400)
-            
-    except Exception as e:
-        import traceback
-        print("Error in nvidia_docs_analyzer_api:", str(e))
-        print(traceback.format_exc())  # This will print the full error traceback
-        return JsonResponse({
-            "error": str(e)
-        }, status=500)
+        return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
+        
+        
