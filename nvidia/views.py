@@ -11,10 +11,12 @@ import os
 import asyncio
 from .controllers.nvidia_api_cb_ctrller import handle_nvidia_api_cb_request
 from .controllers.nvidia_docs_analyzer_ctrller import handle_nvidia_docs_analyzer_request
+import logging
 
 # Load environment variables
 load_dotenv(override=True)
 
+logging.basicConfig(level=logging.DEBUG)
 # Get API key and verify it exists
 NVIDIA_API_KEY = os.getenv("NVIDIA_API")
 if not NVIDIA_API_KEY:
@@ -28,6 +30,7 @@ try:
         api_key=NVIDIA_API_KEY
     )
 except Exception as e:
+    logging.error(f"Error during API call: {e}")
     raise RuntimeError(f"Failed to initialize OpenAI client: {str(e)}")
 
 def nvidia(request):
@@ -41,19 +44,53 @@ def nvidia_docs_analyzer(request):
 
 
 # Generator function to stream API response chunks
-def generate_stream_responses(response):
-    for chunk in response:
-        if chunk.choices[0].delta.content is not None:
-            chunk_content = chunk.choices[0].delta.content
-            yield f"data: {json.dumps({'chunk': chunk_content})}\n\n"
+def generate_stream_responses(completion):
+    try:
+        for chunk in completion:
+            if chunk.choices[0].delta.content:
+                # Properly format the chunk as JSON
+                yield f"data: {json.dumps({'chunk': chunk.choices[0].delta.content})}\n\n"
+    except Exception as e:
+        yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
 @csrf_exempt
 @require_http_methods(["POST"])
 def nvidia_api(request):
     return handle_nvidia_api_cb_request(request, client, generate_stream_responses)
 
+logger = logging.getLogger(__name__)
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def nvidia_docs_analyzer_api(request):
-    return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
-    
+    try:
+        print("Request received")
+        print("Request method:", request.method)
+        print("Content type:", request.content_type)
+        print("Files:", request.FILES)
+        
+        # Check if this is a file upload request
+        if request.FILES:
+            files = request.FILES.getlist('input_file')
+            print("Processing file upload")
+            if not files:
+                return JsonResponse({"error": "No files provided."}, status=400)
+            return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
+            
+        # Check if this is a JSON request
+        elif request.content_type == 'application/json':
+            print("Processing JSON request")
+            return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
+            
+        else:
+            return JsonResponse({
+                "error": "Invalid request format"
+            }, status=400)
+            
+    except Exception as e:
+        import traceback
+        print("Error in nvidia_docs_analyzer_api:", str(e))
+        print(traceback.format_exc())  # This will print the full error traceback
+        return JsonResponse({
+            "error": str(e)
+        }, status=500)

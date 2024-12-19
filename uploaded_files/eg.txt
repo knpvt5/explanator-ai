@@ -1,0 +1,7 @@
+This is an example to demonstrate how you can easily use the provided
+ code. As a developer, simply copy the code and paste it into 
+ your Python IDE. To get a free NVIDIA API key, 
+ visit https://build.nvidia.com/explore/discover. Once you
+  have the API key, you just need to update the directory path to 
+  the document you want to analyze, and you're all set to start
+   analyzing. Thank you!
