@@ -11,4 +11,6 @@ urlpatterns = [
     path('nvidia-docs-analyzer/', views.nvidia_docs_analyzer, name='nvidia_docs_analyzer'),
     path('nvidia-docs-analyzer-api/', views.nvidia_docs_analyzer_api, name='nvidia_docs_analyzer_api'),
     
+    path('clear-uploaded-files-api/', views.clear_uploaded_files_api, name='clear_uploaded_files_api'),
+    
 ]

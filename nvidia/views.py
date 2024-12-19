@@ -71,4 +71,32 @@ def nvidia_docs_analyzer_api(request):
         
         return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
         
+
+@csrf_exempt
+@require_http_methods(["POST"])      
+def clear_uploaded_files_api(request):
+    """Clear the uploaded files and session data."""
+    try:
+        # Check if there are files stored in the session
+        if 'file_data' in request.session:
+            file_data = request.session['file_data']
+            print("Files to remove:", file_data)
+
+            # Delete the files from the server
+            for file_info in file_data:
+                file_path = file_info['path']
+                if os.path.exists(file_path):
+                    os.remove(file_path)  # Delete the file
+                    print(f"Deleted file: {file_path}")
+
+            # Clear the session
+            request.session['file_data'] = []
+            # request.session.clear()
+            return JsonResponse({"message": "Files removed and session cleared successfully."})
+        else:
+            return JsonResponse({"error": "No files to remove."}, status=400)
+
+    except Exception as e:
+        print(f"Error clearing uploaded files: {e}")
+        return JsonResponse({"error": str(e)}, status=500)      
         

@@ -148,3 +148,4 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
         print("Error in handle_nvidia_docs_analyzer_request:", str(e))
         print(traceback.format_exc())
         return JsonResponse({"error": str(e)}, status=500)
+
