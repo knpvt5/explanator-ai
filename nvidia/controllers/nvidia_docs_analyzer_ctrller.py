@@ -18,7 +18,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
             files = request.FILES.getlist('input_file')
             print(f"Files received: {[file.name for file in files]}")
 
-            UPLOAD_DIR = 'uploaded_files'
+            UPLOAD_DIR = 'static/data'
             os.makedirs(UPLOAD_DIR, exist_ok=True)
 
             file_data = []
@@ -41,19 +41,25 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
 
             # Update session with new file data
             request.session['file_data'] = file_data
-            request.session.modified = True  # Ensure session is saved
+            
+            # Clear the session after file upload
+            # request.session.clear()
 
             return JsonResponse({
                 "message": "Files uploaded successfully",
                 "files": [{"name": file.name} for file in files]
             })
+            
 
         # Handle analysis request
         elif request.content_type == "application/json":
             data = json.loads(request.body.decode('utf-8'))
             user_input = data.get("userInput")
-            model_name = data.get("modelName", "nvidia/llama-3.1-nemotron-70b-instruct")
+            model_name = data.get("modelName")
 
+            if not model_name:
+                model_name = "nvidia/llama-3.1-nemotron-70b-instruct"
+            
             if not user_input:
                 return JsonResponse({"error": "No Question Provided."}, status=400)
 
@@ -140,6 +146,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
 
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON format"}, status=400)
+
     
     except Exception as e:
         import traceback
