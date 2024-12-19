@@ -9,128 +9,120 @@ import asyncio
 
 def handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses):
     try:
-        files = []
-        file_data = []
-        user_input = None
-        model_name = None
-        
+        # Initialize session storage if it doesn't exist
+        if 'file_data' not in request.session:
+            request.session['file_data'] = []
+
+        # Handle file upload request
         if request.FILES:
             files = request.FILES.getlist('input_file')
             print(f"Files received: {[file.name for file in files]}")
 
-            # Inside the block, save the file data in the session
-            if 'file_data' not in request.session:
-                request.session['file_data'] = []
-
-            # Assume you're saving files to a directory, such as 'uploaded_files'
-            UPLOAD_DIR = 'uploaded_files'  # You can change this to any directory you prefer
-
-            # Create the upload directory if it doesn't exist
+            UPLOAD_DIR = 'uploaded_files'
             os.makedirs(UPLOAD_DIR, exist_ok=True)
 
             file_data = []
             for file in files:
                 try:
-                    # Define the file path where you want to save the file
                     file_path = os.path.join(UPLOAD_DIR, file.name)
+                    
+                    # Save file to disk
+                    with open(file_path, 'wb+') as f:
+                        for chunk in file.chunks():
+                            f.write(chunk)
 
-                    # Write the content to the file on disk
-                    with open(file_path, 'wb') as f:
-                        f.write(file.read())  # Write the raw file content
-
-                    # Store the file path in the session
                     file_data.append({
                         'name': file.name,
-                        'path': file_path  # Store the file path instead of content
+                        'path': file_path
                     })
                 except Exception as e:
                     print(f"Error saving file '{file.name}': {str(e)}")
+                    return JsonResponse({"error": f"Error saving file '{file.name}': {str(e)}"}, status=500)
 
-            # Store the file data in the session
+            # Update session with new file data
             request.session['file_data'] = file_data
+            request.session.modified = True  # Ensure session is saved
 
-            # Return a response
             return JsonResponse({
                 "message": "Files uploaded successfully",
                 "files": [{"name": file.name} for file in files]
             })
-                            
-            
+
+        # Handle analysis request
         elif request.content_type == "application/json":
             data = json.loads(request.body.decode('utf-8'))
             user_input = data.get("userInput")
-            model_name = data.get("modelName")
+            model_name = data.get("modelName", "nvidia/llama-3.1-nemotron-70b-instruct")
 
-            stored_file_data = request.session.get('file_data', [])
-            all_files_data_str = "\n".join([f.get('content', '') for f in stored_file_data])
-
-            if not model_name:
-                model_name = "nvidia/llama-3.1-nemotron-70b-instruct"
-            
             if not user_input:
                 return JsonResponse({"error": "No Question Provided."}, status=400)
 
-            for file in request.session['file_data']:
-                print("Files in file data list:", file)
-            
-            def extract_all_files_data():
-                all_data = []  
+            # Verify session data exists
+            if 'file_data' not in request.session or not request.session['file_data']:
+                return JsonResponse({"error": "No files have been uploaded yet."}, status=400)
 
-                for file in request.session['file_data']:
-                    file_name = file['name']
-                    file_path = file['path']
-                    filename = file_name.lower()
-                    
-                    if filename.endswith(".txt"):
-                        try:
+            def extract_all_files_data():
+                all_data = []
+                
+                for file_info in request.session['file_data']:
+                    try:
+                        file_path = file_info['path']
+                        if not os.path.exists(file_path):
+                            print(f"File not found: {file_path}")
+                            continue
+
+                        filename = file_info['name'].lower()
+                        
+                        if filename.endswith(".txt"):
                             with open(file_path, 'r', encoding='utf-8') as textFile:
                                 text_content = textFile.read()
                                 all_data.append({
+                                    'filename': filename,
                                     'text_content': text_content
                                 })
-                            print(f"Total text data from {file_name}: {text_content}")
-                            print("="*100 + "\n")
-                        except Exception as e:
-                            print(f"Error reading text file {file_name}: {e}")
-                            
-                    elif filename.endswith(".csv"):
-                        try:
+
+                        elif filename.endswith(".csv"):
                             csvData = []
                             with open(file_path, 'r', encoding='utf-8') as file:
                                 CSVreader = csv.DictReader(file)
-                                for CSVrow in CSVreader:
-                                    csvData.append(CSVrow)
-                            print(f"Total CSV data from {file_name}: {csvData}")
-                            print("="*100 + "\n")
-                            all_data.append(csvData) 
-                        except Exception as e:
-                            print(f"Error reading CSV file {file_name}: {e}")
-                            
-                    elif filename.endswith(".json"):
-                        try:
-                            json_data = json.loads(file.read().decode('utf-8'))
-                            all_data.append(json_data)
-                        except Exception as e:
-                            print(f"Error reading JSON file {file_name}: {e}")
-                        
-                    elif filename.endswith(".pdf"):
-                        try:
-                            pdf_reader = PyPDF2.PdfReader(file)
-                            text = ""
-                            for page in pdf_reader.pages:
-                                text += page.extract_text()
-                            all_data.append({'pdf_data': text})
-                        except Exception as e:
-                            print(f"Error reading PDF file {filename}: {e}")
+                                csvData = [row for row in CSVreader]
+                            all_data.append({
+                                'filename': filename,
+                                'csv_data': csvData
+                            })
+
+                        elif filename.endswith(".json"):
+                            with open(file_path, 'r', encoding='utf-8') as file:
+                                json_data = json.load(file)
+                                all_data.append({
+                                    'filename': filename,
+                                    'json_data': json_data
+                                })
+
+                        elif filename.endswith(".pdf"):
+                            with open(file_path, 'rb') as file:
+                                pdf_reader = PyPDF2.PdfReader(file)
+                                text = ""
+                                for page in pdf_reader.pages:
+                                    text += page.extract_text()
+                                all_data.append({
+                                    'filename': filename,
+                                    'pdf_data': text
+                                })
+
+                    except Exception as e:
+                        print(f"Error processing file {file_info['name']}: {str(e)}")
+                        continue
 
                 return all_data
 
             all_files_data = extract_all_files_data()
-            all_files_data_str = "\n".join([str(row) for row in all_files_data])
+            
+            if not all_files_data:
+                return JsonResponse({"error": "No data could be extracted from the uploaded files."}, status=400)
 
-            if not all_files_data_str:
-                print("No data extracted.")
-                
+            all_files_data_str = "\n".join([str(data) for data in all_files_data])
+
             completion = client.chat.completions.create(
                 model=model_name,
                 messages=[
