@@ -353,12 +353,8 @@ nav a:hover {
 #remove-file:hover{
   background: #fff;
   color: #000;
+  font-weight: bold;
 }
-
-/* #file-name::-webkit-scrollbar{
-  width: 5px;
-  color: #fff;
-} */
 
 
 .chat-input-container textarea {

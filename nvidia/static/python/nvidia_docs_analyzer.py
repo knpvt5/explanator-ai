@@ -86,7 +86,7 @@ def extract_all_files_data():
             except Exception as e:
                 print(f"Error reading CSV file {csv_file}: {e}")
                 
-        elif file.endswith(".csv"):
+        elif file.endswith(".json"):
             json_file = file
             jsonData = []
             try:

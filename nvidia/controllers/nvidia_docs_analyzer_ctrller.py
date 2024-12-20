@@ -111,6 +111,8 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
                                         'filename': filename,
                                         'pdf_data': text
                                     })
+                            else:
+                                print(f"Unsupported file format: {filename}")
 
                         except Exception as e:
                             print(f"Error processing file {file_info['name']}: {str(e)}")
