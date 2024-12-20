@@ -8,6 +8,7 @@ urlpatterns = [
     path('gemini-api-cb/', views.gemini_api_cb, name='gemini_api_cb'),
     
     path('gemini-docs-analyzer/', views.gemini_docs_analyzer, name='gemini_docs_analyzer'),
+    path('gemini-docs-analyzer-api/', views.gemini_docs_analyzer_api, name='gemini_docs_analyzer_api'),
     
     
 ]

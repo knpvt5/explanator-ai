@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messagesContainer = chatBox.querySelector(".chat-messages");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
+    const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
     const backendAPI = "/gemini/gemini-api/";
 
@@ -109,16 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    const suggestedQuestionBox = document.querySelector(".suggested-question-box");
-    function hideSuggestionBox() {
-        if (suggestedQuestionBox) {
-            suggestedQuestionBox.style.display = "none";
-        }
-    }
-
     sendButton.addEventListener("click", () => {
         sendMessage();
-        hideSuggestionBox();
+        suggestedQuestionBox.remove();
         userInput.value = "";
     });
 
@@ -127,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
-            hideSuggestionBox();
+            suggestedQuestionBox.remove();
             userInput.value = "";
         }
     });

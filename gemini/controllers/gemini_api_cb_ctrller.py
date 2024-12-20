@@ -40,6 +40,7 @@ def handle_gemini_api_cb_request(request, model, generate_stream_responses):
 
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON in request body"}, status=400)
+        
         except Exception as general_error:
             return JsonResponse({"error": f"Unexpected Error: {str(general_error)}"}, status=500)
 

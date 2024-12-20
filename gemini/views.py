@@ -2,7 +2,6 @@
 import os
 from django.shortcuts import render
 import json
-from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
@@ -13,8 +12,14 @@ import json
 from bs4 import BeautifulSoup 
 import PyPDF2
 from .controllers.gemini_api_cb_ctrller import handle_gemini_api_cb_request
+from .controllers.gemini_docs_analyzer_ctrller import handle_gemini_docs_analyzer_request
 
 load_dotenv()
+
+# Configure Gemini API
+genai.configure(api_key=os.getenv("GEMINI_API"))
+model = genai.GenerativeModel("gemini-1.5-flash")
+
 
 def gemini(request):
     return render(request, 'gemini/gemini.html')
@@ -24,11 +29,6 @@ def gemini_api_cb(request):
 
 def gemini_docs_analyzer(request):
     return render(request, 'gemini/gemini_docs_analyzer.html')
-
-
-# Configure Gemini API
-genai.configure(api_key=os.getenv("GEMINI_API"))
-model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 # Function to stream the chunks back to the client
@@ -45,3 +45,8 @@ def generate_stream_responses(response):
 @csrf_exempt
 def gemini_api(request):
     return handle_gemini_api_cb_request(request, model, generate_stream_responses)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def gemini_docs_analyzer_api(request):
+    return handle_gemini_docs_analyzer_request(request, model, generate_stream_responses)
