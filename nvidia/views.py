@@ -11,12 +11,10 @@ import os
 import asyncio
 from .controllers.nvidia_api_cb_ctrller import handle_nvidia_api_cb_request
 from .controllers.nvidia_docs_analyzer_ctrller import handle_nvidia_docs_analyzer_request
-import logging
 
 # Load environment variables
 load_dotenv(override=True)
 
-logging.basicConfig(level=logging.DEBUG)
 # Get API key and verify it exists
 NVIDIA_API_KEY = os.getenv("NVIDIA_API")
 if not NVIDIA_API_KEY:
@@ -30,7 +28,6 @@ try:
         api_key=NVIDIA_API_KEY
     )
 except Exception as e:
-    logging.error(f"Error during API call: {e}")
     raise RuntimeError(f"Failed to initialize OpenAI client: {str(e)}")
 
 def nvidia(request):
@@ -58,7 +55,6 @@ def generate_stream_responses(completion):
 def nvidia_api(request):
     return handle_nvidia_api_cb_request(request, client, generate_stream_responses)
 
-logger = logging.getLogger(__name__)
 
 @csrf_exempt
 @require_http_methods(["POST"])
