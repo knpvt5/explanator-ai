@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/styles/home.css' %}" />
@@ -25,7 +25,6 @@
   </head>
   <body>
     <header>
-      
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
@@ -47,19 +46,19 @@
             </a>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div id="python-data-container" data-python-url="{% static 'python/nvidia.py' %}"></div>
+          <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_cb.py' %}"></div>
         </div>
         <div class="code-box">
           <div id="codeBox-above-space">
-            <h2>GEMINI API CHATBOTS</h2>
-            <a href="{% url 'gemini_api_chatbots' %}" title="Go to link">
+            <h2>GEMINI API</h2>
+            <a href="{% url 'gemini' %}" title="Go to link">
               <button type="button" title="link" class="link-btn">
                 <i class="fa-solid fa-up-right-from-square"></i>
               </button>
             </a>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div id="python-data-container" data-python-url="{% static 'python/gemini.py' %}"></div>
+          <div id="python-data-container" data-python-url="{% static 'python/gemini_api_cb.py' %}"></div>
         </div>
       </div>
 
