@@ -26,42 +26,33 @@ files = [
 all_Data = []
 
 for filename in files:
-    if filename.endswith(".txt"):
-        try:
+    try:
+        if filename.endswith(".txt"):
             with open(filename, "r", encoding="utf-8") as file:
                 text_content = file.read()
                 all_Data.append(text_content)
                 print(f"txt file data: {text_content}\n")
-        except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
-            
-    elif filename.endswith(".csv"):
-        csvData = []
-        try:
+                
+        elif filename.endswith(".csv"):
+            csvData = []
             with open(filename, "r", encoding="utf-8") as csvFile:
                 CSVreader = csv.DictReader(csvFile)
                 for CSVrow in CSVreader:
                     csvData.append(CSVrow)
                 print(f"CSV file data: {csvData}\n")
                 all_Data.append(csvData)
-        except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
-            
-    elif filename.endswith(".json"):
-        jsonData = []
-        try:
+
+        elif filename.endswith(".json"):
+            jsonData = []
             with open(filename, "r", encoding="utf-8") as jsonFile:
                 JSONreader = json.load(jsonFile)
                 for JSONrow in JSONreader:
                     jsonData.append(JSONrow)
                 print(f"json file data: {jsonData}\n")
                 all_Data.append(jsonData)
-        except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
             
-    elif filename.endswith(".pdf"):
-        pdfData = []
-        try:    
+        elif filename.endswith(".pdf"):
+            pdfData = []
             with open(filename, "rb") as pdfFile:
                 PDFreader = PyPDF2.PdfReader(pdfFile)
                 for page in PDFreader.pages:
@@ -69,10 +60,11 @@ for filename in files:
                     pdfData.append(text)
                 print(f"pdf file data: {pdfData}\n")
                 all_Data.append(pdfData)
-        except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
-    else:
-        print(f"Unsupported file format: {filename}")
+        else:
+            print(f"Unsupported file format: {filename}")
+    except FileNotFoundError:
+                print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
+
 
 # Convert all data to string format
 all_Data_str = str(all_Data) if all_Data else ""

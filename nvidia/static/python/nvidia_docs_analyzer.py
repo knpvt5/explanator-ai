@@ -55,48 +55,39 @@ def extract_all_files_data():
     
     # Parsing text files
     for file in files:
-        if file.endswith(".txt"):
-            text_file = file
-            try:
+        try:
+            if file.endswith(".txt"):
+                text_file = file
                 with open(text_file, 'r', encoding='utf-8') as textFile:
                     text_content = textFile.read()
                     all_data.append({
                         'text_content': text_content
                     })
                 print(f"Total text data from {text_file}: {text_content}\n")
-            except Exception as e:
-                print(f"Error reading text file {text_file}: {e}\n")
                 
-        elif file.endswith(".csv"):
-            csv_file = file
-            csvData = []
-            try:
+            elif file.endswith(".csv"):
+                csv_file = file
+                csvData = []
                 with open(csv_file, 'r', encoding='utf-8') as file:
                     CSVreader = csv.DictReader(file)
                     for CSVrow in CSVreader:
                         csvData.append(CSVrow)
                 print(f"Total CSV data from {csv_file}: {csvData}\n")
                 all_data.append(csvData) 
-            except Exception as e:
-                print(f"Error reading CSV file {csv_file}: {e}\n")
-                
-        elif file.endswith(".json"):
-            json_file = file
-            jsonData = []
-            try:
+                    
+            elif file.endswith(".json"):
+                json_file = file
+                jsonData = []
                 with open(json_file, 'r', encoding='utf-8') as jsonFile:
                     JSONreader = json.load(jsonFile)
                     for JSONrow in JSONreader:
                         jsonData.append(JSONrow)
                 print(f"Total JSON data from {json_file}: {jsonData}\n")
                 all_data.append(jsonData)
-            except Exception as e:
-                print(f"Error reading JSON file {json_file}: {e}\n")
-                
-        elif file.endswith(".pdf"):
-            pdf_file = file
-            pdfData = []
-            try:
+                    
+            elif file.endswith(".pdf"):
+                pdf_file = file
+                pdfData = []
                 with open(pdf_file, 'rb') as file:
                     reader = PyPDF2.PdfReader(file)
                     text = ""
@@ -107,8 +98,9 @@ def extract_all_files_data():
                     })
                 print(f"Total PDF data from {pdf_file}: {pdfData}\n")
                 all_data.append(pdfData)
-            except Exception as e:
-                print(f"Error reading PDF file {pdf_file}: {e}\n")
+
+        except FileNotFoundError:
+            print(f"Error: File not found at path '{file}'. Please ensure the file exists.\n")
 
     return all_data 
 
