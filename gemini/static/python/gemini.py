@@ -7,18 +7,13 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-def ask_question():
+while True:
     user_input = input("\nPlease ask your question (or type 'exit' to quit): ")
+    
     if user_input.lower() in ['exit', 'q']:
         print("Exiting...")
-        return False
-    return user_input
+        exit()
 
-while True:
-    user_input = ask_question()
-    if not user_input:
-        break
-    
     # Define safety settings
     safety_settings = [
         {
