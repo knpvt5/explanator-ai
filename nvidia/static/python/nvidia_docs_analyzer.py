@@ -10,17 +10,13 @@ import PyPDF2
 # Load environment variables
 load_dotenv()
 
-files_input = input("Enter the file path or leave blank for default files: ")
 
-if not files_input:
-    files = ["static/eg_data/eg-txt-data/eg1.txt",
-                "static/eg_data/eg-csv-data/eg11.csv",
-                "static/eg_data/eg-json-data/eg11.json",
-                "static/eg_data/eg-pdf-data/eg1.pdf",
-                "static/eg_data/eg-txt-data/eg1.txt",
+files = ["static/eg_data/eg-txt-data/eg.txt",
+                "static/eg_data/eg-csv-data/eg1.csv",
+                "static/eg_data/eg-json-data/eg1.json",
+                "static/eg_data/eg-pdf-data/eg.pdf",
+                "static/eg_data/eg-txt-data/eg.txt",
                 ]
-else:
-    files = [file.strip() for file in files_input.split(',')]
 
 
 #model options
@@ -67,10 +63,9 @@ def extract_all_files_data():
                     all_data.append({
                         'text_content': text_content
                     })
-                print(f"Total text data from {text_file}: {text_content}")
-                print("="*100 + "\n")
+                print(f"Total text data from {text_file}: {text_content}\n")
             except Exception as e:
-                print(f"Error reading text file {text_file}: {e}")
+                print(f"Error reading text file {text_file}: {e}\n")
                 
         elif file.endswith(".csv"):
             csv_file = file
@@ -80,11 +75,10 @@ def extract_all_files_data():
                     CSVreader = csv.DictReader(file)
                     for CSVrow in CSVreader:
                         csvData.append(CSVrow)
-                print(f"Total CSV data from {csv_file}: {csvData}")
-                print("="*100 + "\n")
-                all_data.append(csvData)  # Append the data to the main list
+                print(f"Total CSV data from {csv_file}: {csvData}\n")
+                all_data.append(csvData) 
             except Exception as e:
-                print(f"Error reading CSV file {csv_file}: {e}")
+                print(f"Error reading CSV file {csv_file}: {e}\n")
                 
         elif file.endswith(".json"):
             json_file = file
@@ -94,11 +88,10 @@ def extract_all_files_data():
                     JSONreader = json.load(jsonFile)
                     for JSONrow in JSONreader:
                         jsonData.append(JSONrow)
-                print(f"Total JSON data from {json_file}: {jsonData}")
-                print("="*100 + "\n")
+                print(f"Total JSON data from {json_file}: {jsonData}\n")
                 all_data.append(jsonData)
             except Exception as e:
-                print(f"Error reading JSON file {json_file}: {e}")
+                print(f"Error reading JSON file {json_file}: {e}\n")
                 
         elif file.endswith(".pdf"):
             pdf_file = file
@@ -112,11 +105,10 @@ def extract_all_files_data():
                     pdfData.append({
                         'pdf_data': text,
                     })
-                print(f"Total PDF data from {pdf_file}: {pdfData}")
-                print("="*100 + "\n")
+                print(f"Total PDF data from {pdf_file}: {pdfData}\n")
                 all_data.append(pdfData)
             except Exception as e:
-                print(f"Error reading PDF file {pdf_file}: {e}")
+                print(f"Error reading PDF file {pdf_file}: {e}\n")
 
     return all_data 
 

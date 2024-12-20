@@ -31,9 +31,9 @@ for filename in files:
             with open(filename, "r", encoding="utf-8") as file:
                 text_content = file.read()
                 all_Data.append(text_content)
-            print(f"txt file data: {text_content}")
+                print(f"txt file data: {text_content}\n")
         except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.")
+            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
             
     elif filename.endswith(".csv"):
         csvData = []
@@ -45,7 +45,7 @@ for filename in files:
                 print(f"CSV file data: {csvData}\n")
                 all_Data.append(csvData)
         except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.")
+            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
             
     elif filename.endswith(".json"):
         jsonData = []
@@ -57,7 +57,7 @@ for filename in files:
                 print(f"json file data: {jsonData}\n")
                 all_Data.append(jsonData)
         except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.")
+            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
             
     elif filename.endswith(".pdf"):
         pdfData = []
@@ -70,7 +70,7 @@ for filename in files:
                 print(f"pdf file data: {pdfData}\n")
                 all_Data.append(pdfData)
         except FileNotFoundError:
-            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.")
+            print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
     else:
         print(f"Unsupported file format: {filename}")
 
