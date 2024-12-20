@@ -60,10 +60,10 @@ def nvidia_api(request):
 @require_http_methods(["POST"])
 def nvidia_docs_analyzer_api(request):
     # for debugging
-        print("Request received")
+        """ print("Request received")
         print("Request method:", request.method)
         print("Content type:", request.content_type)
-        print("Files:", request.FILES)
+        print("Files:", request.FILES) """
         
         return handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses)
         
