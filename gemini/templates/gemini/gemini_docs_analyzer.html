@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static '/styles/gemini.css' %}" />
+    <link rel="stylesheet" href="{% static '/styles/gemini_docs_analyzer.css' %}" />
     <title>GEMINI</title>
   </head>
   <body>
@@ -43,6 +43,14 @@
             </div>
           </div>
           <div class="chat-input-container">
+            <div class="file-upload-container">
+              <label for="input_file" class="upload-label">
+                <i class="fa-solid fa-paperclip"></i>
+              </label>
+              <input type="file" id="input_file" name="input_file" multiple accept=".txt,.csv,.json,.pdf" />
+              <span id="file-name"></span>
+              <button id="remove-file" aria-label="Remove file" title="Remove file">x</button>
+            </div>
             <textarea id="user-input" placeholder="Ask any Question here..."></textarea>
             <button id="send-button"><i class="fa-solid fa-arrow-up"></i></button>
           </div>
