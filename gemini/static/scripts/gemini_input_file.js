@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const backendAPI = "/gemini/gemini-docs-analyzer-api/";
 
     inputFile.addEventListener("change", function () {
+        removeUploadedFiles();
         const file = inputFile.files[0];
         const maxFileSize = 5 * 1024 * 1024; // 5 MB        
 
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             removeFile.style.display = "block";
             localStorage.setItem("fileUploaded", file.name);
             console.log("fileUploaded saved to localStorage:", file.name);
-            
+
 
             if (file.size > maxFileSize) {
                 alert("File size exceeds the 5 MB limit!");
@@ -97,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("fileUploaded removed from localStorage");
     });
 
+
     const fileUploaded = localStorage.getItem("fileUploaded");
     if (fileUploaded) {
         console.log("Restoring from localStorage:", fileUploaded);
@@ -105,9 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 width: 50px;
                 overflow-x: auto;
                 border: 1px solid #fff;
-                margin-bottom:3px ;
+                margin-bottom:5px ;
             `;
         fileNameSpan.style.display = "block";
         removeFile.style.display = "block";
+    }else{
+        removeUploadedFiles();
     }
 });
