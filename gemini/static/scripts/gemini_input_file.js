@@ -49,11 +49,47 @@ const uploadFile = () => {
                     throw new Error(data.error || `HTTP error! status: ${response.status}`);
                 }
                 console.log('File upload success:', data);
-                alert("File uploaded successfully!");
+                // alert("File uploaded successfully!");
             })
             .catch(error => {
                 console.error('File upload error:', error);
-                alert("File uploaded failed!");
+                // alert("File uploaded failed!");
             });
     }
 };
+
+
+async function removeUploadedFiles() {
+    try {
+        const response = await fetch("/nvidia/clear-uploaded-files-api/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // "X-CSRFToken": getCookie("csrftoken"), 
+            },
+        });
+
+        // Ensure the response is ok before processing it
+        if (response.ok) {
+            const data = await response.json(); 
+            console.log("Uploaded files removed and session cleared:", data);
+        } else {
+            const errorData = await response.json();  
+            console.error("Error removing files:", errorData.error || response.statusText);
+        }
+    } catch (error) {
+        console.error("Error removing files:", error);
+    }
+}
+
+
+removeFile.addEventListener("click", () => {
+    inputFile.value = '';
+    fileNameSpan.style.display = "none";
+    removeFile.style.display = "none"
+    removeUploadedFiles();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    removeUploadedFiles();
+});
