@@ -27,7 +27,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
             files = request.FILES.getlist('input_file')
             logging.info(f"Files received: {[file.name for file in files]}")
 
-            UPLOAD_DIR = 'static/data'
+            UPLOAD_DIR = '/data/site_data'
             os.makedirs(UPLOAD_DIR, exist_ok=True)
 
             file_data = []
