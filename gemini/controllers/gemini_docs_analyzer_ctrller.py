@@ -30,7 +30,7 @@ def handle_gemini_docs_analyzer_request(request, model, generate_stream_response
             files = request.FILES.getlist('input_file')
             logging.info(f"Files received: {[file.name for file in files]}")
 
-            UPLOAD_DIR = '/data/site_data'
+            UPLOAD_DIR = './data/site_data'
             os.makedirs(UPLOAD_DIR, exist_ok=True)
         
             for file in files:
