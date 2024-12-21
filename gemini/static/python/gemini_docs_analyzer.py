@@ -4,6 +4,16 @@ from dotenv import load_dotenv
 import csv
 import json
 import PyPDF2
+import logging
+
+# Configure logging to display messages to the terminal
+logging.basicConfig(
+    level=logging.DEBUG, 
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  
+)
+
+# Initialize logging
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
@@ -61,14 +71,14 @@ for filename in files:
                 print(f"pdf file data: {pdfData}\n")
                 all_Data.append(pdfData)
         else:
-            print(f"Unsupported file format: {filename}")
+            logging.info(f"Unsupported file format: {filename}")
     except FileNotFoundError:
-                print(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
+            logging.info(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
 
 
 # Convert all data to string format
 all_Data_str = str(all_Data) if all_Data else ""
-print("all data string:", all_Data_str)
+logging.info("all data string:", all_Data_str)
 
 if not all_Data:
     print("No data extracted. Exiting...")
@@ -84,9 +94,9 @@ else:
         try:
             # Generate content using the text data as context
             prompt = (
-                # "You are a helpful assistant. Only answer questions based on the provided text data. "
-                # "Do not answer any questions that are not based on the text data. "
-                f"Text Data:\n{all_Data_str}\n\n"
+                # "You are a helpful assistant. Only answer questions based on the provided data. "
+                # "Do not answer any questions that are not based on the data. "
+                f"Data:\n{all_Data_str}\n\n"
                 f"User's Input: {user_input}"
             )
 

@@ -6,6 +6,15 @@ from bs4 import BeautifulSoup
 import requests
 import os
 import asyncio
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
+
+# Initialize logging
+logger = logging.getLogger(__name__)
 
 def handle_nvidia_docs_analyzer_request(request, client, generate_stream_responses):
     try:
@@ -16,7 +25,7 @@ def handle_nvidia_docs_analyzer_request(request, client, generate_stream_respons
         # Handle file upload request
         if request.FILES:
             files = request.FILES.getlist('input_file')
-            print(f"Files received: {[file.name for file in files]}")
+            logging.info(f"Files received: {[file.name for file in files]}")
 
             UPLOAD_DIR = 'static/data'
             os.makedirs(UPLOAD_DIR, exist_ok=True)

@@ -4,7 +4,7 @@ const removeFile = document.getElementById("remove-file");
 
 const backendAPI = "/nvidia/nvidia-docs-analyzer-api/";
 
-let fileUploaded = false;
+// let fileUploaded = false;
 
 // File upload event handling
 inputFile.addEventListener("change", function () {
