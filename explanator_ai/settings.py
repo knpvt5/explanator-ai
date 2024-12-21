@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'homepage',
     'nvidia',
     'gemini',
     'ai',
@@ -126,6 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Include static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'homepage/static'),
     os.path.join(BASE_DIR, 'nvidia/static'),
     os.path.join(BASE_DIR, 'gemini/static'),
     os.path.join(BASE_DIR, 'ai/static'),

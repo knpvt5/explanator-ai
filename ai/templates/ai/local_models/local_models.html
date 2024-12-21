@@ -29,11 +29,10 @@
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
-      {% comment %} <a href="{% url 'ai' %}">ARTIFICIAL INTELLIGENCE</a> {% endcomment %}
+      <a href="{% url 'api_models' %}">API MODELS</a>
       <a href="{% url 'datasets' %}">DATASETS</a>
       <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
       <a href="{% url 'local_models' %}">LOCAL MODELS</a>
-      <a href="{% url 'api_models' %}">API MODELS</a>
     </nav>
     <main>
       <div class="content">

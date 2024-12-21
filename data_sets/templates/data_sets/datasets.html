@@ -25,17 +25,13 @@
   </head>
   <body>
     <header>
-      {% comment %}
-      <h1>API MODELS</h1>
-      {% endcomment %}
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
-      {% comment %} <a href="{% url 'ai' %}">ARTIFICIAL INTELLIGENCE</a> {% endcomment %}
-      <a href="{% url 'nvidia_raw_dataset_reader' %}">NVIDIA RAW DATASET READER</a>
-      <a href="{% url 'gemini_raw_dataset_reader' %}">GEMINI RAW DATASET READER</a>
-      <a href="{% url 'tokenized_datasets' %}"> TOKENIZED DATASETS</a>
-      <a href="{% url 'non_tokenized_datasets' %}"> NON TOKENIZED DATASETS</a>
+      <a href="{% url 'api_models' %}">API MODELS</a>
+      <a href="{% url 'datasets' %}">DATASETS</a>
+      <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
+      <a href="{% url 'local_models' %}"> LOCAL MODELS</a>
     </nav>
     <main>
       <div class="content">
