@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const backendAPI = "/nvidia/nvidia-docs-analyzer-api/";
 
-
     // File upload event handling
     inputFile.addEventListener("change", function () {
         removeUploadedFiles();
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (file) {
             formData.append("input_file", file);
 
-            console.log([...formData.entries()]);
+            // console.log([...formData.entries()]);
 
             fetch(backendAPI, {
                 method: 'POST',

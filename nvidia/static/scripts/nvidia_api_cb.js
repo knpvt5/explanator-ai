@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("send-button");
     const selectModel = document.querySelector('.select-model select');
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
-    
 
     let selectedModel = selectModel.value; // Set initial global model
 
     selectModel.addEventListener('change', (e) => {
-        selectedModel = e.target.options[e.target.selectedIndex].textContent; 
+        selectedModel = e.target.options[e.target.selectedIndex].textContent;
         // console.log(selectedModel)
     });
 
@@ -57,9 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     userInput: question,
-                    modelName: selectedModel, 
+                    modelName: selectedModel,
                 }),
             });
 

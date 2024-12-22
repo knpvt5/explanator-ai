@@ -80,6 +80,35 @@ document.querySelectorAll(".suggested-question").forEach((question) => {
     sendButton.disabled = true; // Initially disabled
 });
 
+function fileInputNameChange() {
+    try {
+        const nvidiaFileUploaded = localStorage.getItem('nvidiaFileUploaded');
+        console.log(nvidiaFileUploaded);
+
+        // Get the current content of the CodeMirror editor
+        const existingCode = pythonEditor.getValue();
+
+        // Replace the old file path with the new one
+        const updatedCode = existingCode.replace(
+            /files\s*=\s* .*/,
+            `files = ["${nvidiaFileUploaded}"]`
+        );
+
+        // Save the current cursor and scroll positions
+        const cursorPosition = pythonEditor.getCursor();
+        const scrollPosition = pythonEditor.getScrollInfo().top;
+
+        // Set the updated code
+        pythonEditor.setValue(updatedCode);
+
+        // Restore cursor and scroll positions
+        pythonEditor.setCursor(cursorPosition);
+        pythonEditor.scrollTo(0, scrollPosition);
+    } catch (error) {
+        console.error('Error during file input CodeMirror change:', error);
+    }
+}
+
 
 // Chat Box Update
 document.addEventListener("DOMContentLoaded", () => {
@@ -127,6 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
         pythonEditor.scrollTo(0, scrollPosition);
     });
 
+    //In codemirror changing file name
+    const inputFile = document.getElementById("input_file");
+    inputFile.addEventListener('change', fileInputNameChange);
+    //Calling this again when the document is reloaded
+    fileInputNameChange();
 });
 
 // Initialize CodeMirror for Markdown Editor
