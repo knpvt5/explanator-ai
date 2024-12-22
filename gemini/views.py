@@ -20,8 +20,8 @@ genai.configure(api_key=os.getenv("GEMINI_API"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 
-def gemini(request):
-    return render(request, 'gemini/gemini.html')
+""" def gemini(request):
+    return render(request, 'gemini/gemini.html') """
 
 def gemini_api_cb(request):
     return render(request, 'gemini/gemini_api_cb.html')

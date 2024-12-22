@@ -26,12 +26,7 @@ model_name = "gemini-1.5-flash"
 model = genai.GenerativeModel(model_name)
 
 # Specify the file paths
-files = [
-    "static/eg_data/eg-txt-data/eg.txt",
-    "static/eg_data/eg-csv-data/eg1.csv",
-    "static/eg_data/eg-json-data/eg1.json",
-    "static/eg_data/eg-pdf-data/eg.pdf",
-]
+files = []
 
 all_Data = []
 

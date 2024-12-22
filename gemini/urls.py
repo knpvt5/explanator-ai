@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.gemini, name='gemini'),
+    # path('', views.gemini, name='gemini'),
     
     path('gemini-api/', views.gemini_api, name='gemini_api'),
     path('gemini-api-cb/', views.gemini_api_cb, name='gemini_api_cb'),

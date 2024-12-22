@@ -11,12 +11,7 @@ import PyPDF2
 load_dotenv()
 
 
-files = ["static/eg_data/eg-txt-data/eg.txt",
-                "static/eg_data/eg-csv-data/eg1.csv",
-                "static/eg_data/eg-json-data/eg1.json",
-                "static/eg_data/eg-pdf-data/eg.pdf",
-                "static/eg_data/eg-txt-data/eg.txt",
-                ]
+files = []
 
 
 #model options

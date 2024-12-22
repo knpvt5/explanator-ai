@@ -30,8 +30,8 @@ try:
 except Exception as e:
     raise RuntimeError(f"Failed to initialize OpenAI client: {str(e)}")
 
-def nvidia(request):
-    return render(request, 'nvidia/nvidia.html')
+""" def nvidia(request):
+    return render(request, 'nvidia/nvidia.html') """
 
 def nvidia_api_cb(request):
     return render(request, 'nvidia/nvidia_api_cb.html')
