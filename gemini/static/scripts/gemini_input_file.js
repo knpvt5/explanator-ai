@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 border: 1px solid #fff;
             `;
             removeFile.style.display = "block";
-            localStorage.setItem("fileUploaded", file.name);
-            console.log("fileUploaded saved to localStorage:", file.name);
+            localStorage.setItem("geminiFileUploaded", file.name);
+            console.log("geminiFileUploaded saved to localStorage:", file.name);
 
 
             if (file.size > maxFileSize) {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 inputFile.value = "";
                 fileNameSpan.style.display = "none";
                 removeFile.style.display = "none";
-                localStorage.removeItem("fileUploaded");
+                localStorage.removeItem("geminiFileUploaded");
             } else {
                 uploadFile();
             }
@@ -94,15 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
         fileNameSpan.style.display = "none";
         removeFile.style.display = "none";
         removeUploadedFiles();
-        localStorage.removeItem("fileUploaded");
-        console.log("fileUploaded removed from localStorage");
+        localStorage.removeItem("geminiFileUploaded");
+        console.log("geminiFileUploaded removed from localStorage");
     });
 
 
-    const fileUploaded = localStorage.getItem("fileUploaded");
-    if (fileUploaded) {
-        // console.log("Restoring from localStorage:", fileUploaded);
-        fileNameSpan.textContent = fileUploaded;
+    const geminiFileUploaded = localStorage.getItem("geminiFileUploaded");
+    if (geminiFileUploaded) {
+        // console.log("Restoring from localStorage:", geminiFileUploaded);
+        fileNameSpan.textContent = geminiFileUploaded;
         fileNameSpan.style.cssText = `
                 width: 50px;
                 overflow-x: auto;

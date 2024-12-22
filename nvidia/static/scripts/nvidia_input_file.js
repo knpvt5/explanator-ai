@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const backendAPI = "/nvidia/nvidia-docs-analyzer-api/";
 
-    // let fileUploaded = false;
 
     // File upload event handling
     inputFile.addEventListener("change", function () {
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
         removeFile.style.display = "block"
         const file = inputFile.files[0];
-        localStorage.setItem("fileUploaded", file.name);
+        localStorage.setItem("nvidiaFileUploaded", file.name);
         const maxFileSize = 5 * 1024 * 1024; // 5 MB
 
 
@@ -88,14 +87,14 @@ document.addEventListener("DOMContentLoaded", function () {
         fileNameSpan.style.display = "none";
         removeFile.style.display = "none"
         removeUploadedFiles();
-        localStorage.removeItem("fileUploaded");
+        localStorage.removeItem("nvidiaFileUploaded");
     });
 
     // Get uploaded file name from localStorage on reload
-    const fileUploaded = localStorage.getItem("fileUploaded");
-    if (fileUploaded) {
+    const nvidiaFileUploaded = localStorage.getItem("nvidiaFileUploaded");
+    if (nvidiaFileUploaded) {
         fileNameSpan.style.display = "none";
-        fileNameSpan.textContent = fileUploaded;
+        fileNameSpan.textContent = nvidiaFileUploaded;
         fileNameSpan.style.cssText = `
          width: 50px;
          overflow-x: auto;
