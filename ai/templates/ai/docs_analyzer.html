@@ -36,7 +36,7 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'nvidia_docs_analyzer' %}'">
           <div id="codeBox-above-space">
             <h2>NVIDIA DOCS ANALYZER</h2>
             <a href="{% url 'nvidia_docs_analyzer' %}" title="Go to link">
@@ -48,7 +48,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_docs_analyzer.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'gemini_docs_analyzer' %}'">
           <div id="codeBox-above-space">
             <h2>GEMINI DOCS ANALYZER</h2>
             <a href="{% url 'gemini_docs_analyzer' %}" title="Go to link">

@@ -36,7 +36,7 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'fine_tuning_via_CPU' %}'">
           <div id="codeBox-above-space">
             <h2>FINE TUNING VIA CPU</h2>
             <a href="{% url 'fine_tuning_via_CPU' %}" title="Go to link">
@@ -48,7 +48,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/fine_tuning_via_CPU/ft_gtp2_with_wp-data.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'fine_tuning_via_CUDA' %}'">
           <div id="codeBox-above-space">
             <h2>FINE TUNING VIA CUDA</h2>
             <a href="{% url 'fine_tuning_via_CUDA' %}" title="Go to link">
@@ -60,7 +60,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/fine_tuning_via_CUDA/ft_gtp2_with_wp_data.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'fine_tuning_via_TPU' %}'">
           <div id="codeBox-above-space">
             <h2>FINE TUNING VIA TPU</h2>
             <a href="{% url 'fine_tuning_via_TPU' %}" title="Go to link">

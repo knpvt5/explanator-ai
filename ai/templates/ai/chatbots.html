@@ -36,7 +36,7 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'nvidia_api_cb' %}'">
           <div id="codeBox-above-space">
             <h2>NVIDIA API CHATBOT</h2>
             <a href="{% url 'nvidia_api_cb' %}" title="Go to link">
@@ -48,7 +48,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_cb.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'gemini_api_cb' %}'">
           <div id="codeBox-above-space">
             <h2>GEMINI API CHATBOT</h2>
             <a href="{% url 'gemini_api_cb' %}" title="Go to link">

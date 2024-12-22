@@ -36,7 +36,7 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'nvidia_raw_dataset_reader' %}'">
           <div id="codeBox-above-space">
             <h2>NVIDIA API DATASETS</h2>
             <a href="{% url 'nvidia_raw_dataset_reader' %}" title="Go to link">
@@ -48,7 +48,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_datasets/nvidia_raw_dataset_reader.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'gemini_raw_dataset_reader' %}'">
           <div id="codeBox-above-space">
             <h2>GEMINI API DATASETS</h2>
             <a href="{% url 'gemini_raw_dataset_reader' %}" title="Go to link">
@@ -60,7 +60,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/gemini_api_datasets/gemini_raw_dataset_reader.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'tokenized_datasets' %}'">
           <div id="codeBox-above-space">
             <h2>TOKENIZED DATASETS</h2>
             <a href="{% url 'tokenized_datasets' %}" title="Go to link">
@@ -72,7 +72,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/tokenized_datasets/wp_csv_data_tokenization.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'non_tokenized_datasets' %}'">
           <div id="codeBox-above-space">
             <h2>NON TOKENIZED DATASETS</h2>
             <a href="{% url 'non_tokenized_datasets' %}" title="Go to link">

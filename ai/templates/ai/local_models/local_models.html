@@ -37,7 +37,7 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'alibaba' %}'">
           <div id="codeBox-above-space">
             <h2>ALIBABA MODELS</h2>
             <a href="{% url 'alibaba' %}" title="Go to link">
@@ -49,7 +49,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/local_models/alibaba/qwen2_1.5b.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'meta' %}'">
           <div id="codeBox-above-space">
             <h2>META MODELS</h2>
             <a href="{% url 'meta' %}" title="Go to link">
@@ -61,7 +61,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/local_models/meta/llama3.2_1b.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'openai' %}'">
           <div id="codeBox-above-space">
             <h2>OPENAI MODELS</h2>
             <a href="{% url 'openai' %}" title="Go to link">
@@ -84,7 +84,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/local_models/google/bert_txt_reader.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'custom_models' %}'">
           <div id="codeBox-above-space">
             <h2>CUSTOM MODELS</h2>
             <a href="{% url 'custom_models' %}" title="Go to link">

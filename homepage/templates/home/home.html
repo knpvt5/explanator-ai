@@ -49,7 +49,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_cb.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'docs_analyzer' %}'">
           <div id="codeBox-above-space">
             <h2>DOCS ANALYZER</h2>
             <a href="{% url 'docs_analyzer' %}" title="Go to link">
@@ -61,7 +61,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_docs_analyzer.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'datasets' %}'">
           <div id="codeBox-above-space">
             <h2>DATASETS</h2>
             <a href="{% url 'datasets' %}" title="Go to link">
@@ -73,7 +73,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/datasets/loading_wp_tokenized_datasets.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'fine_tuning_via_CPU' %}'">
           <div id="codeBox-above-space">
             <h2>FINE-TUNING</h2>
             <a href="{% url 'fine_tuning_via_CPU' %}" title="Go to link">
@@ -85,7 +85,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/fine_tuning_via_CPU/ft_gtp2_with_wp-data.py' %}"></div>
         </div>
-        <div class="code-box">
+        <div class="code-box" onclick="window.location.href='{% url 'local_models' %}'">
           <div id="codeBox-above-space">
             <h2>LOCAL MODELS</h2>
             <a href="{% url 'local_models' %}" title="Go to link">
