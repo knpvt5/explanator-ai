@@ -28,7 +28,8 @@
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
-      <a href="{% url 'api_models' %}">API MODELS</a>
+      <a href="{% url 'chatbots' %}">CHATBOTS</a>
+      <a href="{% url 'docs_analyzer' %}">DOCS ANALYZER</a>
       <a href="{% url 'datasets' %}">DATASETS</a>
       <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
       <a href="{% url 'local_models' %}"> LOCAL MODELS</a>
@@ -37,8 +38,8 @@
       <div class="content">
         <div class="code-box">
           <div id="codeBox-above-space">
-            <h2>NVIDIA API</h2>
-            <a href="{% url 'nvidia' %}" title="Go to link">
+            <h2>NVIDIA API CHATBOT</h2>
+            <a href="{% url 'nvidia_api_cb' %}" title="Go to link">
               <button type="button" title="link" class="link-btn">
                 <i class="fa-solid fa-up-right-from-square"></i>
               </button>
@@ -49,8 +50,8 @@
         </div>
         <div class="code-box">
           <div id="codeBox-above-space">
-            <h2>GEMINI API</h2>
-            <a href="{% url 'gemini' %}" title="Go to link">
+            <h2>GEMINI API CHATBOT</h2>
+            <a href="{% url 'gemini_api_cb' %}" title="Go to link">
               <button type="button" title="link" class="link-btn">
                 <i class="fa-solid fa-up-right-from-square"></i>
               </button>

@@ -4,8 +4,10 @@ from . import views
 urlpatterns = [
     path('', views.ai, name='ai'),
     # path('ai/', views.ai, name='ai'), 
+        
+    path('chatbots/', views.chatbots, name='chatbots'), 
     
-    path('api-models/', views.api_models, name='api_models'), 
+    path('docs-analyzer/', views.docs_analyzer, name='docs_analyzer'), 
     
     path('fine-tuning/', views.fine_tuning, name='fine_tuning'),
 

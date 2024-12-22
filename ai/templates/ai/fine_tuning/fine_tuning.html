@@ -28,9 +28,10 @@
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
-      <a href="{% url 'api_models' %}">API MODELS</a>
+      <a href="{% url 'chatbots' %}">CHATBOTS</a>
+      <a href="{% url 'docs_analyzer' %}">DOCS ANALYZER</a>
       <a href="{% url 'datasets' %}">DATASETS</a>
-      <a href="{% url 'fine_tuning_via_CPU' %}">FINE-TUNING</a>
+      <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
       <a href="{% url 'local_models' %}"> LOCAL MODELS</a>
     </nav>
     <main>

@@ -3,8 +3,11 @@ from django.shortcuts import render
 def ai(request):
     return render(request, 'ai/ai.html')
 
-def api_models(request):
-    return render(request, 'ai/api_models/api_models.html')
+def chatbots(request):
+    return render(request, 'ai/chatbots.html')
+
+def docs_analyzer(request):
+    return render(request, 'ai/docs_analyzer.html')
 
 def fine_tuning(request):
     return render(request, 'ai/fine_tuning/fine_tuning.html')
