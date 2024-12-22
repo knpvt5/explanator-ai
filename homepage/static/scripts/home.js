@@ -41,7 +41,6 @@ document.querySelectorAll(".code-box").forEach((codeBox, index) => {
 });
 
 
-
 // Initialize CodeMirror for Markdown Editor
 const markdownPreviewDiv = document.getElementById("markdown-preview");
 const dataContainer = document.getElementById("markdown-data-container");

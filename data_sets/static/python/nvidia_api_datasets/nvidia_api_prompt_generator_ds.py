@@ -5,7 +5,7 @@ from datasets import load_dataset
 
 load_dotenv()
 
-# Load the Hugging Face dataset
+# Loading dataset via HF in streaming mode
 dataset = load_dataset("fka/awesome-chatgpt-prompts", streaming=True)
 
 # print("printing whole dataset","dataset)

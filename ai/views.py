@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-def ai(request):
-    return render(request, 'ai/ai.html')
+""" def ai(request):
+    return render(request, 'ai/ai.html') """
 
 def chatbots(request):
     return render(request, 'ai/chatbots.html')
