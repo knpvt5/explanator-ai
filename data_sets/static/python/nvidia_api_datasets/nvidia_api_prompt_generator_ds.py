@@ -19,7 +19,7 @@ data = []
 for example in dataset['train']:
     data.append(f"{example}\n")
 
-# Join the list into a single str
+# Joining list into a single str
 all_data = "".join(data)
 
 print(all_data)

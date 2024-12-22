@@ -22,7 +22,7 @@
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/styles/nvidia_api_cb.css' %}" />
-    <title>NVIDIA RAW DATASET READER</title>
+    <title>PROMPT GENERATOR</title>
   </head>
   <body>
     <header>
@@ -35,11 +35,11 @@
     <main>
       <div class="content">
         <div class="chat-box">
-          <h2>ASK ME ANYTHING RELATED TO THIS DATASET...</h2>
+          <h2>GENERATE ANY PROMPT...</h2>
           <div class="chat-messages">
             <div class="suggested-question-box">
-              <p class="suggested-question one">Summarize this dataset?</p>
-              <p class="suggested-question two">What is written in this dataset?</p>
+              <p class="suggested-question one">Generate a prompt to create an image?</p>
+              <p class="suggested-question two">Generate a prompt to create a transformer?</p>
             </div>
           </div>
           <div class="chat-input-container">
@@ -49,11 +49,11 @@
         </div>
         <div class="code-box">
           <div id="codeBox-above-space">
-            <h2>NVIDIA RAW DATASET READER</h2>
+            <h2>PROMPT GENERATOR</h2>
             <button type="button" title="copy code" id="copy-code-btn"><i class="fa-regular fa-copy"></i></button>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_datasets/nvidia_raw_dataset_reader.py' %}"></div>
+          <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_datasets/nvidia_api_prompt_generator_ds.py' %}"></div>
         </div>
       </div>
 

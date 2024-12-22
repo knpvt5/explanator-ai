@@ -27,9 +27,14 @@ except Exception as e:
     raise RuntimeError(f"Failed to initialize OpenAI client: {str(e)}")
 
 
-# Create your views here.
+#views here.
+def nvidia_api_prompt_generator_ds(request):
+    return render(request, 'data_sets/nvidia_api_datasets/nvidia_api_prompt_generator_ds.html')
+
 def nvidia_raw_dataset_reader(request):
     return render(request, 'data_sets/nvidia_api_datasets/nvidia_raw_dataset_reader.html')
+
+
 
 
 # Generator function to stream API response chunks
