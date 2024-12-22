@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fileUploaded = localStorage.getItem("fileUploaded");
     if (fileUploaded) {
-        console.log("Restoring from localStorage:", fileUploaded);
+        // console.log("Restoring from localStorage:", fileUploaded);
         fileNameSpan.textContent = fileUploaded;
         fileNameSpan.style.cssText = `
                 width: 50px;
