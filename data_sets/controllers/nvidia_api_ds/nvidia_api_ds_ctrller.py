@@ -12,7 +12,14 @@ import requests
 import os
 from datasets import load_dataset
 import pandas as pd
+import logging
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(levelname)s - %(message)s - %(name)s -%(asctime)s '
+)
+# Initialize logging
+logger = logging.getLogger(__name__)
 
 
 def handle_nvidia_raw_dataset_reader_request(request, client, generate_stream_responses):
@@ -30,10 +37,9 @@ def handle_nvidia_raw_dataset_reader_request(request, client, generate_stream_re
         split_df = pd.DataFrame(split_rows)
         all_data.append(split_df)
 
-    # Print details of the DataFrame
-    print(f"Split: {split_name}")
-    print(split_df.head())
-    print("\n" + "="*50 + "\n")
+    # Printing details of the DataFrame
+    """ print(f"Split: {split_name}")
+    print(split_df.head()) """
 
     try:
         body  = json.loads(request.body.decode("utf-8"))
@@ -51,7 +57,6 @@ def handle_nvidia_raw_dataset_reader_request(request, client, generate_stream_re
             # top_k = 50,
             top_p=0.7,
             max_tokens=1024,
-            # repetition_penalty=1.2,
             stream=True
         )
         
@@ -61,14 +66,18 @@ def handle_nvidia_raw_dataset_reader_request(request, client, generate_stream_re
         return response
 
     except Exception as e:
-        print(f"Error occurred during completion request: {e}")
+        logging.error(f"Error occurred during completion request: {e}")
         
         
         
-def handle_nvidia_api_prompt_generator_request(request, client, generate_stream_responses):
+def handle_nvidia_api_prompt_generator_ds_request(request, client, generate_stream_responses):
     try: 
         body  = json.loads(request.body.decode("utf-8"))
         user_input = body.get('userInput')
+        model_name = body.get('modelName')
+        
+        if not model_name:
+            model_name = "nvidia/llama-3.1-nemotron-70b-instruct"
 
         dataset = load_dataset("fka/awesome-chatgpt-prompts", streaming=True)
         data = []
@@ -83,7 +92,7 @@ def handle_nvidia_api_prompt_generator_request(request, client, generate_stream_
 
         #openai completion
         completion = client.chat.completions.create(
-            model="nvidia/llama-3.1-nemotron-70b-instruct",
+            model= model_name,
             messages=[
                 {"role": "system", "content": "You are a professional prompt engineer."}, 
                 {"role": "assistant", "content": "I will assist you in crafting prompts for ChatGPT and other AI models."},
@@ -102,5 +111,8 @@ def handle_nvidia_api_prompt_generator_request(request, client, generate_stream_
         return StreamingHttpResponse(generate_stream_responses(completion), content_type="text/event-stream")
 
     
+    except json.decoder.JSONDecodeError as e:
+        logging.error(f"Error occurred while decoding JSON: {e}") 
+            
     except Exception as e:
-        print(f"Error occurred during completion request: {e}")     
+        logging.error(f"Error occurred during completion request: {e}")     

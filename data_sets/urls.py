@@ -13,6 +13,7 @@ urlpatterns = [
     path('non-tokenized-datasets/', views.non_tokenized_datasets, name='non_tokenized_datasets'),
     
     path('nvidia-api-prompt-generator-ds/', nvidia_api_datasets_views.nvidia_api_prompt_generator_ds, name='nvidia_api_prompt_generator_ds'),
+    path('nvidia-api-prompt-generator-ds-api/', nvidia_api_datasets_views.nvidia_api_prompt_generator_ds_api, name='nvidia_api_prompt_generator_ds_api'),
     
     path('nvidia-raw-dataset-reader/', nvidia_api_datasets_views.nvidia_raw_dataset_reader, name='nvidia_raw_dataset_reader'),
     path('nvidia-raw-dataset-reader-api/', nvidia_api_datasets_views.nvidia_raw_dataset_reader_api, name='nvidia_raw_dataset_reader_api'),

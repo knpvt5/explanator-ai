@@ -37,7 +37,7 @@ while True:
 
     #openai completion
     completion = client.chat.completions.create(
-        model="nvidia/llama-3.1-nemotron-70b-instruct",
+        model= "nvidia/llama-3.1-nemotron-70b-instruct",
         messages=[
             {"role": "system", "content": "You are a professional prompt engineer."}, 
             {"role": "assistant", "content": "I will assist you in crafting prompts for ChatGPT and other AI models."},
@@ -48,7 +48,6 @@ while True:
         # top_k = 50,
         top_p=0.7,
         max_tokens=1024,
-        # repetition_penalty=1.2,
         stream=True
     )
 

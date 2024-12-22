@@ -10,4 +10,7 @@ def tokenized_datasets(request):
 def non_tokenized_datasets(request):
     return render(request, 'datasets/non_tokenized_datasets.html')
 
+def non_tokenized_datasets(request):
+    return render(request, 'datasets/non_tokenized_datasets.html')
+
 

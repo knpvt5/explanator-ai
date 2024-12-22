@@ -12,7 +12,7 @@ import requests
 import os
 from datasets import load_dataset
 import pandas as pd
-from ..controllers.nvidia_api_ds.nvidia_api_ds_ctrller import handle_nvidia_raw_dataset_reader_request
+from ..controllers.nvidia_api_ds.nvidia_api_ds_ctrller import handle_nvidia_raw_dataset_reader_request, handle_nvidia_api_prompt_generator_ds_request
 
 
 load_dotenv(override=True)
@@ -47,4 +47,9 @@ def generate_stream_responses(response):
 @require_http_methods(["POST"])
 def nvidia_raw_dataset_reader_api(request):
     return handle_nvidia_raw_dataset_reader_request(request, client, generate_stream_responses)
+    
+@csrf_exempt
+@require_http_methods(["POST"])
+def nvidia_api_prompt_generator_ds_api(request):
+    return handle_nvidia_api_prompt_generator_ds_request(request, client, generate_stream_responses)
     
