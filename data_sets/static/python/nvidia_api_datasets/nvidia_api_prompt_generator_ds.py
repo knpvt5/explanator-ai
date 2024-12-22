@@ -8,9 +8,7 @@ load_dotenv()
 # Load the Hugging Face dataset
 dataset = load_dataset("fka/awesome-chatgpt-prompts", streaming=True)
 
-# print(dataset)
-
-# for i, example in enumerate(dataset['train']):
+# print("printing whole dataset","dataset)
 
 #to store the data
 data = []
@@ -31,9 +29,9 @@ client = OpenAI(
 )
 
 while True:
-    user_question = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
+    user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
-    if user_question.lower() in ['exit', 'q']:
+    if user_input.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
@@ -44,7 +42,7 @@ while True:
             {"role": "system", "content": "You are a professional prompt engineer."}, 
             {"role": "assistant", "content": "I will assist you in crafting prompts for ChatGPT and other AI models."},
             {"role": "system", "content": f"dataset: {all_data}."},
-            {"role": "user", "content": user_question}
+            {"role": "user", "content": user_input}
         ],
         temperature=0.5,
         # top_k = 50,
