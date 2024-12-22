@@ -6,7 +6,7 @@ import json
 import PyPDF2
 import logging
 
-# Configure logging to display messages to the terminal
+# Config logging 
 logging.basicConfig(
     level=logging.DEBUG, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  
@@ -15,17 +15,15 @@ logging.basicConfig(
 # Initialize logging
 logger = logging.getLogger(__name__)
 
-# Load environment variables
 load_dotenv()
 
-# Configure the Gemini API
+# Gemini API
 genai.configure(api_key=os.getenv("GEMINI_API"))
 
-# Specify the model name
+#model name
 model_name = "gemini-1.5-flash"
 model = genai.GenerativeModel(model_name)
 
-# Specify the file paths
 files = []
 
 all_Data = []
@@ -71,14 +69,14 @@ for filename in files:
             logging.info(f"Error: File not found at path '{filename}'. Please ensure the file exists.\n")
 
 
-# Convert all data to string format
+# Converting all data to str
 all_Data_str = str(all_Data) if all_Data else ""
 logging.info("all data string:", all_Data_str)
 
 if not all_Data:
     print("No data extracted. Exiting...")
 else:
-    # Main question-answering loop
+
     while True:
         user_input = input("\nPlease ask your question (or type 'exit' to quit): ")
         
@@ -87,7 +85,6 @@ else:
             break
 
         try:
-            # Generate content using the text data as context
             prompt = (
                 # "You are a helpful assistant. Only answer questions based on the provided data. "
                 # "Do not answer any questions that are not based on the data. "

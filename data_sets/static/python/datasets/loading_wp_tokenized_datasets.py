@@ -2,12 +2,12 @@ from datasets import load_dataset
 from transformers import AutoTokenizer
 import pandas as pd
 
-# Specify dataset and tokenizer
+# dataset name and tokenizer 
 dataset_name = "knkrn5/wealthpsychology-tokenized-data"
 tokenizer_name = "allenai/longformer-large-4096"
 tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
-# Load the tokenized dataset
+# Loading the tokenized dataset
 dataset = load_dataset(dataset_name)
 for split_name, split_data in dataset.items():
     print(f"Split: {split_name}")

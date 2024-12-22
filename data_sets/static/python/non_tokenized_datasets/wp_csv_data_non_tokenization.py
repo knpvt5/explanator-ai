@@ -3,10 +3,9 @@ import pandas as pd
 from datasets import Dataset, DatasetDict
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
-# Load all CSV files into DataFrames
+# Loading all CSV files into DataFrames
 wp_pages_df = pd.read_csv('data/wp-csv-data/wp-pages.csv')
 wp_home_df = pd.read_csv('data/wp-csv-data/wp-home.csv')
 blog_categories_df = pd.read_csv('data/wp-csv-data/blog-categories.csv')
@@ -19,12 +18,12 @@ our_plan_df = pd.read_csv('data/wp-csv-data/our-plan.csv')
 
 # Function to standardize DataFrame structure
 def standardize_dataframe(df, required_columns=['topic', 'description']):
-    # Create missing columns with empty strings if they don't exist
+    # Creating missing columns with empty strings if they don't exist
     for col in required_columns:
         if col not in df.columns:
             df[col] = ''
     
-    # Ensure only required columns are present and in the correct order
+    # Checking only required columns are present and in the correct order
     return df[required_columns]
 
 
@@ -120,7 +119,7 @@ print(our_plan_df.head(), "\n")
 
 
 
-# Push the dataset to the Hugging Face Hub
+# Pushing the dataset to the Hugging Face Hub
 # DATASET_NAME = "wealthpsychology-raw-data"
 """ DATASET_NAME = "knkrn5/wealthpsychology-raw-data"
 DESCRIPTION = "This dataset contains raw data for the Wealth Psychology website content."
@@ -156,13 +155,12 @@ def push_dataset_with_overwrite(dataset_dict, repo_id, token):
     except Exception as e:
         print(f"Error pushing dataset: {str(e)}")
 
-# Your existing data processing code remains the same until the push part...
 
-# Replace the push_to_hub call with this:
+# Setting the dataset name and description
 DATASET_NAME = "knkrn5/wealthpsychology-raw-data"
 DESCRIPTION = "This dataset contains raw data for the Wealth Psychology website content."
 
-# Use the new function to push with overwrite
+#function to push with overwrite
 push_dataset_with_overwrite(
     dataset_dict=non_tokenized_data,
     repo_id=DATASET_NAME,

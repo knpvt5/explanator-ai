@@ -14,7 +14,7 @@ while True:
         print("Exiting...")
         exit()
 
-    # Define safety settings
+    #  safety settings
     safety_settings = [
         {
             "category": "HATE_SPEECH",

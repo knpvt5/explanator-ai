@@ -6,41 +6,40 @@ import pandas as pd
 
 load_dotenv()
 
-# Load the dataset in streaming mode
+# Loading dataset in streaming mode
 dataset = load_dataset("knkrn5/wealthpsychology-raw-data", streaming=True)
 
-# Checking the dataset details
+# Printing whole dataset
 print(dataset)
 
 all_data = []
 
-# Process each split in the dataset
+# Processing each split in the dataset
 for split_name, split_data in dataset.items():
     split_rows = [row for row in split_data]
     split_df = pd.DataFrame(split_rows)
     all_data.append(split_df)
 
-# Print details of the DataFrame
+# Printing details of the DataFrame
 print(f"Split: {split_name}")
 print(split_df.head())
 print("\n" + "="*50 + "\n")
 
-# Initialize the OpenAI client
+# OpenAI client Init
 client = OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
     api_key=os.getenv("NVIDIA_API")
 )
 
 while True:
-    # Take user input for the question
+    # user input 
     user_question = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
-    # Exit the loop if the user types 'exit'
     if user_question.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
-    # Create a completion request with the user question
+    # completion
     completion = client.chat.completions.create(
         model="nvidia/llama-3.1-nemotron-70b-instruct",
         messages=[
@@ -54,7 +53,7 @@ while True:
         stream=True
     )
 
-    # Stream the response chunks and print them
+    # Streaming response 
     for chunk in completion:
         if chunk.choices[0].delta.content is not None:
             print(chunk.choices[0].delta.content, end="")

@@ -36,17 +36,17 @@
     </nav>
     <main>
       <div class="content">
-        <div class="code-box" onclick="window.location.href='{% url 'nvidia_raw_dataset_reader' %}'">
+        <div class="code-box" onclick="window.location.href='{% url 'nvidia_api_prompt_generator_ds' %}'">
           <div id="codeBox-above-space">
             <h2>NVIDIA API DATASETS</h2>
-            <a href="{% url 'nvidia_raw_dataset_reader' %}" title="Go to link">
+            <a href="{% url 'nvidia_api_prompt_generator_ds' %}" title="Go to link">
               <button type="button" title="link" class="link-btn">
                 <i class="fa-solid fa-up-right-from-square"></i>
               </button>
             </a>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
-          <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_datasets/nvidia_raw_dataset_reader.py' %}"></div>
+          <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_datasets/nvidia_api_prompt_generator_ds.py' %}"></div>
         </div>
         <div class="code-box" onclick="window.location.href='{% url 'gemini_raw_dataset_reader' %}'">
           <div id="codeBox-above-space">

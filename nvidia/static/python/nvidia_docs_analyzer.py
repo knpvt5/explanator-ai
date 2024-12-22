@@ -7,7 +7,6 @@ import csv
 import json
 import PyPDF2
 
-# Load environment variables
 load_dotenv()
 
 
@@ -22,12 +21,11 @@ models = {
     "4": "microsoft/phi-3-mini-128k-instruct",
 }
 
-# Prompt user to select a model
+# select a model
 print("Select a model:")
 for key, value in models.items():
     print(f"{key}. {value}")
 
-# Validate user input in a loop
 while True:
     model_choice = input("\nEnter the number corresponding to the model: ")
     if model_choice in models:
@@ -38,17 +36,16 @@ while True:
 
 print("Using model:", model_name)
 
-# Initialize the OpenAI client with NVIDIA's base URL and API key
 client = OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
     api_key=os.getenv("NVIDIA_API")
 )
 
-# Function to extract text from CSV files
+# Extract data function
 def extract_all_files_data():
     all_data = []  
     
-    # Parsing text files
+    # Parsing data from files
     for file in files:
         try:
             if file.endswith(".txt"):
@@ -99,7 +96,7 @@ def extract_all_files_data():
 
     return all_data 
 
-# Extract text from CSV files
+# Extract data
 all_files_data_str = ""
 all_files_data = extract_all_files_data()
 if all_files_data:
@@ -113,16 +110,15 @@ else:
 
 
 while True:
-    # Take user input for the question
+    # user input 
     user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
-    # Exit the loop if the user types 'exit' or 'q'
     if user_input.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
     try:
-        # Create a completion request with the user question and extracted CSV text as context
+        # completion 
         completion = client.chat.completions.create(
             model= model_name,
             messages=[
@@ -138,12 +134,11 @@ while True:
             stream=True
         )
 
-        # Stream the response chunks and print them
+        # Streaming response 
         print("\nAI Response:")
         for chunk in completion:
             if hasattr(chunk.choices[0].delta, "content"):
                 print(chunk.choices[0].delta.content, end="")
-        print()  # For newline after the streamed response
 
     except Exception as e:
         print(f"Error occurred during completion request: {e}")

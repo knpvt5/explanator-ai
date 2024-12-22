@@ -14,12 +14,11 @@ models = {
     "6": "nvidia/nemotron-4-340b-instruct",
     "7": "microsoft/phi-3-mini-128k-instruct",
 }
-# Prompt user to select a model
+#select  model
 print("Select a model:")
 for key, value in models.items():
     print(f"{key}. {value}")
 
-# Validate user input in a loop
 while True:
     model_choice = input("\nEnter the number corresponding to the model: ")
     if model_choice in models:
@@ -31,7 +30,6 @@ while True:
 print("Using model:", model_name)
 
 
-# Initialize the OpenAI client with NVIDIA's base URL and API key
 client = OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
     api_key=os.getenv("NVIDIA_API")
@@ -39,15 +37,14 @@ client = OpenAI(
 # print(os.getenv("NVIDIA_API")) 
 
 while True:
-    # Take user input for the question
+    # user input 
     user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
-    # Exit the loop if the user types 'exit'
     if user_input.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
-    # Create a completion request with the user question
+    # Completion
     completion = client.chat.completions.create(
         model= model_name,
         messages=[
@@ -62,7 +59,7 @@ while True:
         stream=True
     )
 
-    # Stream the response chunks and print them
+    # Streaming responses
     for chunk in completion:
         if chunk.choices[0].delta.content is not None:
             print(chunk.choices[0].delta.content, end="")
