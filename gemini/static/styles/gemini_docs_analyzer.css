@@ -194,6 +194,7 @@ nav a:hover {
   border-radius: 3px;
   overflow-x: auto;
   width: fit-content;
+  white-space: pre-wrap;
 }
 
 .chat-message h1 {

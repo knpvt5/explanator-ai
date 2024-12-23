@@ -5,6 +5,11 @@ from datasets import load_dataset
 
 load_dotenv()
 
+client = OpenAI(
+    base_url="https://integrate.api.nvidia.com/v1",
+    api_key=os.getenv("NVIDIA_API")
+)
+
 # Loading dataset via HF in streaming mode
 dataset = load_dataset("fka/awesome-chatgpt-prompts", streaming=True)
 
@@ -20,7 +25,7 @@ for prompts in dataset['train']:
 # Joining list into a single str
 all_data = "".join(data)
 
-print(all_data)
+# print(all_data)
 
 
 models = {
@@ -49,11 +54,7 @@ while True:
 
 print("Using model:", model_name)
     
-    
-client = OpenAI(
-    base_url="https://integrate.api.nvidia.com/v1",
-    api_key=os.getenv("NVIDIA_API")
-)
+
 
 while True:
     user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")

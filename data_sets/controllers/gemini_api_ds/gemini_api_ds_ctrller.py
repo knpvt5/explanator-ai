@@ -1,19 +1,14 @@
 import os
-from django.shortcuts import render
-import json
-from django.http import JsonResponse, StreamingHttpResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from dotenv import load_dotenv
 import google.generativeai as genai
-import requests
-import csv
-import json
-from bs4 import BeautifulSoup 
-import PyPDF2
+from django.http import StreamingHttpResponse, JsonResponse
 from datasets import load_dataset
+import json
 import pandas as pd
+import logging
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 def handle_gemini_raw_dataset_reader_request(request, model, generate_stream_responses): 
         # Load the dataset
@@ -60,3 +55,53 @@ def handle_gemini_raw_dataset_reader_request(request, model, generate_stream_res
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         print("Please try again or check your API key and internet connection.")
+
+
+def handle_gemini_api_prompt_generator_ds_request(request, model, generate_stream_responses): 
+    try:
+        body = json.loads(request.body.decode("utf-8"))
+        user_input = body.get("userInput")
+
+        # Loading dataset via HF in streaming mode
+        dataset = load_dataset("fka/awesome-chatgpt-prompts", streaming=True)
+
+        # logging.info("printing whole dataset","dataset")
+
+        #to store the data
+        data = []
+
+        # Looping dataset
+        for prompts in dataset['train']:
+            data.append(f"{prompts}\n")
+
+        # Joining list into a single str
+        all_data = "".join(data)
+
+        # logging.info(all_data)
+            
+        try:
+            prompt = (
+            "You are a professional prompt engineer. "
+            "You will assist you in crafting prompts for ChatGPT and other AI models. "
+            f"Dataset:\n{all_data}\n\n"
+            f"User's Input: {user_input}"
+            )
+
+            response = model.generate_content(
+                contents=prompt,
+                generation_config=genai.types.GenerationConfig(max_output_tokens=1024),
+                stream=True,
+                tools=None,
+                tool_config=None,
+                request_options=None
+            )
+            
+            return StreamingHttpResponse(generate_stream_responses(response), content_type="text/event-stream")
+                    
+        except Exception as e:
+            logging.error("Please try again or check your API key and internet connection.")
+            return JsonResponse(f"An error occurred: {str(e)}")
+                
+    except Exception as e:
+        return JsonResponse(f"An error occurred. Please try again or check Later.: {str(e)}")
+
