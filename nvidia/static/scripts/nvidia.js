@@ -35,35 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Input event for textarea with user input
-    document.querySelectorAll(".suggested-question").forEach((question) => {
-        const sendButton = document.getElementById("send-button");
-
-        question.addEventListener("click", function () {
-            const questionText = this.textContent.trim();
-            const chatBoxTextarea = document.querySelector(".chat-box textarea");
-
-            chatBoxTextarea.value = questionText;
-
-            // Trigger input event manually
-            chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
-            sendButton.click();
-        });
-
-        // Enable/Disable send button based on input
-        const userInput = document.getElementById("user-input");
-        userInput.addEventListener("input", () => {
-            sendButton.disabled = userInput.value.trim() === "";
-        });
-
-        sendButton.disabled = true;
-    });
-
+    
     // Handle file input changes
     const inputFile = document.getElementById("input_file");
     const removeFile = document.getElementById("remove-file");
     inputFile.addEventListener('change', fileInputNameChange);
-    removeFile.addEventListener('click', fileInputNameChange);
 
     // Initialize MutationObserver for textarea change
     /* const observer = new MutationObserver(() => fileInputNameChange());

@@ -6,12 +6,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectModel = document.querySelector('.select-model select');
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
-    let selectedModel = selectModel.value; // Set initial global model
+    // Input event for textarea with user input
+    document.querySelectorAll(".suggested-question").forEach((question) => {
+        question.addEventListener("click", function () {
+            const questionText = this.textContent.trim();
+            const chatBoxTextarea = document.querySelector(".chat-box textarea");
+            
+            chatBoxTextarea.value = questionText;
+            // Trigger input event manually
+            chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
+            sendButton.click();
+        });
+
+        // Enable/Disable send button based on input
+        userInput.addEventListener("input", () => {
+            sendButton.disabled = userInput.value.trim() === "";
+        });
+    });
+
+    // Storing and getting from local storage
+    userInput.addEventListener("input", (e) => {
+        console.log(e.target.value);
+        localStorage.setItem("nvidiaApiCbInput", JSON.stringify(e.target.value));
+    });
+    const nvidiaApiCbInput = JSON.parse(localStorage.getItem("nvidiaApiCbInput"));
+    if (nvidiaApiCbInput) {
+        userInput.value = nvidiaApiCbInput;
+
+    }
+    // Initial send button state based on input
+    sendButton.disabled = !userInput.value.trim();
+
+
+    let selectedModel = selectModel.value;
 
     selectModel.addEventListener('change', (e) => {
         selectedModel = e.target.options[e.target.selectedIndex].textContent;
         // console.log(selectedModel)
     });
+
 
     const backendAPI = "/nvidia/nvidia-api/";
 
@@ -40,9 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const sendMessage = async () => {
-        const question = userInput.value.trim();
+        const user_input = userInput.value.trim();
 
-        appendMessage("user", question);
+        appendMessage("user", user_input);
         const botMessageBox = appendMessage("bot", "Generating...");
 
         userInput.disabled = true;
@@ -57,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "X-CSRFToken": csrfToken,
                 },
                 body: JSON.stringify({
-                    userInput: question,
+                    userInput: user_input,
                     modelName: selectedModel,
                 }),
             });
@@ -125,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         suggestedQuestionBox.remove();
         userInput.value = "";
+        localStorage.removeItem("nvidiaApiCbInput");
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -133,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
+            localStorage.removeItem("nvidiaApiCbInput");
         }
     });
 });

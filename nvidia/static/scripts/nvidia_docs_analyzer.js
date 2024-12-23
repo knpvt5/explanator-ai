@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedModel = e.target.options[e.target.selectedIndex].textContent;
     });
 
+    userInput.addEventListener("input", (e) => {
+        console.log(e.target.value);
+        localStorage.setItem("nvidiaDocsAnalyzerInput", JSON.stringify(e.target.value));
+    });
+    const nvidiaDocsAnalyzerInput = JSON.parse(localStorage.getItem("nvidiaDocsAnalyzerInput"));
+    if (nvidiaDocsAnalyzerInput) {
+        userInput.value = nvidiaDocsAnalyzerInput;
+        sendButton.disabled = false;
+    }
+
     // ChatBox functionality
     const appendMessage = (sender, message) => {
         const messageBox = document.createElement("div");
@@ -100,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } finally {
             userInput.value = "";
             userInput.disabled = false;
-            // sendButton.disabled = false;
             if (window.innerWidth < 768) {
                 userInput.blur();
             }
