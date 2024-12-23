@@ -141,10 +141,6 @@ nav a:hover {
   resize: vertical;
 }
 
-.chat-messages::resizer {
-  font-size: 30px;
-}
-
 .suggested-question-box {
   display: flex;
   width: 100%;
