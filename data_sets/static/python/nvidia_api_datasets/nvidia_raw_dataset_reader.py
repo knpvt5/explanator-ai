@@ -10,7 +10,7 @@ load_dotenv()
 dataset = load_dataset("knkrn5/wealthpsychology-raw-data", streaming=True)
 
 # Printing whole dataset
-print(dataset)
+# print(dataset)
 
 all_data = []
 
@@ -20,10 +20,33 @@ for split_name, split_data in dataset.items():
     split_df = pd.DataFrame(split_rows)
     all_data.append(split_df)
 
-# Printing details of the DataFrame
-print(f"Split: {split_name}")
-print(split_df.head())
-print("\n" + "="*50 + "\n")
+# print(f"Split: {split_name}")
+# print(split_df.head())
+
+models = {
+    "1": "nvidia/llama-3.1-nemotron-70b-instruct",
+    "2": "meta/llama-3.3-70b-instruct",
+    # "3": "mistralai/mixtral-8x7b-instruct-v0.1",
+    "4": "nv-mistralai/mistral-nemo-12b-instruct",
+    # "5": "mistralai/mixtral-8x22b-instruct-v0.1",
+    # "6": "nvidia/nemotron-4-340b-instruct",
+    "7": "microsoft/phi-3-mini-128k-instruct",
+}
+
+#select  model
+print("Select a model:")
+for key, value in models.items():
+    print(f"{key}. {value}")
+
+while True:
+    model_choice = input("\nEnter the number corresponding to the model: ")
+    if model_choice in models:
+        model_name = models[model_choice]
+        break
+    else:
+        print("Invalid choice. Please enter a valid number.")
+
+print("Using model:", model_name)
 
 # OpenAI client Init
 client = OpenAI(
@@ -33,19 +56,19 @@ client = OpenAI(
 
 while True:
     # user input 
-    user_question = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
+    user_input = input("\nPlease enter your question (or type 'exit' or 'q' to quit): ")
 
-    if user_question.lower() in ['exit', 'q']:
+    if user_input.lower() in ['exit', 'q']:
         print("Exiting the program.")
         break
 
     # completion
     completion = client.chat.completions.create(
-        model="nvidia/llama-3.1-nemotron-70b-instruct",
+        model=model_name,
         messages=[
             {"role": "system", "content": "You are an AI assistant."},
             {"role": "system", "content": f"Dataset: {all_data}."},
-            {"role": "user", "content": user_question}
+            {"role": "user", "content": user_input}
         ],
         temperature=0.5,
         top_p=0.7,

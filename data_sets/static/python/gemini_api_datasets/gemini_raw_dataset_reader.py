@@ -41,9 +41,9 @@ while True:
 
     try:
         prompt = (
-            "You are a helpful assistant. Only answer questions based on the provided text data. "
-            "Do not answer any questions that are not based on the text data. "
-            f"Text Data:\n{all_data}\n\n"
+            "You are a helpful assistant. Only answer questions based on the provided dataset. "
+            "Do not answer any questions that are not based on the dataset. "
+            f"Dataset:\n{all_data}\n\n"
             f"User's Question: {user_input}"
         )
 
