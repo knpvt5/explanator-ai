@@ -92,6 +92,7 @@ nav a:hover {
   margin-bottom: -5px;
 }
 
+
 .link-btn {
   background-color: #4caf50;
   color: white;
@@ -111,6 +112,10 @@ nav a:hover {
   background-color: #006605;
 }
 
+/* .CodeMirror-vscrollbar,
+.CodeMirror-hscrollbar {
+  width: 0px;
+} */
 
 #markdown-preview {
   min-height: 550px;
