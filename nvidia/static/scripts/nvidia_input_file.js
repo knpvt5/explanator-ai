@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
         removeFile.style.display = "block"
         const file = inputFile.files[0];
-        localStorage.setItem("nvidiaFileUploaded", file.name);
+        localStorage.setItem("nvidiaFileUploaded", JSON.stringify(file.name));
         const maxFileSize = 5 * 1024 * 1024; // 5 MB
 
 
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Get uploaded file name from localStorage on reload
-    const nvidiaFileUploaded = localStorage.getItem("nvidiaFileUploaded");
+    const nvidiaFileUploaded = JSON.parse(localStorage.getItem("nvidiaFileUploaded"));
     if (nvidiaFileUploaded) {
         fileNameSpan.style.display = "none";
         fileNameSpan.textContent = nvidiaFileUploaded;
