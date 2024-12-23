@@ -261,6 +261,9 @@ nav a:hover {
   border: 1px solid #fff;
   overflow-x: auto;
 }
+.chat-message hr{
+  margin: 0;
+}
 
 .chat-message.user {
   background-color: #106802;

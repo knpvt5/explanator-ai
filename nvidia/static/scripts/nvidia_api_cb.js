@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         question.addEventListener("click", function () {
             const questionText = this.textContent.trim();
             const chatBoxTextarea = document.querySelector(".chat-box textarea");
-            
+
             chatBoxTextarea.value = questionText;
             // Trigger input event manually
             chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Storing and getting from local storage
     userInput.addEventListener("input", (e) => {
-        console.log(e.target.value);
         localStorage.setItem("nvidiaApiCbInput", JSON.stringify(e.target.value));
     });
     const nvidiaApiCbInput = JSON.parse(localStorage.getItem("nvidiaApiCbInput"));
