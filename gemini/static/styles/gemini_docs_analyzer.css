@@ -74,7 +74,7 @@ nav a:hover {
   resize: vertical;
 }
 .CodeMirror-vscrollbar,
-.CodeMirror-hscrollbar {
+.CodeMirror-hscrollbar{
   width: 0px;
 }
 
@@ -117,12 +117,10 @@ nav a:hover {
 .chat-box {
   display: flex;
   flex-direction: column;
-  height: 600px;
   background-color: #333;
   border-radius: 10px;
   padding: 10px;
   resize: vertical;
-  /* overflow-y: auto; */
 }
 
 .chat-box::-webkit-resizer {
@@ -138,13 +136,16 @@ nav a:hover {
 
 .chat-messages {
   /* flex-grow: 1; */
-  height: 1500px;
+  min-height: 300px;
+  height: 300px;
   overflow-y: auto;
   padding: 15px;
   display: flex;
   flex-direction: column;
   background-color: #242430;
   gap: 10px;
+  overflow-x: auto;
+  resize: vertical;
 }
 
 .suggested-question-box {
@@ -285,8 +286,8 @@ nav a:hover {
 }
 
 /* .file-upload-container {
-    border: 1px solid #ccc;
-  } */
+  border: 1px solid #ccc;
+} */
 
 /* Hide the actual file input */
 #input_file {
@@ -329,14 +330,14 @@ nav a:hover {
   font-size: 14px;
   color: #eee;
   /* width: 50px;
-    overflow-x: auto; */
+  overflow-x: auto; */
 }
 
 #file-name::-webkit-scrollbar {
   display: none;
 }
 
-#remove-file {
+#remove-file{
   color: #fff;
   border: 1px solid #fff;
   width: fit-content;
@@ -350,11 +351,12 @@ nav a:hover {
   display: none;
 }
 
-#remove-file:hover {
+#remove-file:hover{
   background: #fff;
   color: #000;
   font-weight: bold;
 }
+
 
 .chat-input-container textarea {
   width: 100%;
@@ -407,7 +409,7 @@ nav a:hover {
 }
 
 .select-model {
-  height: 300px;
+  height: 50px;
   border: 1px solid #ccc;
   margin-top: 5px;
   border-radius: 10px;
@@ -420,7 +422,7 @@ nav a:hover {
   height: 100%;
   background: #242430;
   font-size: large;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: #fff;
   border: none;
   outline: none;
