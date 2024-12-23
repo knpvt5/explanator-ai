@@ -88,7 +88,7 @@ def handle_nvidia_api_prompt_generator_ds_request(request, client, generate_stre
 
         # Joining list into a single str
         all_data = "".join(data)
-        print(all_data)
+        # print(all_data)
 
         #openai completion
         completion = client.chat.completions.create(
@@ -101,7 +101,7 @@ def handle_nvidia_api_prompt_generator_ds_request(request, client, generate_stre
             ],
             temperature=0.5,
             # top_k = 50,
-            top_p=0.7,
+            # top_p=0.7,
             max_tokens=2048,
             # repetition_penalty=1.2,
             stream=True
