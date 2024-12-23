@@ -47,7 +47,7 @@ while True:
         temperature=0.5,
         # top_k = 50,
         top_p=0.7,
-        max_tokens=1024,
+        max_tokens=2048,
         stream=True
     )
 

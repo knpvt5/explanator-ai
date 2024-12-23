@@ -102,7 +102,7 @@ def handle_nvidia_api_prompt_generator_ds_request(request, client, generate_stre
             temperature=0.5,
             # top_k = 50,
             top_p=0.7,
-            max_tokens=1024,
+            max_tokens=2048,
             # repetition_penalty=1.2,
             stream=True
         )
