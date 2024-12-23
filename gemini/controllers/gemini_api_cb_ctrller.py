@@ -9,7 +9,7 @@ def handle_gemini_api_cb_request(request, model, generate_stream_responses):
         try:
             # Parse and validate the request body
             body = json.loads(request.body)
-            user_input = body.get("question", "")
+            user_input = body.get("userInput", "")
             if not user_input:
                 return JsonResponse({"error": "No question provided"}, status=400)
 

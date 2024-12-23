@@ -5,6 +5,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("send-button");
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
+    // Input event for textarea with user input
+    document.querySelectorAll(".suggested-question").forEach((question) => {
+        question.addEventListener("click", function () {
+            const questionText = this.textContent.trim();
+            const chatBoxTextarea = document.querySelector(".chat-box textarea");
+
+            chatBoxTextarea.value = questionText;
+            // manual Trigger 
+            chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
+            sendButton.click();
+        });
+
+        // Enable/Disable send button based on input
+        userInput.addEventListener("input", () => {
+            sendButton.disabled = userInput.value.trim() === "";
+        });
+    });
+
+    // Storing and getting from local storage
+    userInput.addEventListener("input", (e) => {
+        localStorage.setItem("geminiDocsAnalyzerTextInput", JSON.stringify(e.target.value));
+    });
+    const geminiDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("geminiDocsAnalyzerTextInput"));
+    if (geminiDocsAnalyzerTextInput) {
+        userInput.value = geminiDocsAnalyzerTextInput;
+
+    }
+    // Initial send button state based on input
+    sendButton.disabled = !userInput.value.trim();
+
+
     const backendAPI = "/gemini/gemini-docs-analyzer-api/";
 
     const appendMessage = (sender, message, parsed = false) => {
@@ -17,18 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             messageBox.textContent = message;
         }
-        
+
         messagesContainer.appendChild(messageBox);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         return messageBox;
     };
 
     const sendMessage = async () => {
-        const question = userInput.value.trim();
-        if (!question) return;
+        const user_input = userInput.value.trim();
+        if (!user_input) return;
 
         // Add user message
-        appendMessage("user", question);
+        appendMessage("user", user_input);
 
         // Create bot message container
         const botMessageBox = appendMessage("bot", "Generating...", true); // Note the 'true' to enable markdown parsing
@@ -45,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
                 },
-                body: JSON.stringify({ 
-                    user_input: question,
+                body: JSON.stringify({
+                    userInput: user_input,
                 }),
             });
 
@@ -90,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendButton.disabled = false;
             userInput.value = "";
             userInput.focus();
-            if(window.innerWidth < 768) {
+            if (window.innerWidth < 768) {
                 userInput.blur();
             }
         }
@@ -116,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         suggestedQuestionBox.remove();
         userInput.value = "";
+        localStorage.removeItem("geminiDocsAnalyzerTextInput");
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -125,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
+            localStorage.removeItem("geminiDocsAnalyzerTextInput");
         }
     });
 

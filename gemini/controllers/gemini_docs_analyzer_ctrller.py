@@ -60,7 +60,7 @@ def handle_gemini_docs_analyzer_request(request, model, generate_stream_response
             
         elif request.content_type == "application/json":
             body = json.loads(request.body.decode("utf-8"))
-            user_input = body.get("user_input", "")
+            user_input = body.get("userInput", "")
 
             if not user_input:
                 logging.warning("User input is missing in the request body.")

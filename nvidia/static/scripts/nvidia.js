@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Handle file input changes
     const inputFile = document.getElementById("input_file");
-    const removeFile = document.getElementById("remove-file");
     inputFile.addEventListener('change', fileInputNameChange);
 
     // Initialize MutationObserver for textarea change

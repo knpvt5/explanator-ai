@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 border: 1px solid #fff;
             `;
             removeFile.style.display = "block";
-            localStorage.setItem("geminiFileUploaded", file.name);
+            localStorage.setItem("geminiFileUploaded", JSON.stringify(file.name));
             console.log("geminiFileUploaded saved to localStorage:", file.name);
 
 
@@ -95,11 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
         removeFile.style.display = "none";
         removeUploadedFiles();
         localStorage.removeItem("geminiFileUploaded");
-        console.log("geminiFileUploaded removed from localStorage");
     });
 
 
-    const geminiFileUploaded = localStorage.getItem("geminiFileUploaded");
+    const geminiFileUploaded = JSON.parse(localStorage.getItem("geminiFileUploaded"));
     if (geminiFileUploaded) {
         // console.log("Restoring from localStorage:", geminiFileUploaded);
         fileNameSpan.textContent = geminiFileUploaded;

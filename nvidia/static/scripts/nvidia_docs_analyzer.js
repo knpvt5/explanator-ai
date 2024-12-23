@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const chatBoxTextarea = document.querySelector(".chat-box textarea");
             
             chatBoxTextarea.value = questionText;
-            // Trigger input event manually
+            // manual Trigger 
             chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
             sendButton.click();
         });
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Storing and getting from local storage
     userInput.addEventListener("input", (e) => {
-        localStorage.setItem("nvidiaDocsAnalyzerInput", JSON.stringify(e.target.value));
+        localStorage.setItem("nvidiaDocsAnalyzerTextInput", JSON.stringify(e.target.value));
     });
-    const nvidiaDocsAnalyzerInput = JSON.parse(localStorage.getItem("nvidiaDocsAnalyzerInput"));
-    if (nvidiaDocsAnalyzerInput) {
-        userInput.value = nvidiaDocsAnalyzerInput;
+    const nvidiaDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("nvidiaDocsAnalyzerTextInput"));
+    if (nvidiaDocsAnalyzerTextInput) {
+        userInput.value = nvidiaDocsAnalyzerTextInput;
 
     }
     // Initial send button state based on input
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         suggestedQuestionBox.remove();
         userInput.value = "";
-        localStorage.removeItem("nvidiaDocsAnalyzerInput");
+        localStorage.removeItem("nvidiaDocsAnalyzerTextInput");
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
-            localStorage.removeItem("nvidiaDocsAnalyzerInput");
+            localStorage.removeItem("nvidiaDocsAnalyzerTextInput");
         }
     });
 });

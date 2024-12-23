@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Storing and getting from local storage
     userInput.addEventListener("input", (e) => {
-        localStorage.setItem("nvidiaApiCbInput", JSON.stringify(e.target.value));
+        localStorage.setItem("nvidiaApiCbTextInput", JSON.stringify(e.target.value));
     });
-    const nvidiaApiCbInput = JSON.parse(localStorage.getItem("nvidiaApiCbInput"));
-    if (nvidiaApiCbInput) {
-        userInput.value = nvidiaApiCbInput;
+    const nvidiaApiCbTextInput = JSON.parse(localStorage.getItem("nvidiaApiCbTextInput"));
+    if (nvidiaApiCbTextInput) {
+        userInput.value = nvidiaApiCbTextInput;
 
     }
     // Initial send button state based on input
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMessage();
         suggestedQuestionBox.remove();
         userInput.value = "";
-        localStorage.removeItem("nvidiaApiCbInput");
+        localStorage.removeItem("nvidiaApiCbTextInput");
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
-            localStorage.removeItem("nvidiaApiCbInput");
+            localStorage.removeItem("nvidiaApiCbTextInput");
         }
     });
 });
