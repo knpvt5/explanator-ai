@@ -29,7 +29,7 @@
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
     <nav>
-      <a href="{% url 'nvidia_api_prompt_generator_ds' %}">PROMPT GENERATOR</a>
+      <a href="{% url 'nvidia_api_prompt_generator_ds' %}">NVIDIA PROMPT GENERATOR</a>
       <a href="{% url 'nvidia_raw_dataset_reader' %}">NVIDIA RAW DATASET READER</a>
     </nav>
     <main>
@@ -45,6 +45,15 @@
           <div class="chat-input-container">
             <textarea id="user-input" placeholder="Ask any Question here..."></textarea>
             <button id="send-button"><i class="fa-solid fa-arrow-up"></i></button>
+          </div>
+          <div class="select-model">
+            <select>
+              <option value="" disabled selected>Select a model</option>
+              <option value="model1">nvidia/llama-3.1-nemotron-70b-instruct</option>
+              <option value="model2">meta/llama-3.3-70b-instruct</option>
+              <option value="model4">nv-mistralai/mistral-nemo-12b-instruct</option>
+              <option value="model7">microsoft/phi-3-mini-128k-instruct</option>
+            </select>
           </div>
         </div>
         <div class="code-box">
