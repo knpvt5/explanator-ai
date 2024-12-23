@@ -58,31 +58,36 @@ function fileInputNameChange() {
         }
         console.log(nvidiaFileUploaded);
 
-        // Get the current content of the CodeMirror editor
+        // Get content from CodeMirror
         const existingCode = pythonEditor.getValue();
 
-        // Replace the old file path with the new one
+        // Name file in codemirror
         const updatedCode = existingCode.replace(
             /files\s*=\s* .*/,
             `files = ["${nvidiaFileUploaded}"]`
         );
 
-        // Save the current cursor and scroll positions
-        const cursorPosition = pythonEditor.getCursor();
-        const scrollPosition = pythonEditor.getScrollInfo().top;
+        StoreCodeMirrorScrollAndCursor(updatedCode)
 
-        // Set the updated code
-        pythonEditor.setValue(updatedCode);
-
-        // Restore cursor and scroll positions
-        pythonEditor.setCursor(cursorPosition);
-        pythonEditor.scrollTo(0, scrollPosition);
     } catch (error) {
         console.error('Error during file input CodeMirror change:', error);
     }
 }
 
-// Chat Box Update
+function StoreCodeMirrorScrollAndCursor(updatedCode) {
+    // Save the current cursor and scroll positions
+    const cursorPosition = pythonEditor.getCursor();
+    const scrollPosition = pythonEditor.getScrollInfo().top;
+
+    // Set the updated code
+    pythonEditor.setValue(updatedCode);
+
+    // Restore cursor and scroll positions
+    pythonEditor.setCursor(cursorPosition);
+    pythonEditor.scrollTo(0, scrollPosition);
+}
+
+// CodeBox Update
 const selectModel = document.querySelector('.select-model');
 const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
@@ -94,16 +99,8 @@ chatBoxTextarea.addEventListener('input', (event) => {
         /user_input = .*/,
         `user_input = "${userInput}"`
     );
-    // Save the current cursor and scroll positions
-    const cursorPosition = pythonEditor.getCursor();
-    const scrollPosition = pythonEditor.getScrollInfo().top;
 
-    // Set the updated code
-    pythonEditor.setValue(updatedCode);
-
-    // Restore cursor and scroll positions
-    pythonEditor.setCursor(cursorPosition);
-    pythonEditor.scrollTo(0, scrollPosition);
+    StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
 selectModel.addEventListener('change', (event) => {
@@ -115,16 +112,9 @@ selectModel.addEventListener('change', (event) => {
         /model\s*=\s* .*/,
         `model = "${selectedModel}"`
     );
-    // Save the current cursor and scroll positions
-    const cursorPosition = pythonEditor.getCursor();
-    const scrollPosition = pythonEditor.getScrollInfo().top;
 
-    // Set the updated code
-    pythonEditor.setValue(updatedCode);
-
-    // Restore cursor and scroll positions
-    pythonEditor.setCursor(cursorPosition);
-    pythonEditor.scrollTo(0, scrollPosition);
+    StoreCodeMirrorScrollAndCursor(updatedCode)
+    
 });
 
 // Initialize CodeMirror for Markdown Editor
@@ -149,5 +139,5 @@ async function loadMarkdownContent() {
     }
 }
 
-// Load and render the Markdown content on page load
+// on Load render the Markdown content
 loadMarkdownContent();
