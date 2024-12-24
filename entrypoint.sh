@@ -1,12 +1,10 @@
 #!/bin/bash
+
 # Exit on error
 set -o errexit
 
 # Activate the virtual environment
-source /usr/src/app/venv/bin/activate
-
-# Wait for the database to be ready (if needed)
-# ./wait-for-it.sh db:5432 -- echo "Database is ready!"
+source /opt/venv/bin/activate
 
 # Apply database migrations
 echo "Applying database migrations..."
