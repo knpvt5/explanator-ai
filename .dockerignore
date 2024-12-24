@@ -1,0 +1,23 @@
+# Ignore the entire virtual environment folder
+.env
+.venv
+.vscode
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Other common ignores
+.DS_Store
+logs/
+log/
+results/
+final_model/
+staticfiles/
+
+# wp-data and data
+data/
+tests/
+
+# Database files
+*.db

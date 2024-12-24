@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SECRET_KEY=${SECRET_KEY}
+      - NVIDIA_API=${NVIDIA_API}
+      - GEMINI_API=${GEMINI_API}
+    ports:
+      - "8000:8000"
+    entrypoint: ["/usr/src/app/entrypoint.sh"]

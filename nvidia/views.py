@@ -15,17 +15,12 @@ from .controllers.nvidia_docs_analyzer_ctrller import handle_nvidia_docs_analyze
 # Load environment variables
 load_dotenv(override=True)
 
-# Get API key and verify it exists
-NVIDIA_API_KEY = os.getenv("NVIDIA_API")
-if not NVIDIA_API_KEY:
-    raise RuntimeError("NVIDIA API key not found!")
-
 # Initialize OpenAI client
 client = None
 try:
     client = OpenAI(
         base_url="https://integrate.api.nvidia.com/v1",
-        api_key=NVIDIA_API_KEY
+        api_key=os.getenv("NVIDIA_API")
     )
 except Exception as e:
     raise RuntimeError(f"Failed to initialize OpenAI client: {str(e)}")
