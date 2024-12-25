@@ -149,6 +149,25 @@ nav a:hover {
   resize: vertical;
 }
 
+/* Custom Scrollbar for WebKit-based browsers */
+.chat-messages::-webkit-scrollbar {
+  width: 10px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: #555;
+  border-radius: 5px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #4caf50; 
+  border-radius: 5px;
+}
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background-color: #3e8e41; 
+}
+.chat-messages::-webkit-scrollbar-corner {
+  background: #fff;
+}
+
 .suggested-question-box {
   display: flex;
   width: 100%;
@@ -286,6 +305,7 @@ nav a:hover {
 
 .chat-input-container {
   display: flex;
+  gap: 5px;
   padding: 10px;
   background-color: #242430;
   border: 1px solid #ccc;
@@ -380,6 +400,25 @@ nav a:hover {
   resize: none;
 }
 
+/* Custom Scrollbar for WebKit-based browsers */
+.chat-input-container textarea::-webkit-scrollbar {
+  width: 10px;
+}
+.chat-input-container textarea::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 5px;
+}
+.chat-input-container textarea::-webkit-scrollbar-thumb {
+  background-color: #4caf50; 
+  border-radius: 5px;
+}
+.chat-input-container textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #3e8e41; 
+}
+.chat-input-container textarea::-webkit-scrollbar-corner {
+  background: #fff;
+}
+
 .chat-input-container::placeholder {
   color: #999;
 }
@@ -391,8 +430,8 @@ nav a:hover {
   cursor: not-allowed;
 }
 
-#send-button {
-  background-color: #4caf50;
+.chat-input-container #send-button {
+  background: #4caf50;
   height: fit-content;
   width: fit-content;
   color: white;
@@ -401,15 +440,15 @@ nav a:hover {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  float: right;
+  align-self: flex-end; 
   transition: 0.3s ease;
 }
 
-#send-button:hover {
+.chat-input-container #send-button:hover {
   background-color: #005804;
 }
 
-#send-button:disabled {
+.chat-input-container #send-button:disabled {
   background-color: #cccccc;
   font-weight: bold;
   color: #4caf50;
