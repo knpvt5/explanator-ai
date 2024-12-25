@@ -264,7 +264,7 @@ nav a:hover {
   overflow-x: auto;
 }
 
-.chat-message hr{
+.chat-message hr {
   margin: 0;
 }
 
@@ -272,6 +272,8 @@ nav a:hover {
   background-color: #106802;
   color: white;
   align-self: flex-end;
+  word-break: break-word; 
+  overflow-wrap: break-word;
 }
 
 .chat-message.bot {
