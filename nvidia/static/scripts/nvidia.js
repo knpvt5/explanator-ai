@@ -10,17 +10,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const chatMessages = document.querySelector(".chat-messages");
         const expandCollapseBtn = document.getElementById("expand-collapse-btn");
     
-        if (window.innerWidth > 480) {
-            content.classList.toggle("content-expand");
-            chatBox.classList.toggle("chat-box-expand");
-            chatMessages.classList.toggle("chat-messages-expand");
-        }
+            function toggleExpandCollapse() {
+                if (window.innerWidth > 480) {
+                    content.classList.toggle("content-expand");
+                    chatBox.classList.toggle("chat-box-expand");
+                    chatMessages.classList.toggle("chat-messages-expand");
+                }
+            
+                if (chatBox.classList.contains("chat-box-expand")) {
+                    expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
+                } else {
+                    expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
+                }
+            }
     
-        if (chatBox.classList.contains("chat-box-expand")) {
-            expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-        } else {
-            expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
-        }
+        toggleExpandCollapse();
+
+        window.removeEventListener("resize", toggleExpandCollapse);
+    
     });
     
 
@@ -122,7 +129,10 @@ chatBoxTextarea.addEventListener('input', (event) => {
         `user_input = "${userInput}"`
     );
 
-    StoreCodeMirrorScrollAndCursor(updatedCode);
+    pythonEditor.setValue(updatedCode);
+
+
+    // StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
 
