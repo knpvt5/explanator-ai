@@ -1,8 +1,34 @@
 let pythonEditor;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Select textarea and CodeMirror setup
-    const textarea = document.getElementById("user-input");
+    // userInputTextarea and CodeMirror setup
+    // const textarea = document.getElementById("user-input");
+
+    document.getElementById("expand-collapse-btn").addEventListener("click", function () {
+        const content = document.querySelector(".content");
+        const chatBox = document.querySelector(".chat-box");
+        const chatMessages = document.querySelector(".chat-messages");
+        const expandCollapseBtn = document.getElementById("expand-collapse-btn");
+    
+        // Check if the window width is greater than 480px
+        if (window.innerWidth > 480) {
+            // Toggle classes for expansion
+            content.classList.toggle("content-expand");
+            chatBox.classList.toggle("chat-box-expand");
+            chatMessages.classList.toggle("chat-messages-expand");
+        }
+    
+        // Now check the updated state of chatBox class and toggle the icon
+        if (chatBox.classList.contains("chat-box-expand")) {
+            // If chat box is expanded, show collapse icon
+            expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
+        } else {
+            // If chat box is collapsed, show expand icon
+            expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
+        }
+    });
+    
+
 
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
         mode: "python",

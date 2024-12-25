@@ -66,13 +66,9 @@ nav a:hover {
   gap: 20px;
   padding: 20px;
 }
-
-/* .content {
-  display: grid;
+.content-expand {
   grid-template-columns: 1fr;
-  gap: 20px;
-  padding: 20px;
-} */
+}
 
 
 .chat-box {
@@ -84,6 +80,14 @@ nav a:hover {
   padding: 10px;
   resize: vertical;
 }
+.chat-box-expand{
+  /* height: 100vh; */
+  width: 80%;
+  margin: 0 auto;
+  margin-top: -150px;
+}
+
+
 
 .chat-box-header{
   display: flex;
@@ -96,7 +100,7 @@ nav a:hover {
   color: #fff;
 }
 
-.expand-collapse-btn{
+#expand-collapse-btn{
   background-color: #4caf50;
   color: white;
   border: none;
@@ -107,7 +111,7 @@ nav a:hover {
   transition: 0.3s ease;
 }
 
-.expand-collapse-btn:hover {
+#expand-collapse-btn:hover {
   background-color: #005804;
 }
 
@@ -123,6 +127,9 @@ nav a:hover {
   gap: 10px;
   overflow-x: auto;
   resize: vertical;
+}
+.chat-messages-expand {
+  height: 60vh
 }
 
 /* Custom Scrollbar for WebKit-based browsers */
