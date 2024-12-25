@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.querySelector(".chat-box");
     const messagesContainer = chatBox.querySelector(".chat-messages");
+    const chatBoxTextarea = document.querySelector(".chat-box textarea");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
@@ -9,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".suggested-question").forEach((question) => {
         question.addEventListener("click", function () {
             const questionText = this.textContent.trim();
-            const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
             chatBoxTextarea.value = questionText;
             // manual Trigger 
@@ -23,9 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    function userInputTextareaAutoResize(chatBoxTextarea) {
+        if (!chatBoxTextarea) return;
+        chatBoxTextarea.style.height = "auto";
+        chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+    }
+
     // Storing and getting from local storage
     userInput.addEventListener("input", (e) => {
         localStorage.setItem("geminiApiCbTextInput", JSON.stringify(e.target.value));
+        userInputTextareaAutoResize(chatBoxTextarea);
     });
     const geminiApiCbTextInput = JSON.parse(localStorage.getItem("geminiApiCbTextInput"));
     if (geminiApiCbTextInput) {
@@ -147,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestedQuestionBox.remove();
         userInput.value = "";
         localStorage.removeItem("geminiApiCbTextInput");
+        userInputTextareaAutoResize(chatBoxTextarea);
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -157,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
             suggestedQuestionBox.remove();
             userInput.value = "";
             localStorage.removeItem("geminiApiCbTextInput");
+            userInputTextareaAutoResize(chatBoxTextarea);
         }
     });
 

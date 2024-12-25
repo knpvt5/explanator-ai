@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.querySelector(".chat-box");
     const messagesContainer = chatBox.querySelector(".chat-messages");
