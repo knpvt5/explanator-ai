@@ -90,6 +90,10 @@ function StoreCodeMirrorScrollAndCursor(updatedCode) {
 // CodeBox Update
 const selectModel = document.querySelector('.select-model');
 const chatBoxTextarea = document.querySelector(".chat-box textarea");
+function userInputTextareaAutoResize() {
+    chatBoxTextarea.style.height = "auto";
+    chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+}
 
 chatBoxTextarea.addEventListener('input', (event) => {
     const userInput = event.target.value;
@@ -99,6 +103,8 @@ chatBoxTextarea.addEventListener('input', (event) => {
         /user_input = .*/,
         `user_input = "${userInput}"`
     );
+
+    userInputTextareaAutoResize();
 
     StoreCodeMirrorScrollAndCursor(updatedCode);
 });

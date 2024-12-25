@@ -1,8 +1,8 @@
-let pythonEditor; 
+let pythonEditor;
 
 document.addEventListener("DOMContentLoaded", () => {
     // Select textarea and CodeMirror setup
-    const textarea = document.getElementById("user-input");
+
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
         mode: "python",
         theme: "dracula",
@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         matchBrackets: true,
         autoCloseBrackets: true,
     });
+
+    userInputTextareaAutoResize(chatBoxTextarea);
+
 
     // Fetch external Python code and load into CodeMirror
     const pythonFileUrl = document.getElementById('python-data-container').getAttribute('data-python-url');
@@ -35,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    
+
     // Handle file input changes
     const inputFile = document.getElementById("input_file");
     inputFile.addEventListener('change', fileInputNameChange);
@@ -91,6 +94,12 @@ function StoreCodeMirrorScrollAndCursor(updatedCode) {
 const selectModel = document.querySelector('.select-model');
 const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
+function userInputTextareaAutoResize(chatBoxTextarea) {
+    chatBoxTextarea.style.height = "auto";
+    chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+    return chatBoxTextarea.scrollHeight;
+}
+
 chatBoxTextarea.addEventListener('input', (event) => {
     const userInput = event.target.value;
 
@@ -100,12 +109,15 @@ chatBoxTextarea.addEventListener('input', (event) => {
         `user_input = "${userInput}"`
     );
 
+    userInputTextareaAutoResize(chatBoxTextarea);
+
     StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
+
+
 selectModel.addEventListener('change', (event) => {
     const selectedModel = event.target.options[event.target.selectedIndex].textContent;
-    console.log(selectedModel);
 
     const existingCode = pythonEditor.getValue();
     const updatedCode = existingCode.replace(
@@ -114,7 +126,7 @@ selectModel.addEventListener('change', (event) => {
     );
 
     StoreCodeMirrorScrollAndCursor(updatedCode)
-    
+
 });
 
 // Initialize CodeMirror for Markdown Editor
