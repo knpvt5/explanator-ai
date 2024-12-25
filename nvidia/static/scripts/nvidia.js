@@ -2,6 +2,7 @@ let pythonEditor;
 
 document.addEventListener("DOMContentLoaded", () => {
     // Select textarea and CodeMirror setup
+    const textarea = document.getElementById("user-input");
 
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
         mode: "python",
@@ -11,9 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         matchBrackets: true,
         autoCloseBrackets: true,
     });
-
-    userInputTextareaAutoResize(chatBoxTextarea);
-
 
     // Fetch external Python code and load into CodeMirror
     const pythonFileUrl = document.getElementById('python-data-container').getAttribute('data-python-url');
@@ -94,12 +92,6 @@ function StoreCodeMirrorScrollAndCursor(updatedCode) {
 const selectModel = document.querySelector('.select-model');
 const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
-function userInputTextareaAutoResize(chatBoxTextarea) {
-    chatBoxTextarea.style.height = "auto";
-    chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
-    return chatBoxTextarea.scrollHeight;
-}
-
 chatBoxTextarea.addEventListener('input', (event) => {
     const userInput = event.target.value;
 
@@ -108,8 +100,6 @@ chatBoxTextarea.addEventListener('input', (event) => {
         /user_input = .*/,
         `user_input = "${userInput}"`
     );
-
-    userInputTextareaAutoResize(chatBoxTextarea);
 
     StoreCodeMirrorScrollAndCursor(updatedCode);
 });

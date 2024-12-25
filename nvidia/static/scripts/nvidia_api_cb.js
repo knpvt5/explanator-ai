@@ -1,6 +1,9 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.querySelector(".chat-box");
     const messagesContainer = chatBox.querySelector(".chat-messages");
+    const chatBoxTextarea = document.querySelector(".chat-box textarea");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
     const selectModel = document.querySelector('.select-model select');
@@ -10,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".suggested-question").forEach((question) => {
         question.addEventListener("click", function () {
             const questionText = this.textContent.trim();
-            const chatBoxTextarea = document.querySelector(".chat-box textarea");
 
             chatBoxTextarea.value = questionText;
             // Trigger input event manually
@@ -22,11 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
         userInput.addEventListener("input", () => {
             sendButton.disabled = userInput.value.trim() === "";
         });
+
     });
+
+    function userInputTextareaAutoResize(chatBoxTextarea) {
+        if (!chatBoxTextarea) return;
+        chatBoxTextarea.style.height = "auto";
+        chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+    }
 
     // Storing and getting from local storage
     userInput.addEventListener("input", (e) => {
         localStorage.setItem("nvidiaApiCbTextInput", JSON.stringify(e.target.value));
+        userInputTextareaAutoResize(chatBoxTextarea)
     });
     const nvidiaApiCbTextInput = JSON.parse(localStorage.getItem("nvidiaApiCbTextInput"));
     if (nvidiaApiCbTextInput) {
@@ -35,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // Initial send button state based on input
     sendButton.disabled = !userInput.value.trim();
-
 
     let selectedModel = selectModel.value;
 
@@ -158,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestedQuestionBox.remove();
         userInput.value = "";
         localStorage.removeItem("nvidiaApiCbTextInput");
+        userInputTextareaAutoResize(chatBoxTextarea)
     });
 
     userInput.addEventListener("keydown", (e) => {
@@ -167,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             suggestedQuestionBox.remove();
             userInput.value = "";
             localStorage.removeItem("nvidiaApiCbTextInput");
+            userInputTextareaAutoResize(chatBoxTextarea)
         }
     });
 });
