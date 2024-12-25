@@ -67,52 +67,6 @@ nav a:hover {
   padding: 20px;
 }
 
-.CodeMirror {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  min-height: 520px;
-  resize: vertical;
-}
-.CodeMirror-vscrollbar,
-.CodeMirror-hscrollbar{
-  width: 0px;
-}
-
-.code-box {
-  /* grid-column: 1/2; */
-  height: fit-content;
-  background-color: #333;
-  color: #fff;
-  padding: 15px;
-  overflow-x: auto;
-  border-radius: 10px;
-}
-
-#codeBox-above-space {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 10px;
-  margin-bottom: -5px;
-}
-
-#copy-code-btn {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  margin-top: 15px;
-  padding: 5px 7px;
-  font-size: 20px;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s ease;
-  margin-left: 50%;
-}
-
-#copy-code-btn:hover {
-  background-color: #006605;
-}
 
 .chat-box {
   display: flex;
@@ -215,6 +169,8 @@ nav a:hover {
   overflow-x: auto;
   width: fit-content;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .chat-message h1 {
@@ -301,6 +257,8 @@ nav a:hover {
   /* border: 1px solid #ccc; */
   align-self: flex-start;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .chat-input-container {
@@ -476,6 +434,54 @@ nav a:hover {
   padding: 10px;
   border-radius: 10px;
 }
+
+.CodeMirror {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 520px;
+  resize: vertical;
+}
+.CodeMirror-vscrollbar,
+.CodeMirror-hscrollbar{
+  width: 0px;
+}
+
+.code-box {
+  /* grid-column: 1/2; */
+  height: fit-content;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+#codeBox-above-space {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+  margin-bottom: -5px;
+}
+
+#copy-code-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  padding: 5px 7px;
+  font-size: 20px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-left: 50%;
+}
+
+#copy-code-btn:hover {
+  background-color: #006605;
+}
+
 
 #markdown-preview {
   min-height: 550px;
