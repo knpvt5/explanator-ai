@@ -1,131 +1,158 @@
-// Initialize CodeMirror for Python Editor
-const pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
-    mode: "python",
-    theme: "dracula",
-    lineWrapping: false,
-    lineNumbers: true,
-    matchBrackets: true,
-    autoCloseBrackets: true,
-});
+let pythonEditor;
 
-//Python file URL from the data-container element
-const pythonFileUrl = document.getElementById('python-data-container').getAttribute('data-python-url');
+document.addEventListener("DOMContentLoaded", () => {
+    // userInputTextarea and CodeMirror setup
+    const textarea = document.getElementById("user-input");
 
-// Fetch the external Python file and load it into the CodeMirror editor
-if (pythonFileUrl) {
-    fetch(pythonFileUrl)
-        .then((response) => response.text())
-        .then((code) => {
-            pythonEditor.setValue(code);
-        })
-        .catch((error) => {
-            console.error('Error fetching the Python file:', error);
+    document.getElementById("expand-collapse-btn").addEventListener("click", function () {
+        const content = document.querySelector(".content");
+        const chatBox = document.querySelector(".chat-box");
+        const chatMessages = document.querySelector(".chat-messages");
+        const expandCollapseBtn = document.getElementById("expand-collapse-btn");
+
+        function toggleExpandCollapse() {
+            if (window.innerWidth > 480) {
+                content.classList.toggle("content-expand");
+                chatBox.classList.toggle("chat-box-expand");
+                chatMessages.classList.toggle("chat-messages-expand");
+            } else {
+                content.classList.remove("content-expand");
+                chatBox.classList.remove("chat-box-expand");
+                chatMessages.classList.remove("chat-messages-expand");
+            }
+
+            if (chatBox.classList.contains("chat-box-expand")) {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
+                sessionStorage.setItem("ExpandCollapseBtn", true);
+            } else {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
+                sessionStorage.removeItem("ExpandCollapseBtn");
+            }
+        }
+
+        toggleExpandCollapse();
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth < 480) {
+                toggleExpandCollapse();
+            }
         });
-} else {
-    console.error("Python file URL is not defined.");
-}
 
-// Copy Code Button
-document.getElementById("copy-code-btn").addEventListener("click", function () {
-    const copyButton = document.getElementById("copy-code-btn");
-    const codeContent = pythonEditor.getValue(); // Get content from CodeMirror
-    const tempElement = document.createElement("textarea");
-    tempElement.value = codeContent;
-
-    document.body.appendChild(tempElement);
-    tempElement.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempElement);
-
-    copyButton.innerHTML = "<i class='fa-solid fa-copy'></i>";
-
-});
-
-
-document.querySelectorAll(".suggested-question").forEach((question) => {
-    const sendButton = document.getElementById("send-button");
-    const userInput = document.getElementById("user-input");
-
-    question.addEventListener("click", function () {
-        const question = this.textContent.trim();
-        const chatBoxTextarea = document.querySelector(".chat-box textarea");
-
-        chatBoxTextarea.value = question;
-
-        // Manually trigger the input event
-        const inputEvent = new Event("input", { bubbles: true });
-        chatBoxTextarea.dispatchEvent(inputEvent);
-        sendButton.click();
     });
 
-    //Initially Enable/Disable send button on Empty input
-    userInput.addEventListener("input", () => {
-        sendButton.disabled = userInput.value.trim() === "";
-    })
+    if (JSON.parse(sessionStorage.getItem("ExpandCollapseBtn")) === true) {
+        document.getElementById("expand-collapse-btn").click();
+    }
 
-    userInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && e.shiftKey) {
-            e.preventDefault();
-            e.stopPropagation();
+
+    pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
+        mode: "python",
+        theme: "dracula",
+        lineWrapping: false,
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+    });
+
+    // Fetch external Python code and load into CodeMirror
+    const pythonFileUrl = document.getElementById('python-data-container').getAttribute('data-python-url');
+    if (pythonFileUrl) {
+        fetch(pythonFileUrl)
+            .then((response) => response.text())
+            .then((code) => {
+                pythonEditor.setValue(code);
+            })
+            .catch((error) => {
+                console.error('Error fetching the Python file:', error);
+            });
+    }
+
+    // Copy code button functionality
+    document.getElementById("copy-code-btn").addEventListener("click", function () {
+        const codeContent = pythonEditor.getValue();
+        navigator.clipboard.writeText(codeContent).then(() => {
+            console.log("Code copied to clipboard!");
+        }).catch((error) => {
+            console.error("Error copying to clipboard:", error);
+        });
+    });
+
+
+    // Handle file input changes
+    const inputFile = document.getElementById("input_file");
+    inputFile.addEventListener('change', fileInputNameChange);
+
+    // Initialize MutationObserver for textarea change
+    /* const observer = new MutationObserver(() => fileInputNameChange());
+    observer.observe(pythonEditor, { childlist: true, characterData: true, subtree: true }); */
+
+    setTimeout(() => {
+        fileInputNameChange();
+    }, 5000);
+
+});
+
+function fileInputNameChange() {
+    try {
+        const nvidiaFileUploaded = JSON.parse(localStorage.getItem('nvidiaFileUploaded'));
+        if (!nvidiaFileUploaded) {
             return;
         }
+        console.log(nvidiaFileUploaded);
 
-        // Handle Enter key without Shift 
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-        }
-    });
+        // Get content from CodeMirror
+        const existingCode = pythonEditor.getValue();
 
-    // Initialize send button state
-    sendButton.disabled = true; // Initially disabled
+        // Name file in codemirror
+        const updatedCode = existingCode.replace(
+            /files\s*=\s* .*/,
+            `files = ["${nvidiaFileUploaded}"]`
+        );
+
+        StoreCodeMirrorScrollAndCursor(updatedCode)
+
+    } catch (error) {
+        console.error('Error during file input CodeMirror change:', error);
+    }
+}
+
+function StoreCodeMirrorScrollAndCursor(updatedCode) {
+    // Save the scroll positions
+    const scrollPosition = pythonEditor.getScrollInfo().top;
+
+    // Set the updated code
+    pythonEditor.setValue(updatedCode);
+
+    // Restore scroll positions
+    pythonEditor.scrollTo(0, scrollPosition);
+}
+
+// CodeBox Update
+const selectModel = document.querySelector('.select-model');
+const chatBoxTextarea = document.querySelector(".chat-box textarea");
+
+chatBoxTextarea.addEventListener('input', (event) => {
+    const userInput = event.target.value;
+
+    const existingCode = pythonEditor.getValue();
+    const updatedCode = existingCode.replace(
+        /user_input = .*/,
+        `user_input = "${userInput}"`
+    );
+
+    StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
+selectModel.addEventListener('change', (event) => {
+    const selectedModel = event.target.options[event.target.selectedIndex].textContent;
 
-// Chat Box Update
-document.addEventListener("DOMContentLoaded", () => {
-    const selectModel = document.querySelector('.select-model');
-    const chatBoxTextarea = document.querySelector(".chat-box textarea");
+    const existingCode = pythonEditor.getValue();
+    const updatedCode = existingCode.replace(
+        /model\s*=\s* .*/,
+        `model = "${selectedModel}"`
+    );
 
-    chatBoxTextarea.addEventListener('input', (event) => {
-        const userInput = event.target.value;
-
-        const existingCode = pythonEditor.getValue();
-        const updatedCode = existingCode.replace(
-            /user_input = .*/,
-            `user_input = "${userInput}"`
-        );
-        // Save the current cursor and scroll positions
-        const cursorPosition = pythonEditor.getCursor();
-        const scrollPosition = pythonEditor.getScrollInfo().top;
-
-        // Set the updated code
-        pythonEditor.setValue(updatedCode);
-
-        // Restore cursor and scroll positions
-        pythonEditor.setCursor(cursorPosition);
-        pythonEditor.scrollTo(0, scrollPosition);
-    });
-
-    selectModel.addEventListener('change', (event) => {
-        const selectedModel = event.target.options[event.target.selectedIndex].textContent;
-        console.log(selectedModel);
-
-        const existingCode = pythonEditor.getValue();
-        const updatedCode = existingCode.replace(
-            /model\s*=\s* .*/,
-            `model = "${selectedModel}"`
-        );
-        // Save the current cursor and scroll positions
-        const cursorPosition = pythonEditor.getCursor();
-        const scrollPosition = pythonEditor.getScrollInfo().top;
-
-        // Set the updated code
-        pythonEditor.setValue(updatedCode);
-
-        // Restore cursor and scroll positions
-        pythonEditor.setCursor(cursorPosition);
-        pythonEditor.scrollTo(0, scrollPosition);
-    });
+    StoreCodeMirrorScrollAndCursor(updatedCode)
 
 });
 
@@ -151,5 +178,5 @@ async function loadMarkdownContent() {
     }
 }
 
-// Load and render the Markdown content on page load
+// on Load render the Markdown content
 loadMarkdownContent();

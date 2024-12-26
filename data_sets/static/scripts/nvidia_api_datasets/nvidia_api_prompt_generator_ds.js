@@ -1,35 +1,91 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.querySelector(".chat-box");
     const messagesContainer = chatBox.querySelector(".chat-messages");
+    const chatBoxTextarea = document.querySelector(".chat-box textarea");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
     const selectModel = document.querySelector('.select-model select');
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
-    const backendAPI = "/data_sets/nvidia-api-prompt-generator-ds-api/";
+    // Input event for textarea with user input
+    document.querySelectorAll(".suggested-question").forEach((question) => {
+        question.addEventListener("click", function () {
+            const questionText = this.textContent.trim();
+
+            chatBoxTextarea.value = questionText;
+            // Trigger input event manually
+            chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
+            sendButton.click();
+        });
+
+        // Enable/Disable send button based on input
+        userInput.addEventListener("input", () => {
+            sendButton.disabled = userInput.value.trim() === "";
+        });
+
+    });
+
+    function userInputTextareaAutoResize(chatBoxTextarea) {
+        if (!chatBoxTextarea) return;
+        chatBoxTextarea.style.height = "auto";
+        chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+    }
+
+    // Storing and getting from local storage
+    userInput.addEventListener("input", (e) => {
+        localStorage.setItem("nvidiaApiPromptGenerator", JSON.stringify(e.target.value));
+        userInputTextareaAutoResize(chatBoxTextarea)
+    });
+    const nvidiaApiPromptGenerator = JSON.parse(localStorage.getItem("nvidiaApiPromptGenerator"));
+    if (nvidiaApiPromptGenerator) {
+        userInput.value = nvidiaApiPromptGenerator;
+        userInputTextareaAutoResize(chatBoxTextarea)
+    }
+    // Initial send button state based on input
+    sendButton.disabled = !userInput.value.trim();
+
+    let selectedModel = selectModel.value;
 
     selectModel.addEventListener('change', (e) => {
-        selectedModel = e.target.options[e.target.selectedIndex].textContent; 
+        selectedModel = e.target.options[e.target.selectedIndex].textContent;
         // console.log(selectedModel)
     });
 
-    let selectedModel = selectModel.value; 
+
+    const backendAPI = "/data_sets/nvidia-api-prompt-generator-ds-api/";
 
     const appendMessage = (sender, message) => {
-        const messageBox = document.createElement('div');
+        const messageBox = document.createElement("div");
         messageBox.classList.add("chat-message", sender);
         messageBox.textContent = message;
-        messagesContainer.appendChild(messageBox)
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        messagesContainer.appendChild(messageBox);
+        autoScroll();
         return messageBox;
     };
 
-    const sendMessage = async () => {
-        const userMessage = userInput.value;
-        if (!userMessage) return;
+    let userIsScrolling = false;
+    messagesContainer.addEventListener('scroll', () => {
+        if (messagesContainer.scrollTop < messagesContainer.scrollHeight - messagesContainer.clientHeight - 50) {
+            userIsScrolling = true;
+        } else {
+            userIsScrolling = false;
+        }
+    });
 
-        appendMessage("user", userMessage)
-        const botMessageBox = appendMessage("bot", "Generating...")
+    function autoScroll() {
+        if (!userIsScrolling) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }
+
+    const sendMessage = async () => {
+        const user_input = userInput.value.trim();
+
+        appendMessage("user", user_input);
+        const botMessageBox = appendMessage("bot", "Generating...");
+
+        userInput.disabled = true;
+        sendButton.disabled = true;
 
         try {
             const csrfToken = getCookie("csrftoken");
@@ -40,52 +96,52 @@ document.addEventListener("DOMContentLoaded", () => {
                     "X-CSRFToken": csrfToken,
                 },
                 body: JSON.stringify({
-                    "userInput": userMessage,
-                    "modelName": selectedModel
-                })
+                    userInput: user_input,
+                    modelName: selectedModel,
+                }),
             });
-
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Handle streaming response
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
-            let responseText = "";
+            let responseText = '';
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
 
                 const chunk = decoder.decode(value);
-                const lines = chunk.split("\n");
+                const lines = chunk.split('\n');
 
-                for (const line of lines) {
-                    if (line.startsWith("data: ")) {
+                lines.forEach(line => {
+                    if (line.startsWith('data: ')) {
                         try {
-                            const data = JSON.parse(line.slice(5));
-                            if (data.chunk) {
-                                responseText += data.chunk;
-                                // Use marked to parse and render markdown in real-time
+                            const jsonData = JSON.parse(line.slice(6));
+                            if (jsonData.chunk) {
+                                responseText += jsonData.chunk;
                                 botMessageBox.innerHTML = marked.parse(responseText);
-                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                                autoScroll();
                             }
-                        } catch (e) {
-                            console.error("Error parsing chunk:", e);
+                        } catch (parseError) {
+                            console.error('JSON parsing error:', parseError);
                         }
                     }
-                }
+                });
             }
+
         } catch (error) {
-            botMessageBox.textContent = "An error occurred. Please try again.";
-            console.error("Error occurred:", error);
+            console.error("Error:", error);
+            botMessageBox.textContent = `Error: ${error.message}`;
         } finally {
             userInput.value = "";
             userInput.disabled = false;
-            sendButton.disabled = true;
             userInput.focus();
+            if (window.innerWidth < 768) {
+                userInput.blur();
+            }
         }
     };
 
@@ -104,21 +160,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     };
 
-    // event for send button click
     sendButton.addEventListener("click", () => {
         sendMessage();
         suggestedQuestionBox.remove();
         userInput.value = "";
+        localStorage.removeItem("nvidiaApiPromptGenerator");
+        userInputTextareaAutoResize(chatBoxTextarea)
     });
 
     userInput.addEventListener("keydown", (e) => {
-        // Handle Enter key without Shift 
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
+            localStorage.removeItem("nvidiaApiPromptGenerator");
+            userInputTextareaAutoResize(chatBoxTextarea)
         }
     });
-
 });

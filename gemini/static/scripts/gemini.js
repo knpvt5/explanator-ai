@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (chatBox.classList.contains("chat-box-expand")) {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-                sessionStorage.setItem("geminiExpandCollapseBtn", true);
+                sessionStorage.setItem("ExpandCollapseBtn", true);
             } else {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
-                sessionStorage.removeItem("geminiExpandCollapseBtn");
+                sessionStorage.removeItem("ExpandCollapseBtn");
             }
         }
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    if (JSON.parse(sessionStorage.getItem("geminiExpandCollapseBtn")) === true) {
+    if (JSON.parse(sessionStorage.getItem("ExpandCollapseBtn")) === true) {
         document.getElementById("expand-collapse-btn").click();
     }
 
