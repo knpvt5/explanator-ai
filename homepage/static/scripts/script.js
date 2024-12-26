@@ -71,7 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("copy-code-btn").addEventListener("click", function () {
         const codeContent = pythonEditor.getValue();
         navigator.clipboard.writeText(codeContent).then(() => {
+            this.innerHTML = '<i class="fa-solid fa-copy"></i>';
             console.log("Code copied to clipboard!");
+            setTimeout(() => {
+                this.innerHTML = '<i class="fa-regular fa-copy"></i>';
+            }, 3000);
         }).catch((error) => {
             console.error("Error copying to clipboard:", error);
         });
