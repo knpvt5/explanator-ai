@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 content.classList.toggle("content-expand");
                 chatBox.classList.toggle("chat-box-expand");
                 chatMessages.classList.toggle("chat-messages-expand");
+            }else{
+                alert("Not expandable on mobile devices")
             }
 
             if (chatBox.classList.contains("chat-box-expand")) {
