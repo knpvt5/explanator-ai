@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='local_dev_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['explanatorai.site', 'www.explanatorai.site', 'explanator-ai.onrender.com', 'localhost', '127.0.0.1', 'healthcheck.railway.app', 'explanator-ai-production.up.railway.app']
 

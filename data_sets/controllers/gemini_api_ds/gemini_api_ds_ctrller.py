@@ -25,9 +25,9 @@ def handle_gemini_raw_dataset_reader_request(request, model, generate_stream_res
         split_df = pd.DataFrame(split_rows)
         all_data.append(split_df)
         
-    print(split_df.head())
+    """ print(split_df.head())
     print(all_data)
-    print("\n" + "="*50 + "\n") #simple line separator
+    print("\n" + "="*50 + "\n") """ 
     
 
     try:
