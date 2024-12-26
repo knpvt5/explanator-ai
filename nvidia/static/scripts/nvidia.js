@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const expandCollapseBtn = document.getElementById("expand-collapse-btn");
 
         function toggleExpandCollapse() {
-            toggleExpandCollapse = !toggleExpandCollapse;
             if (window.innerWidth > 480) {
                 content.classList.toggle("content-expand");
                 chatBox.classList.toggle("chat-box-expand");
@@ -24,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (chatBox.classList.contains("chat-box-expand")) {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-                let ExpandCollapseBtn = true
-                localStorage.setItem("ExpandCollapseBtn", JSON.stringify(ExpandCollapseBtn));
+                localStorage.setItem("ExpandCollapseBtn", true);
             } else {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
                 localStorage.removeItem("ExpandCollapseBtn");
@@ -35,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleExpandCollapse();
 
         window.addEventListener("resize", function () {
-            toggleExpandCollapse();
+            if (window.innerWidth < 480) {
+                toggleExpandCollapse();
+            }
         });
 
     });
