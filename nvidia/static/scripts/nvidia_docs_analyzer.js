@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!chatBoxTextarea) return;
         chatBoxTextarea.style.height = "auto";
         chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
-        userInputTextareaAutoResize(chatBoxTextarea)
     }
 
     // Storing and getting from local storage
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nvidiaDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("nvidiaDocsAnalyzerTextInput"));
     if (nvidiaDocsAnalyzerTextInput) {
         userInput.value = nvidiaDocsAnalyzerTextInput;
-
+        userInputTextareaAutoResize(chatBoxTextarea)
     }
     // Initial send button state based on input
     sendButton.disabled = !userInput.value.trim();

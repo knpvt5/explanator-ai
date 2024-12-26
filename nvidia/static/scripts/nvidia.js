@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (chatBox.classList.contains("chat-box-expand")) {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-                sessionStorage.setItem("ExpandCollapseBtn", true);
+                sessionStorage.setItem("nvidiaExpandCollapseBtn", true);
             } else {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
-                sessionStorage.removeItem("ExpandCollapseBtn");
+                sessionStorage.removeItem("nvidiaExpandCollapseBtn");
             }
         }
 
@@ -40,13 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    window.addEventListener("resize", function () {
-        if (window.innerWidth < 480) {
-            document.getElementById("expand-collapse-btn").click();
-        }
-    });
-
-    if (JSON.parse(sessionStorage.getItem("ExpandCollapseBtn")) === true) {
+    if (JSON.parse(sessionStorage.getItem("nvidiaExpandCollapseBtn")) === true) {
         document.getElementById("expand-collapse-btn").click();
     }
 
@@ -129,6 +123,7 @@ function StoreCodeMirrorScrollAndCursor(updatedCode) {
     // Set the updated code
     pythonEditor.setValue(updatedCode);
 
+    // Restore scroll positions
     pythonEditor.scrollTo(0, scrollPosition);
 }
 
@@ -147,8 +142,6 @@ chatBoxTextarea.addEventListener('input', (event) => {
 
     StoreCodeMirrorScrollAndCursor(updatedCode);
 });
-
-
 
 selectModel.addEventListener('change', (event) => {
     const selectedModel = event.target.options[event.target.selectedIndex].textContent;

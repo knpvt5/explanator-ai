@@ -37,11 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const geminiApiCbTextInput = JSON.parse(localStorage.getItem("geminiApiCbTextInput"));
     if (geminiApiCbTextInput) {
         userInput.value = geminiApiCbTextInput;
-
+        userInputTextareaAutoResize(chatBoxTextarea)
     }
     // Initial send button state based on input
     sendButton.disabled = !userInput.value.trim();
-
 
     const backendAPI = "/gemini/gemini-api/";
 

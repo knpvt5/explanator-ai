@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const geminiDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("geminiDocsAnalyzerTextInput"));
     if (geminiDocsAnalyzerTextInput) {
         userInput.value = geminiDocsAnalyzerTextInput;
-
+        userInputTextareaAutoResize(chatBoxTextarea);
     }
     // Initial send button state based on input
     sendButton.disabled = !userInput.value.trim();

@@ -66,6 +66,9 @@ nav a:hover {
   gap: 20px;
   padding: 20px;
 }
+.content-expand {
+  grid-template-columns: 1fr;
+}
 
 
 .chat-box {
@@ -77,6 +80,19 @@ nav a:hover {
   padding: 10px;
   resize: vertical;
 }
+.chat-box-expand{
+  height: 93vh;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: -150px;
+}
+
+.chat-box-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
 
 .chat-box::-webkit-resizer {
   width: 20px;
@@ -87,6 +103,21 @@ nav a:hover {
 
 .chat-box h2 {
   color: #fff;
+}
+
+#expand-collapse-btn{
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 7px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#expand-collapse-btn:hover {
+  background-color: #005804;
 }
 
 .chat-messages {
@@ -101,6 +132,9 @@ nav a:hover {
   gap: 10px;
   overflow-x: auto;
   resize: vertical;
+}
+.chat-messages-expand {
+  height: 60vh
 }
 
 /* Custom Scrollbar for WebKit-based browsers */
@@ -348,8 +382,10 @@ nav a:hover {
   width: 100%;
   max-height: 100px;
   font-size: 16px;
+  font-family: sans-serif;
   box-sizing: border-box;
-  background-color: #242430;
+  background: #333;
+  padding: 5px;
   color: #fff;
   border-radius: 5px;
   outline: none;
@@ -363,7 +399,7 @@ nav a:hover {
   width: 10px;
 }
 .chat-input-container textarea::-webkit-scrollbar-track {
-  background: #333;
+  background: #555;
   border-radius: 5px;
 }
 .chat-input-container textarea::-webkit-scrollbar-thumb {
@@ -447,9 +483,8 @@ nav a:hover {
 }
 
 .code-box {
-  /* grid-column: 1/2; */
   height: fit-content;
-  background-color: #333;
+  background: #333;
   color: #fff;
   padding: 15px;
   overflow-x: auto;
@@ -457,25 +492,21 @@ nav a:hover {
 }
 
 #codeBox-above-space {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
-  margin-bottom: -5px;
 }
 
 #copy-code-btn {
-  background-color: #4caf50;
+  background: #4caf50;
   color: white;
   border: none;
-  margin-top: 15px;
   padding: 5px 7px;
   font-size: 20px;
-  width: fit-content;
-  height: fit-content;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s ease;
-  margin-left: 50%;
 }
 
 #copy-code-btn:hover {

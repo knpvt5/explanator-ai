@@ -1,8 +1,49 @@
-let pythonEditor; 
+let pythonEditor;
 
 document.addEventListener("DOMContentLoaded", () => {
     // Select textarea and CodeMirror setup
     const textarea = document.getElementById("user-input");
+
+    document.getElementById("expand-collapse-btn").addEventListener("click", function () {
+        const content = document.querySelector(".content");
+        const chatBox = document.querySelector(".chat-box");
+        const chatMessages = document.querySelector(".chat-messages");
+        const expandCollapseBtn = document.getElementById("expand-collapse-btn");
+
+        function toggleExpandCollapse() {
+            if (window.innerWidth > 480) {
+                content.classList.toggle("content-expand");
+                chatBox.classList.toggle("chat-box-expand");
+                chatMessages.classList.toggle("chat-messages-expand");
+            } else {
+                content.classList.remove("content-expand");
+                chatBox.classList.remove("chat-box-expand");
+                chatMessages.classList.remove("chat-messages-expand");
+            }
+
+            if (chatBox.classList.contains("chat-box-expand")) {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
+                sessionStorage.setItem("geminiExpandCollapseBtn", true);
+            } else {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
+                sessionStorage.removeItem("geminiExpandCollapseBtn");
+            }
+        }
+
+        toggleExpandCollapse();
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth < 480) {
+                toggleExpandCollapse();
+            }
+        });
+
+    });
+
+    if (JSON.parse(sessionStorage.getItem("geminiExpandCollapseBtn")) === true) {
+        document.getElementById("expand-collapse-btn").click();
+    }
+
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
         mode: "python",
         theme: "dracula",
@@ -35,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    
+
     // Handle file input changes
     const inputFile = document.getElementById("input_file");
     inputFile.addEventListener('change', fileInputNameChange);
@@ -75,15 +116,13 @@ function fileInputNameChange() {
 }
 
 function StoreCodeMirrorScrollAndCursor(updatedCode) {
-    // Save the current cursor and scroll positions
-    const cursorPosition = pythonEditor.getCursor();
+    // Save the scroll positions
     const scrollPosition = pythonEditor.getScrollInfo().top;
 
     // Set the updated code
     pythonEditor.setValue(updatedCode);
 
-    // Restore cursor and scroll positions
-    pythonEditor.setCursor(cursorPosition);
+    // Restore scroll positions
     pythonEditor.scrollTo(0, scrollPosition);
 }
 

@@ -34,7 +34,10 @@
     <main>
       <div class="content">
         <div class="chat-box">
-          <h2>ASK ME ANYTHING...</h2>
+          <div class="chat-box-header">
+            <h2>ASK ME ANYTHING...</h2>
+            <button id="expand-collapse-btn"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+          </div>
           <div class="chat-messages">
             <div class="suggested-question-box">
               <p class="suggested-question one">Summarize this document?</p>
@@ -48,7 +51,7 @@
               </label>
               <input type="file" id="input_file" name="input_file" multiple accept=".txt,.csv,.json,.pdf" />
               <span id="file-name"></span>
-              <button id="remove-file" aria-label="Remove file" title= "Remove file">x</button>
+              <button id="remove-file" aria-label="Remove file" title="Remove file">x</button>
             </div>
 
             <textarea id="user-input" placeholder="Upload file types: PDF,.txt,.csv,.json"></textarea>
@@ -59,11 +62,17 @@
               <option value="" disabled selected>Select a model</option>
               <option value="model1">nvidia/llama-3.1-nemotron-70b-instruct</option>
               <option value="model2">meta/llama-3.3-70b-instruct</option>
-              {% comment %} <option value="model3">mistralai/mixtral-8x7b-instruct-v0.1</option> {% endcomment %}
+              {% comment %}
+              <option value="model3">mistralai/mixtral-8x7b-instruct-v0.1</option>
+              {% endcomment %}
               <option value="model4">nv-mistralai/mistral-nemo-12b-instruct</option>
-              {% comment %} <option value="model5">nvidia/nemotron-4-340b-instruct</option> {% endcomment %}
+              {% comment %}
+              <option value="model5">nvidia/nemotron-4-340b-instruct</option>
+              {% endcomment %}
               <option value="model6">microsoft/phi-3-mini-128k-instruct</option>
-              {% comment %} <option value="model7">mistralai/mixtral-8x22b-instruct-v0.1</option> {% endcomment %}
+              {% comment %}
+              <option value="model7">mistralai/mixtral-8x22b-instruct-v0.1</option>
+              {% endcomment %}
             </select>
           </div>
         </div>
