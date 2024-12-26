@@ -109,15 +109,12 @@ function fileInputNameChange() {
 }
 
 function StoreCodeMirrorScrollAndCursor(updatedCode) {
-    // Save the current cursor and scroll positions
-    const cursorPosition = pythonEditor.getCursor();
-    const scrollPosition = pythonEditor.getScrollInfo().top;
+    // Save the scroll positions
+    const scrollPosition = pythonEditor.getScrollInfo().top;    
 
     // Set the updated code
     pythonEditor.setValue(updatedCode);
 
-    // Restore cursor and scroll positions
-    pythonEditor.setCursor(cursorPosition);
     pythonEditor.scrollTo(0, scrollPosition);
 }
 
@@ -137,7 +134,7 @@ chatBoxTextarea.addEventListener('input', (event) => {
     pythonEditor.setValue(updatedCode);
 
 
-    // StoreCodeMirrorScrollAndCursor(updatedCode);
+    StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
 
