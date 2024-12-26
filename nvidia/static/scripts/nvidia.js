@@ -16,8 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 content.classList.toggle("content-expand");
                 chatBox.classList.toggle("chat-box-expand");
                 chatMessages.classList.toggle("chat-messages-expand");
-            }else{
-                alert("Not expandable on mobile devices")
+            } else {
+                content.classList.remove("content-expand");
+                chatBox.classList.remove("chat-box-expand");
+                chatMessages.classList.remove("chat-messages-expand");
             }
 
             if (chatBox.classList.contains("chat-box-expand")) {
@@ -32,6 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toggleExpandCollapse();
 
+        window.addEventListener("resize", function () {
+            toggleExpandCollapse();
+        });
+
+    });
+
+    window.addEventListener("resize", function () {
+        if (window.innerWidth < 480) {
+            document.getElementById("expand-collapse-btn").click();
+        }
     });
 
     if (JSON.parse(localStorage.getItem("ExpandCollapseBtn")) === true) {
@@ -112,7 +124,7 @@ function fileInputNameChange() {
 
 function StoreCodeMirrorScrollAndCursor(updatedCode) {
     // Save the scroll positions
-    const scrollPosition = pythonEditor.getScrollInfo().top;    
+    const scrollPosition = pythonEditor.getScrollInfo().top;
 
     // Set the updated code
     pythonEditor.setValue(updatedCode);
