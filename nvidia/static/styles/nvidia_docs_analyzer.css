@@ -76,6 +76,7 @@ nav a:hover {
   flex-direction: column;
   height: fit-content;
   background-color: #333;
+  color: #fff;
   border-radius: 10px;
   padding: 10px;
   resize: vertical;
@@ -99,10 +100,6 @@ nav a:hover {
   height: 20px;
   background-color: #666;
   cursor: ns-resize;
-}
-
-.chat-box h2 {
-  color: #fff;
 }
 
 #expand-collapse-btn{
