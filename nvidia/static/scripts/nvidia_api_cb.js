@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageBox.classList.add("chat-message", sender);
         messageBox.textContent = message;
         messagesContainer.appendChild(messageBox);
-        // autoScroll();
+        autoScroll();
         return messageBox;
     };
 

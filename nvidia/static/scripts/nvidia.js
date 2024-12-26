@@ -9,27 +9,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const chatBox = document.querySelector(".chat-box");
         const chatMessages = document.querySelector(".chat-messages");
         const expandCollapseBtn = document.getElementById("expand-collapse-btn");
-    
-            function toggleExpandCollapse() {
-                if (window.innerWidth > 480) {
-                    content.classList.toggle("content-expand");
-                    chatBox.classList.toggle("chat-box-expand");
-                    chatMessages.classList.toggle("chat-messages-expand");
-                }
-            
-                if (chatBox.classList.contains("chat-box-expand")) {
-                    expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-                } else {
-                    expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
-                }
+
+        function toggleExpandCollapse() {
+            toggleExpandCollapse = !toggleExpandCollapse;
+            if (window.innerWidth > 480) {
+                content.classList.toggle("content-expand");
+                chatBox.classList.toggle("chat-box-expand");
+                chatMessages.classList.toggle("chat-messages-expand");
             }
-    
+
+            if (chatBox.classList.contains("chat-box-expand")) {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
+                let toggleExpandCollapse = true
+                localStorage.setItem("toggleExpandCollapse", toggleExpandCollapse);
+
+            } else {
+                expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
+                localStorage.removeItem("toggleExpandCollapse");
+            }
+        }
+
         toggleExpandCollapse();
 
         window.removeEventListener("resize", toggleExpandCollapse);
-    
+
     });
-    
+
+    if (localStorage.getItem("toggleExpandCollapse") === "true") {
+        document.getElementById("expand-collapse-btn").click();
+    }
+
 
 
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
