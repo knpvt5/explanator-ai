@@ -20,25 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (chatBox.classList.contains("chat-box-expand")) {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
-                let toggleExpandCollapse = true
-                localStorage.setItem("toggleExpandCollapse", toggleExpandCollapse);
-
+                let ExpandCollapseBtn = true
+                localStorage.setItem("ExpandCollapseBtn", JSON.stringify(ExpandCollapseBtn));
             } else {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>';
-                localStorage.removeItem("toggleExpandCollapse");
+                localStorage.removeItem("ExpandCollapseBtn");
             }
         }
 
         toggleExpandCollapse();
 
-        window.removeEventListener("resize", toggleExpandCollapse);
-
     });
 
-    if (localStorage.getItem("toggleExpandCollapse") === "true") {
+    if (JSON.parse(localStorage.getItem("ExpandCollapseBtn")) === true) {
         document.getElementById("expand-collapse-btn").click();
     }
-
 
 
     pythonEditor = CodeMirror.fromTextArea(document.getElementById("python-code-editor"), {
