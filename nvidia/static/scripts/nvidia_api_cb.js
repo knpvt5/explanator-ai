@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nvidiaApiCbTextInput = JSON.parse(localStorage.getItem("nvidiaApiCbTextInput"));
     if (nvidiaApiCbTextInput) {
         userInput.value = nvidiaApiCbTextInput;
-
+        userInputTextareaAutoResize(chatBoxTextarea)
     }
     // Initial send button state based on input
     sendButton.disabled = !userInput.value.trim();
