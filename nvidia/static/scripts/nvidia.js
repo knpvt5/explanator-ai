@@ -145,9 +145,6 @@ chatBoxTextarea.addEventListener('input', (event) => {
         `user_input = "${userInput}"`
     );
 
-    pythonEditor.setValue(updatedCode);
-
-
     StoreCodeMirrorScrollAndCursor(updatedCode);
 });
 
