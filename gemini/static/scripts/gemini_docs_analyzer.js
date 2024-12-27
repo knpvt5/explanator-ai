@@ -23,6 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // auto scrolling of the msg container
+    let userIsAtBottom = true;
+
+    messagesContainer.addEventListener("scroll", () => {
+        userIsAtBottom = messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight - 10;
+    });
+    function messagesContainerAutoScroll() {
+        if (userIsAtBottom) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }
+
     function userInputTextareaAutoResize(chatBoxTextarea) {
         if (!chatBoxTextarea) return;
         chatBoxTextarea.style.height = "auto";
@@ -45,19 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const backendAPI = "/gemini/gemini-docs-analyzer-api/";
 
-    const appendMessage = (sender, message, parsed = false) => {
+    const appendMessage = (sender, message) => {
         const messageBox = document.createElement("div");
         messageBox.classList.add("chat-message", sender);
-
-        if (parsed) {
-            // Use marked to parse markdown
-            messageBox.innerHTML = marked.parse(message);
-        } else {
-            messageBox.textContent = message;
-        }
-
+        messageBox.textContent = message;
         messagesContainer.appendChild(messageBox);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        messagesContainerAutoScroll();
         return messageBox;
     };
 
@@ -112,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 responseText += data.chunk;
                                 // Use marked to parse and render markdown in real-time
                                 botMessageBox.innerHTML = marked.parse(responseText);
-                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                                messagesContainerAutoScroll();
                             }
                         } catch (e) {
                             console.error("Error parsing chunk:", e);

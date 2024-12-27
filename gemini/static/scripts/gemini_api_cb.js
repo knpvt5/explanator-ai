@@ -24,12 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+
+    // auto scrolling of the msg container
     let userIsAtBottom = true;
     
     messagesContainer.addEventListener("scroll", () => {
         userIsAtBottom = messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight -10;
     });
-    function autoScroll() {
+    function messagesContainerAutoScroll() {
         if (userIsAtBottom) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageBox.classList.add("chat-message", sender);
         messageBox.textContent = message;
         messagesContainer.appendChild(messageBox);
-        autoScroll();
+        messagesContainerAutoScroll();
         return messageBox;
     };
 
@@ -116,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 responseText += data.chunk;
                                 // Use marked to parse and render markdown in real-time
                                 botMessageBox.innerHTML = marked.parse(responseText);
-                                autoScroll();
+                                messagesContainerAutoScroll();
                             }
                         } catch (e) {
                             console.error("Error parsing chunk:", e);
