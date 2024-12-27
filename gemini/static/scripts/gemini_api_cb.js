@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendButton = document.getElementById("send-button");
     const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
+
     // Input event for textarea with user input
     document.querySelectorAll(".suggested-question").forEach((question) => {
         question.addEventListener("click", function () {
@@ -22,6 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
             sendButton.disabled = userInput.value.trim() === "";
         });
     });
+
+    let userIsAtBottom = true;
+    
+    messagesContainer.addEventListener("scroll", () => {
+        userIsAtBottom = messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight -10;
+    });
+    function autoScroll() {
+        if (userIsAtBottom) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }
 
     function userInputTextareaAutoResize(chatBoxTextarea) {
         if (!chatBoxTextarea) return;
@@ -44,19 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const backendAPI = "/gemini/gemini-api/";
 
-    const appendMessage = (sender, message, parsed = false) => {
+    const appendMessage = (sender, message) => {
         const messageBox = document.createElement("div");
         messageBox.classList.add("chat-message", sender);
-
-        if (parsed) {
-            // Use marked to parse markdown
-            messageBox.innerHTML = marked.parse(message);
-        } else {
-            messageBox.textContent = message;
-        }
-
+        messageBox.textContent = message;
         messagesContainer.appendChild(messageBox);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        autoScroll();
         return messageBox;
     };
 
@@ -111,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 responseText += data.chunk;
                                 // Use marked to parse and render markdown in real-time
                                 botMessageBox.innerHTML = marked.parse(responseText);
-                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                                autoScroll();
                             }
                         } catch (e) {
                             console.error("Error parsing chunk:", e);
