@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='local_dev_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['explanatorai.site', 'www.explanatorai.site', 'explanator-ai.onrender.com', 'localhost', '127.0.0.1', 'healthcheck.railway.app', 'explanator-ai-production.up.railway.app']
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', '192.168.98.38', 'explanatorai.site', 'www.explanatorai.site', 'explanator-ai.onrender.com', 'healthcheck.railway.app', 'explanator-ai-production.up.railway.app']
 
 
 # Application definition

@@ -341,13 +341,20 @@ nav a:hover {
 #file-name {
   display: inline-block;
   margin-top: 5px;
-  /* border: 1px solid #ccc; */
   padding: 3px;
   border-radius: 5px;
   font-size: 14px;
   color: #eee;
-  /* width: 50px;
-  overflow-x: auto; */
+}
+#file-name {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #eee;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #file-name::-webkit-scrollbar {
