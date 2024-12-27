@@ -10,6 +10,9 @@ logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+# Initialize logging
+logger = logging.getLogger(__name__)
+
 def handle_gemini_raw_dataset_reader_request(request, model, generate_stream_responses): 
         # Load the dataset
     dataset = load_dataset("knkrn5/wealthpsychology-raw-data", streaming=True)
@@ -53,8 +56,8 @@ def handle_gemini_raw_dataset_reader_request(request, model, generate_stream_res
         
         return StreamingHttpResponse(generate_stream_responses(response), content_type="text/event-stream")
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        print("Please try again or check your API key and internet connection.")
+        logging.error(f"An error occurred: {str(e)}")
+        logging.error("Please try again or check your API key and internet connection.")
 
 
 def handle_gemini_api_prompt_generator_ds_request(request, model, generate_stream_responses): 
