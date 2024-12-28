@@ -21,20 +21,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static '/styles/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/ai_nav.css' %}" />
     <title>Explanator AI</title>
   </head>
   <body>
     <header>
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
+
+      <nav>
+        <a href="{% url 'chatbots' %}">CHATBOTS</a>
+        <a href="{% url 'docs_analyzer' %}">DOCS ANALYZER</a>
+        <a href="{% url 'datasets' %}">DATASETS</a>
+        <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
+        <a href="{% url 'local_models' %}">LOCAL MODELS</a>
+      </nav>
     </header>
-    <nav>
-      <a href="{% url 'chatbots' %}">CHATBOTS</a>
-      <a href="{% url 'docs_analyzer' %}">DOCS ANALYZER</a>
-      <a href="{% url 'datasets' %}">DATASETS</a>
-      <a href="{% url 'fine_tuning' %}">FINE-TUNING</a>
-      <a href="{% url 'local_models' %}">LOCAL MODELS</a>
-    </nav>
+
     <main>
       <div class="content">
         <div class="code-box" onclick="window.location.href='{% url 'chatbots' %}'">

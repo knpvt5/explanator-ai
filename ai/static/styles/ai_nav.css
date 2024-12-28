@@ -1,0 +1,52 @@
+header {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 10px;
+}
+header h1 {
+  cursor: pointer;
+}
+
+#brand-logo {
+  height: 60px;
+  width: auto;
+  padding: 15px 10px;
+  /* margin: 0 auto; */
+  /* border-radius: 10px; */
+  display: block;
+}
+
+@media (max-width: 480px) {
+  #brand-logo {
+    height: 50px;
+    width: auto;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+nav {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  /* justify-content: center; */
+  justify-content: start;
+  overflow-x: auto;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 20px;
+  transition: 0.3s ease;
+}
+
+nav a:not(:last-child) {
+  border-right: 1px solid #fff;
+}
+
+nav a:hover {
+  background-color: #555;
+}
