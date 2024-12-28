@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.querySelector(".menu-btn");
-    const aiSelection = document.querySelector(".ai-selection");
+    const aiSelection = document.querySelector(".left-aside");
 
     menuBtn.addEventListener("click", () => {
-        aiSelection.classList.toggle("active");
+        aiSelection.classList.toggle("left-aside-toggle");
 
         // Check if the aiSelection is hidden or visible
-        if (aiSelection.classList.contains("active")) {
+        if (aiSelection.classList.contains("left-aside-toggle")) {
             menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
         } else {
             menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
         }
     });
 
-    /* document.querySelector('.menu-icon').addEventListener('click', function () {
+   /*  document.querySelector('.menu-icon').addEventListener('click', function () {
         document.body.classList.toggle('nav-open'); // Toggle the nav-open class
     }); */
 
