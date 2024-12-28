@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.querySelector(".menu-icon");
+    const menuBtn = document.querySelector(".menu-btn");
     const aiSelection = document.querySelector(".ai-selection");
 
-    menuIcon.addEventListener("click", () => {
-        aiSelection.classList.toggle("ai-selection-toggle");
+    menuBtn.addEventListener("click", () => {
+        aiSelection.classList.toggle("active");
 
         // Check if the aiSelection is hidden or visible
-        if (aiSelection.classList.contains("ai-selection-toggle")) {
-            menuIcon.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
+        if (aiSelection.classList.contains("active")) {
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
         } else {
-            menuIcon.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
+            menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
         }
     });
 
