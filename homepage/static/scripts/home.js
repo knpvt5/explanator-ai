@@ -1,27 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.querySelector(".menu-btn");
     const leftAside = document.querySelector(".left-aside");
-
+    
     menuBtn.addEventListener("click", () => {
         if (window.innerWidth > 480) {
-            leftAside.classList.toggle("left-aside-toggle");
-
-            // Check if the leftAside is hidden or visible
-            if (leftAside.classList.contains("left-aside-toggle")) {
-                menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-            } else {
-                menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-            }
+            leftAside.classList.toggle("menu-close");
         } else {
-            leftAside.classList.toggle('active')
+            leftAside.classList.toggle("menu-slide");
+        }
+    
+        // Update the menu button icon based on sidebar visibility
+        if ((leftAside.classList.contains("menu-close")) && (window.innerWidth > 480)) {
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }else if ((!leftAside.classList.contains("menu-slide")) && (window.innerWidth < 480)) {
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }else {
+            // menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
+            menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
         }
     });
-
-    /*  document.querySelector('.menu-icon').addEventListener('click', function () {
-         document.body.classList.toggle('nav-open'); // Toggle the nav-open class
-     }); */
-
-
+    
 
     const editors = []; // To store all CodeMirror instances
     document.querySelectorAll(".code-box").forEach((codeBox, index) => {

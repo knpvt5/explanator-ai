@@ -66,7 +66,7 @@ nav a:hover {
   gap: 20px;
   padding: 20px;
 }
-.content-expand {
+.expand-collapse .content {
   grid-template-columns: 1fr;
 }
 
@@ -81,7 +81,7 @@ nav a:hover {
   padding: 10px;
   resize: vertical;
 }
-.chat-box-expand{
+.expand-collapse .chat-box{
   height: 93vh;
   width: 95%;
   margin: 0 auto;
@@ -130,7 +130,7 @@ nav a:hover {
   overflow-x: auto;
   resize: vertical;
 }
-.chat-messages-expand {
+.expand-collapse .chat-messages {
   height: 60vh
 }
 
