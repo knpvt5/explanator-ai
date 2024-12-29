@@ -5,23 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const textarea = document.getElementById("user-input");
 
     document.getElementById("expand-collapse-btn").addEventListener("click", function () {
-        const content = document.querySelector(".content");
-        const chatBox = document.querySelector(".chat-box");
-        const chatMessages = document.querySelector(".chat-messages");
         const expandCollapseBtn = document.getElementById("expand-collapse-btn");
 
         function toggleExpandCollapse() {
             if (window.innerWidth > 480) {
-                content.classList.toggle("content-expand");
-                chatBox.classList.toggle("chat-box-expand");
-                chatMessages.classList.toggle("chat-messages-expand");
+                document.body.classList.toggle('expand-collapse');
             } else {
-                content.classList.remove("content-expand");
-                chatBox.classList.remove("chat-box-expand");
-                chatMessages.classList.remove("chat-messages-expand");
+                document.body.classList.remove('expand-collapse');
             }
 
-            if (chatBox.classList.contains("chat-box-expand")) {
+            if (document.body.classList.contains("expand-collapse")) {
                 expandCollapseBtn.innerHTML = '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>';
                 sessionStorage.setItem("ExpandCollapseBtn", true);
             } else {
