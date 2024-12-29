@@ -1,15 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.querySelector(".menu-btn");
-    const aiSelection = document.querySelector(".left-aside");
+    const leftAside = document.querySelector(".left-aside");
 
     menuBtn.addEventListener("click", () => {
-        aiSelection.classList.toggle("left-aside-toggle");
+        if (window.innerWidth > 480) {
+            leftAside.classList.toggle("left-aside-toggle");
 
-        // Check if the aiSelection is hidden or visible
-        if (aiSelection.classList.contains("left-aside-toggle")) {
-            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
+            // Check if the leftAside is hidden or visible
+            if (leftAside.classList.contains("left-aside-toggle")) {
+                menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            } else {
+                menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            }
         } else {
-            menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
+            leftAside.classList.toggle('active')
         }
     });
 
@@ -89,32 +93,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.querySelector('.menu-btn');
     const leftAside = document.querySelector('.left-aside');
 
-    // Create overlay element
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    document.body.appendChild(overlay);
+
 
     menuBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         leftAside.classList.toggle('active');
-        overlay.classList.toggle('active');
     });
 
-    // Close sidebar when clicking overlay
-    overlay.addEventListener('click', function () {
-        leftAside.classList.remove('active');
-        overlay.classList.remove('active');
-    });
+
 
     // Close sidebar when clicking outside
     document.addEventListener('click', function (e) {
         if (!leftAside.contains(e.target) && !menuBtn.contains(e.target)) {
             leftAside.classList.remove('active');
-            overlay.classList.remove('active');
         }
     });
-});
+}); */

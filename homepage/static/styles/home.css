@@ -26,7 +26,9 @@ header {
   /* height: 100%;  */
   background-color: #000; 
   color: white; /* Text color */
-  z-index: 1;
+  overflow: hidden;
+  z-index: 1000;
+
 }
 
 .menu-btn {
@@ -76,11 +78,12 @@ aside{
   /* height: 100%; */
   height: fit-content;
   overflow-y: auto;
-  border-top: 2px solid #ccc;
+  /* border-top: 2px solid #ccc; */
   /* padding-top: 20px; */
   overflow-y: auto;  
   overflow: hidden; 
   transition: left 0.3s ease;
+  z-index: 999;
 }
 
 .left-aside-toggle{
@@ -278,12 +281,6 @@ footer{
   /* grid-column: span 2; */
 }
 
-@media (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Mobile styles */
 @media (max-width: 768px) {
   #home-page {
@@ -295,45 +292,23 @@ footer{
   }
 
   .left-aside {
-    transform: translateX(-250px); /* Hide by default on mobile */
-  }
-  .left-aside {
-    grid-area: aside;
     width: 250px;
-    background-color: #000;
-    color: white;
     height: fit-content;
     position: fixed; /* Change to fixed positioning */
     top: 60px; /* Height of your header */
     left: 0;
     height: calc(100vh - 60px);
-    z-index: 1000; /* Ensure it appears above main content */
     transition: transform 0.3s ease;
+    transform: translateX(-250px); /* Hide by default on mobile */
   }
 
   .left-aside.active {
-    transform: translateX(0); /* Show when active */
-  }
-
-  /* Add a semi-transparent overlay when sidebar is open */
-  .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-  }
-
-  .overlay.active {
-    display: block;
+    transform: translateX(0); 
   }
 
   /* Adjust main content */
   .content {
     grid-template-columns: 1fr;
-    margin: 0 10px;
+    /* margin: 0 10px; */
   }
 }
