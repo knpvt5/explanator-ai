@@ -70,6 +70,7 @@ header {
   color: white;
   height: fit-content;
   margin-top: -10px;
+  transition: width 0.3s ease;
 }
 
 .left-aside.menu-close {
@@ -83,7 +84,7 @@ header {
   overflow-y: auto;
 }
 .ai-selection::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
 }
 .ai-selection::-webkit-scrollbar-track {
   background-color: #2c3e50;
@@ -146,7 +147,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 15px;
   padding: 5px;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .CodeMirror {
@@ -252,20 +253,21 @@ footer {
   .left-aside {
     width: 250px;
     height: fit-content;
-    position: fixed; /* Change to fixed positioning */
-    top: 60px; /* Height of your header */
+    position: fixed; 
+    top: 60px; 
     left: 0;
     height: calc(100vh - 60px);
-    transition: transform 0.3s ease;
-    transform: translateX(-250px); /* Hide by default on mobile */
+    transition: left 0.3s ease;
+    /* transform: translateX(-250px); */
+    left: -250px;
     z-index: 999;
   }
 
   .left-aside.menu-slide {
-    transform: translateX(0);
+    /* transform: translateX(0); */
+    left: 0;
   }
 
-  /* Adjust main content */
   .content {
     grid-template-columns: 1fr;
     margin: 0 5px;
