@@ -11,12 +11,10 @@ body {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: auto auto;
   grid-template-areas:
-    'aside header'
+    'header header'
     'aside main'
     'aside footer';
-  /* grid-gap: 5px; */
 }
-
 
 header {
   grid-area: header;
@@ -60,7 +58,6 @@ header {
 
 aside{
   position: sticky;
-  /* height: fit-content; */
 }
 
 .left-aside {
@@ -70,7 +67,7 @@ aside{
   width: 250px;
   top: 0;
   left: -250px;  
-  background-color: #2c3e50; 
+  /* background-color: #2c3e50;  */
   background-color: #000; 
   color: white;
   display: flex;
@@ -85,14 +82,15 @@ aside{
   overflow: hidden; 
   transition: left 0.3s ease;
 }
+
 .left-aside-toggle{
   width: 0;
   padding: 0;
-  /* left: 0; */
 }
 
 .ai-selection{
   height: 100vh;
+  min-height: calc(100vh - 60px);
   overflow-y: auto;
 }
 .ai-selection::-webkit-scrollbar {
@@ -106,6 +104,10 @@ aside{
   background-color: #4a5d72;
   border-radius: 10px;
 }
+.ai-selection::-webkit-scrollbar-thumb:hover {
+  background-color: #5b6d82;
+}
+
 
 /* Icons styling */
 .ai-selection i {
@@ -171,9 +173,13 @@ aside{
 
 /* ----------------------------------------------------- */
 
+main {
+  grid-area: main;
+  width: 100%;
+  transition: margin-left 0.3s ease;
+}
 
 .content {
-  grid-area: main;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 15px;
@@ -275,5 +281,59 @@ footer{
 @media (max-width: 768px) {
   .content {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #home-page {
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+
+  .left-aside {
+    transform: translateX(-250px); /* Hide by default on mobile */
+  }
+  .left-aside {
+    grid-area: aside;
+    width: 250px;
+    background-color: #000;
+    color: white;
+    height: fit-content;
+    position: fixed; /* Change to fixed positioning */
+    top: 60px; /* Height of your header */
+    left: 0;
+    height: calc(100vh - 60px);
+    z-index: 1000; /* Ensure it appears above main content */
+    transition: transform 0.3s ease;
+  }
+
+  .left-aside.active {
+    transform: translateX(0); /* Show when active */
+  }
+
+  /* Add a semi-transparent overlay when sidebar is open */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  /* Adjust main content */
+  .content {
+    grid-template-columns: 1fr;
+    margin: 0 10px;
   }
 }

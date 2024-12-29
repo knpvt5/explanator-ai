@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-   /*  document.querySelector('.menu-icon').addEventListener('click', function () {
-        document.body.classList.toggle('nav-open'); // Toggle the nav-open class
-    }); */
+    /*  document.querySelector('.menu-icon').addEventListener('click', function () {
+         document.body.classList.toggle('nav-open'); // Toggle the nav-open class
+     }); */
 
 
 
@@ -86,4 +86,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load and render the Markdown content on page load
     loadMarkdownContent();
 
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.querySelector('.menu-btn');
+    const leftAside = document.querySelector('.left-aside');
+
+    // Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    document.body.appendChild(overlay);
+
+    menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        leftAside.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+
+    // Close sidebar when clicking overlay
+    overlay.addEventListener('click', function () {
+        leftAside.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!leftAside.contains(e.target) && !menuBtn.contains(e.target)) {
+            leftAside.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
 });
