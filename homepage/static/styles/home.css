@@ -174,8 +174,9 @@ main {
   color: white;
   border: none;
   margin-top: 15px;
-  padding: 5px 7px;
+  padding: 5px 15px;
   font-size: 20px;
+  font-weight: bold;
   width: fit-content;
   height: fit-content;
   border-radius: 5px;
@@ -187,6 +188,8 @@ main {
 .link-btn:hover {
   background-color: #006605;
 }
+
+
 
 #markdown-preview {
   min-height: 550px;
