@@ -80,9 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.addEventListener("click", (e) => {
                 e.stopPropagation(); 
                 const currentOptions = aiOptions[index];
-                currentOptions.style.display = currentOptions.style.display === "none" || !currentOptions.style.display
-                    ? "block"
-                    : "none";
+                currentOptions.style.display = currentOptions.style.display === "block" ? "none" : "block";
             });
         });
     }
