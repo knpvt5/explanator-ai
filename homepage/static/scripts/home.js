@@ -78,9 +78,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         aiOptionBtn.forEach((btn, index) => {
             btn.addEventListener("click", (e) => {
-                e.stopPropagation(); 
+                e.stopPropagation();
                 const currentOptions = aiOptions[index];
                 currentOptions.style.display = currentOptions.style.display === "block" ? "none" : "block";
+                function updateAiOptionsBtnIcon() {
+                    if (currentOptions.style.display === "block") {
+                        btn.innerHTML = "<i class='fa-regular fa-circle-xmark'></i>";
+                    } else {
+                        btn.innerHTML = "<i class='fa-solid fa-ellipsis-vertical'></i>";
+                    }
+                }
+                updateAiOptionsBtnIcon();
+                document.addEventListener('click', (e) => {
+                    if (!currentOptions.contains(e.target) && !btn.contains(e.target)) {
+                        currentOptions.style.display = "none";
+                        updateAiOptionsBtnIcon();
+                    }
+                });
             });
         });
     }
