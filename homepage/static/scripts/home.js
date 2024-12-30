@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const markdownPreviewDiv = document.getElementById("markdown-preview");
     const dataContainer = document.getElementById("markdown-data-container");
     const markdownUrl = dataContainer.getAttribute("data-markdown-url");
+    const viewDocsBtn = document.querySelector(".view-docs-btn");
 
     // Function to fetch and render markdown content
     async function loadMarkdownContent() {
@@ -124,7 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Load and render the Markdown content on page load
-    loadMarkdownContent();
+    viewDocsBtn.addEventListener("click", () => {
+        loadMarkdownContent();
+    })
 
 });

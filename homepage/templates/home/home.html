@@ -86,13 +86,13 @@
         <div class="code-box">
           <div id="codeBox-above-space">
             <h2><i class="fa-solid fa-robot"></i> CHATBOTS</h2>
-              <button type="button" title="chatbots" class="ai-options-btn">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-              </button>
-              <ul class="ai-options cb">
-                <li><a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a></li>
-                <li><a href="{% url 'gemini_api_cb' %}">GEMINI API CHATBOT</a></li>
-              </ul>
+            <button type="button" title="chatbots" class="ai-options-btn">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <ul class="ai-options cb">
+              <li><a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a></li>
+              <li><a href="{% url 'gemini_api_cb' %}">GEMINI API CHATBOT</a></li>
+            </ul>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_cb.py' %}"></div>
@@ -166,7 +166,10 @@
       </div>
 
       <div id="markdown-preview">
-        <h3>DOCUMENTATION</h3>
+        <div class="view-docs">
+          <h3>VIEW DOCUMENTATION</h3>
+          <button type="button" class="view-docs-btn"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
         <div id="markdown-data-container" data-markdown-url="{% static 'markdown/homepage.md' %}"></div>
       </div>
     </main>
