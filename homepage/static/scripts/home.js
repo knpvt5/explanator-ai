@@ -1,25 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.querySelector(".menu-btn");
     const leftAside = document.querySelector(".left-aside");
-    
-    menuBtn.addEventListener("click", () => {
+
+    menuBtn.addEventListener("click", (e) => {
         if (window.innerWidth > 480) {
             leftAside.classList.toggle("menu-close");
         } else {
+            e.stopPropagation();
             leftAside.classList.toggle("menu-slide");
         }
-    
-        // Update the menu button icon based on sidebar visibility
-        if ((leftAside.classList.contains("menu-close")) && (window.innerWidth > 480)) {
-            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        }else if ((!leftAside.classList.contains("menu-slide")) && (window.innerWidth < 480)) {
-            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        }else {
-            // menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>'; 
-            menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
+
+        // Update the menu button icon
+        function updateMenuButtonIcon() {
+            if ((leftAside.classList.contains("menu-close")) && (window.innerWidth > 480)) {
+                menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            } else if ((!leftAside.classList.contains("menu-slide")) && (window.innerWidth < 480)) {
+                menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            } else {
+                menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            }
         }
+        updateMenuButtonIcon();
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!leftAside.contains(e.target) && !menuBtn.contains(e.target) && (leftAside.classList.contains("menu-slide"))) {
+                leftAside.classList.remove('menu-slide');
+                updateMenuButtonIcon();
+            }
+        });
     });
-    
 
     const editors = []; // To store all CodeMirror instances
     document.querySelectorAll(".code-box").forEach((codeBox, index) => {
@@ -62,6 +72,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    function aiOptionMenu() {
+        const aiOptionBtn = document.querySelectorAll(".ai-options-btn");
+        const aiOptions = document.querySelectorAll(".ai-options");
+
+        aiOptionBtn.forEach((btn, index) => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation(); 
+                const currentOptions = aiOptions[index];
+                currentOptions.style.display = currentOptions.style.display === "none" || !currentOptions.style.display
+                    ? "block"
+                    : "none";
+            });
+        });
+    }
+
+    aiOptionMenu();
+
 
     // Initialize CodeMirror for Markdown Editor
     const markdownPreviewDiv = document.getElementById("markdown-preview");
@@ -89,25 +116,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMarkdownContent();
 
 });
-
-
-/* document.addEventListener('DOMContentLoaded', function () {
-    const menuBtn = document.querySelector('.menu-btn');
-    const leftAside = document.querySelector('.left-aside');
-
-
-
-    menuBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        leftAside.classList.toggle('active');
-    });
-
-
-
-    // Close sidebar when clicking outside
-    document.addEventListener('click', function (e) {
-        if (!leftAside.contains(e.target) && !menuBtn.contains(e.target)) {
-            leftAside.classList.remove('active');
-        }
-    });
-}); */

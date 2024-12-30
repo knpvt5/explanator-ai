@@ -38,14 +38,14 @@
         <ul>
           <li>
             <i class="fa-solid fa-robot"></i> CHATBOTS
-            <ul class="ai-type chatbot">
+            <ul class="ai-type chatbots">
               <li><a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a></li>
               <li><a href="{% url 'gemini_api_cb' %}">GEMINI API CHATBOT</a></li>
             </ul>
           </li>
           <li>
             <i class="fa-regular fa-folder-open"></i> DOCS ANALYZER
-            <ul class="ai-type docs-analyzer">
+            <ul class="ai-type docs-analyzers">
               <li><a href="{% url 'nvidia_docs_analyzer' %}">NVIDIA DOCS ANALYZER</a></li>
               <li><a href="{% url 'gemini_docs_analyzer' %}">GEMINI DOCS ANALYZER</a></li>
             </ul>
@@ -86,27 +86,33 @@
         <div class="code-box">
           <div id="codeBox-above-space">
             <h2><i class="fa-solid fa-robot"></i> CHATBOTS</h2>
-            <a href="{% url 'chatbots' %}" title="Go to link">
-              <button type="button" title="chatbots" class="link-btn">
+              <button type="button" title="chatbots" class="ai-options-btn">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </button>
-            </a>
+              <ul class="ai-options cbs">
+                <li><a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a></li>
+                <li><a href="{% url 'gemini_api_cb' %}">GEMINI API CHATBOT</a></li>
+              </ul>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_api_cb.py' %}"></div>
         </div>
-        <div class="code-box" onclick="window.location.href='{% url 'docs_analyzer' %}'">
+
+        <div class="code-box">
           <div id="codeBox-above-space">
             <h2><i class="fa-regular fa-folder-open"></i> DOCS ANALYZER</h2>
-            <a href="{% url 'docs_analyzer' %}" title="Go to link">
-              <button type="button" title="link" class="link-btn">
-                <i class="fa-solid fa-up-right-from-square"></i>
-              </button>
-            </a>
+            <button type="button" title="Docs analyzers" class="ai-options-btn">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <ul class="ai-options da">
+              <li><a href="{% url 'nvidia_docs_analyzer' %}">NVIDIA DOCS ANALYZER</a></li>
+              <li><a href="{% url 'gemini_docs_analyzer' %}">GEMINI DOCS ANALYZER</a></li>
+            </ul>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/nvidia_docs_analyzer.py' %}"></div>
         </div>
+
         <div class="code-box" onclick="window.location.href='{% url 'datasets' %}'">
           <div id="codeBox-above-space">
             <h2><i class="fa-solid fa-database"></i> DATASETS</h2>
@@ -119,9 +125,10 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/datasets/loading_wp_tokenized_datasets.py' %}"></div>
         </div>
+
         <div class="code-box" onclick="window.location.href='{% url 'fine_tuning_via_CPU' %}'">
           <div id="codeBox-above-space">
-            <h2><i class="fa-solid fa-microchip"></i>  FINE-TUNING</h2>
+            <h2><i class="fa-solid fa-microchip"></i> FINE-TUNING</h2>
             <a href="{% url 'fine_tuning_via_CPU' %}" title="Go to link">
               <button type="button" title="link" class="link-btn">
                 <i class="fa-solid fa-up-right-from-square"></i>
@@ -131,6 +138,7 @@
           <textarea id="python-code-editor" style="display: none"></textarea>
           <div id="python-data-container" data-python-url="{% static 'python/fine_tuning_via_CPU/ft_gtp2_with_wp-data.py' %}"></div>
         </div>
+
         <div class="code-box" onclick="window.location.href='{% url 'local_models' %}'">
           <div id="codeBox-above-space">
             <h2><i class="fa-solid fa-laptop"></i> LOCAL MODELS</h2>
