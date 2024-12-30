@@ -289,7 +289,7 @@ main {
 }
 
 /* Markdown Preview Styles */
-#markdown-preview h1 {
+#markdown-data-container h1 {
   font-size: 20px;
   color: #4caf50;
   margin-bottom: 1em;
@@ -297,21 +297,21 @@ main {
   text-decoration: underline;
 }
 
-#markdown-preview h2 {
+#markdown-data-container h2 {
   font-size: 16px;
   color: #45a049;
   margin: 0.8em 0;
 }
 
-#markdown-preview ul {
+#markdown-data-container ul {
   margin-left: 20px;
 }
 
-#markdown-preview li {
+#markdown-data-container li {
   margin: 0.5em 0;
 }
 
-#markdown-preview code {
+#markdown-data-container code {
   background: #242430;
   padding: 2px 5px;
   border-radius: 3px;
