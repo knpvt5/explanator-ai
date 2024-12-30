@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize CodeMirror for Markdown Editor
     const markdownPreviewDiv = document.getElementById("markdown-preview");
-    const dataContainer = document.getElementById("markdown-data-container");
-    const markdownUrl = dataContainer.getAttribute("data-markdown-url");
+    const MDdataContainer = document.getElementById("markdown-data-container");
+    const markdownUrl = MDdataContainer.getAttribute("data-markdown-url");
     const viewDocsBtn = document.querySelector(".view-docs-btn");
 
     // Function to fetch and render markdown content
@@ -118,15 +118,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const markdownContent = await response.text();
 
             // Parse and render the Markdown content
-            markdownPreviewDiv.innerHTML = marked.parse(markdownContent);
+            MDdataContainer.innerHTML = marked.parse(markdownContent);
         } catch (error) {
             console.error("Error loading markdown:", error);
-            markdownPreviewDiv.innerHTML = '<p class="error">Error loading documentation</p>';
+            MDdataContainer.innerHTML = '<p class="error">Error loading documentation</p>';
         }
     }
+    loadMarkdownContent();
 
     viewDocsBtn.addEventListener("click", () => {
-        loadMarkdownContent();
+        MDdataContainer.style.display = MDdataContainer.style.display === "block" ? "none" : "block";
+        if (MDdataContainer.style.display === "block") {
+            viewDocsBtn.innerHTML = "<i class='fa-solid fa-chevron-up'></i>";
+        } else {
+            viewDocsBtn.innerHTML = "<i class='fa-solid fa-chevron-down'></i>";
+        }
     })
 
 });

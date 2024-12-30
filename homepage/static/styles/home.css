@@ -228,11 +228,9 @@ main {
   background-color: #4a5d72;
 }
 
-
 #markdown-preview {
-  /* min-height: 550px; */
+  /* min-height: fit-content; */
   /* height: fit-content; */
-  height: fit-content;
   border: 1px solid #ccc;
   color: #ccc;
   border-radius: 10px;
@@ -240,26 +238,12 @@ main {
   margin: 15px;
   background: #333;
   overflow-y: auto;
-  resize: vertical;
-}
-#markdown-preview::-webkit-scrollbar {
-  width: 7px;
-}
-#markdown-preview::-webkit-scrollbar-track {
-  background-color: #2c3e50;
-  border-radius: 10px;
-}
-#markdown-preview::-webkit-scrollbar-thumb {
-  background-color: #4a5d72;
-  border-radius: 10px;
-}
-#markdown-preview::-webkit-scrollbar-thumb:hover {
-  background-color: #5b6d82;
 }
 
 #markdown-preview .view-docs {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 100px;
+  gap: 10px;
 }
 
 .view-docs-btn {
@@ -280,6 +264,28 @@ main {
 
 .view-docs-btn:hover {
   background-color: #006605;
+}
+
+#markdown-data-container {
+  display: none;
+  min-height: 550px;
+  height: 550px;
+  overflow-y: auto;
+  resize: vertical;
+}
+#markdown-data-container::-webkit-scrollbar {
+  width: 7px;
+}
+#markdown-data-container::-webkit-scrollbar-track {
+  background-color: #2c3e50;
+  border-radius: 10px;
+}
+#markdown-data-container::-webkit-scrollbar-thumb {
+  background-color: #4a5d72;
+  border-radius: 10px;
+}
+#markdown-data-container::-webkit-scrollbar-thumb:hover {
+  background-color: #5b6d82;
 }
 
 /* Markdown Preview Styles */
