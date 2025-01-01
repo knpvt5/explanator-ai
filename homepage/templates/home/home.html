@@ -33,7 +33,7 @@
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
 
-    <aside class="left-aside">
+    <nav class="left-aside">
       <div class="ai-selection">
         <ul>
           <li>
@@ -79,7 +79,7 @@
           </li>
         </ul>
       </div>
-    </aside>
+    </nav>
 
     <main>
       <div class="content">
@@ -177,5 +177,6 @@
     <footer>{% include 'includes/footer.html' %}</footer>
 
     <script src="{% static 'scripts/home.js' %}"></script>
+    <script src="{% static 'scripts/home_nav.js' %}"></script>
   </body>
 </html>

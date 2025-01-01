@@ -1,57 +1,114 @@
 header {
-  background-color: #000;
-  color: #fff;
-  padding: 5px 10px;
+  grid-area: header;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  text-align: center;
+  justify-content: flex-start; 
+  align-items: center;    
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  background: #000;
+  color: white; 
+  overflow: hidden;
+  z-index: 1000;
 }
-header h1 {
+
+.menu-btn {
+  font-size: 25px;
+  padding: 10px;
+  height: fit-content;
+  align-self: center;
+  border-radius: 0 20px 20px 0;
   cursor: pointer;
+  /* margin-right: auto;  */
 }
 
 #brand-logo {
-  height: 60px;
+  height: 45px;
   width: auto;
-  padding: 15px 10px;
-  /* margin: 0 auto; */
-  /* border-radius: 10px; */
+  border-radius: 20px;
   display: block;
+  padding: 7px 5px;
+  /* margin-left: auto;  */
 }
 
 @media (max-width: 480px) {
   #brand-logo {
     height: 50px;
-    width: auto;
-    padding: 0;
-    margin: 0 auto;
-    display: block;
   }
 }
 
-nav {
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  /* justify-content: center; */
-  justify-content: start;
-  overflow-x: auto;
+
+.left-aside {
+  /* grid-area: aside; */
+  width: 250px;
+  position: sticky;
+  top: 0;
+  background: #111111;
+  color: white;
+  height: fit-content;
+  margin-top: -10px;
+  transition: width 0.3s ease;
 }
 
-nav a {
-  color: #fff;
+.left-aside.menu-close {
+  width: 0;
+  padding: 0;
+}
+
+.ai-selection {
+  height: 100vh;
+  min-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.ai-selection::-webkit-scrollbar {
+  width: 7px;
+}
+.ai-selection::-webkit-scrollbar-track {
+  background-color: #2c3e50;
+  border-radius: 10px;
+}
+.ai-selection::-webkit-scrollbar-thumb {
+  background-color: #4a5d72;
+  border-radius: 10px;
+}
+.ai-selection::-webkit-scrollbar-thumb:hover {
+  background-color: #5b6d82;
+}
+
+/* Icons styling */
+.ai-selection i {
+  font-size: 18px;
+}
+
+.ai-selection ul {
+  list-style-type: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.ai-selection ul li {
+  margin: 5px;
+}
+
+.ai-selection .ai-type li a {
+  color: white;
   text-decoration: none;
-  text-align: center;
-  padding: 15px 20px;
-  transition: 0.3s ease;
+  font-size: 16px;
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 8px 10px;
+  background-color: #3b4b58;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
 }
 
-nav a:not(:last-child) {
-  border-right: 1px solid #fff;
+.ai-selection .ai-type li a:hover {
+  background-color: #4a5d72;
 }
 
-nav a:hover {
-  background-color: #555;
+.ai-selection a:active {
+  background-color: #1abc9c;
 }
