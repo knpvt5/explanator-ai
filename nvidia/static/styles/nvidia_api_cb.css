@@ -440,6 +440,7 @@ main {
   display: none;
   min-height: 550px;
   height: 550px;
+  padding: 5px;
   overflow-y: auto;
   resize: vertical;
 }
