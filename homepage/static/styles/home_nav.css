@@ -112,3 +112,33 @@ header {
 .ai-selection a:active {
   background-color: #1abc9c;
 }
+
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  #home-page {
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+
+  .left-aside {
+    width: 250px;
+    height: fit-content;
+    position: fixed; 
+    top: 60px; 
+    left: 0;
+    height: calc(100vh - 60px);
+    transition: left 0.3s ease;
+    /* transform: translateX(-250px); */
+    left: -250px;
+    z-index: 999;
+  }
+
+  .left-aside.menu-slide {
+    /* transform: translateX(0); */
+    left: 0;
+  }
+}
