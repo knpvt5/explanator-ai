@@ -38,21 +38,21 @@
         <ul>
           <li>
             <i class="fa-solid fa-robot"></i> CHATBOTS
-            <ul class="ai-type chatbots">
-              <li><a href="{% url 'nvidia_api_cb' %}">NVIDIA API CHATBOT</a></li>
-              <li><a href="{% url 'gemini_api_cb' %}">GEMINI API CHATBOT</a></li>
+            <ul class="ai-types chatbots">
+              <li><a href="#nvidia_api_cb">NVIDIA API CHATBOT</a></li>
+              <li><a href="#gemini_api_cb">GEMINI API CHATBOT</a></li>
             </ul>
           </li>
           <li>
             <i class="fa-regular fa-folder-open"></i> DOCS ANALYZER
-            <ul class="ai-type docs-analyzers">
+            <ul class="ai-types docs-analyzers">
               <li><a href="{% url 'nvidia_docs_analyzer' %}">NVIDIA DOCS ANALYZER</a></li>
               <li><a href="{% url 'gemini_docs_analyzer' %}">GEMINI DOCS ANALYZER</a></li>
             </ul>
           </li>
           <li>
             <i class="fa-solid fa-database"></i> DATASETS
-            <ul class="ai-type datasets">
+            <ul class="ai-types datasets">
               <li><a href="{% url 'nvidia_api_prompt_generator_ds' %}">NVIDIA PROMPT GENERATOR</a></li>
               <li><a href="{% url 'gemini_api_prompt_generator_ds' %}">GEMINI PROMPT GENERATOR</a></li>
               <li><a href="{% url 'non_tokenized_datasets' %}">NON TOKENIZED DATASET</a></li>
@@ -61,7 +61,7 @@
           </li>
           <li>
             <i class="fa-solid fa-microchip"></i> FINE-TUNING
-            <ul class="ai-type fine-tuning">
+            <ul class="ai-types fine-tuning">
               <li><a href="{% url 'fine_tuning_via_CPU' %}">FINE TUNING VIA CPU</a></li>
               <li><a href="{% url 'fine_tuning_via_CUDA' %}">FINE TUNING VIA CUDA</a></li>
               <li><a href="{% url 'fine_tuning_via_TPU' %}">FINE TUNING VIA TPU</a></li>
@@ -69,7 +69,7 @@
           </li>
           <li>
             <i class="fa-solid fa-laptop"></i> LOCAL MODELS
-            <ul class="ai-type local-models">
+            <ul class="ai-types local-models">
               <li><a href="{% url 'alibaba' %}">ALIBABA</a></li>
               <li><a href="{% url 'meta' %}">META</a></li>
               <li><a href="{% url 'openai' %}">OPENAI</a></li>
