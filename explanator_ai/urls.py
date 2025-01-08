@@ -27,4 +27,5 @@ urlpatterns = [
     path('gemini/', include('gemini.urls')),
     path('ai/', include('ai.urls')),
     path('data_sets/', include('data_sets.urls')),
+    
 ]

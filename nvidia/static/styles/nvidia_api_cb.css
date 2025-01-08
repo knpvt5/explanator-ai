@@ -44,7 +44,7 @@ main {
 }
 .expand-collapse .chat-box{
   height: 90vh;
-  /* width: 95%; */
+  width: 98%;
   margin: 0 auto;
   /* margin-top: -150px; */
 }

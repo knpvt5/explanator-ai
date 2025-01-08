@@ -21,15 +21,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
 
     <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static 'styles/home.css' %}" />
-    {% comment %}
     <link rel="stylesheet" href="{% static 'styles/home_nav.css' %}" />
-    {% endcomment %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}" />
     <title>Explanator AI</title>
   </head>
   <body id="home-page">
     <header>
-      <button type="button" class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+      <button type="button" aria-label="Toggle menu" class="menu-btn"><i class="fa-solid fa-bars"></i></button>
       <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
     </header>
 
@@ -39,8 +37,8 @@
           <li>
             <i class="fa-solid fa-robot"></i> CHATBOTS
             <ul class="ai-types chatbots">
-              <li><a href="#nvidia_api_cb">NVIDIA API CHATBOT</a></li>
-              <li><a href="#gemini_api_cb">GEMINI API CHATBOT</a></li>
+              <li><a href="#nvidia-api-cb" data-api="nvidia">NVIDIA API CHATBOT</a></li>
+              <li><a href="#gemini-api-cb" data-api="gemini">GEMINI API CHATBOT</a></li>
             </ul>
           </li>
           <li>
@@ -176,7 +174,7 @@
 
     <footer>{% include 'includes/footer.html' %}</footer>
 
-    <script src="{% static 'scripts/home.js' %}"></script>
+    <script class="dynamic-js" src="{% static 'scripts/home.js' %}"></script>
     <script src="{% static 'scripts/home_nav.js' %}"></script>
   </body>
 </html>
