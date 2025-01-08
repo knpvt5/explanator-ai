@@ -210,6 +210,10 @@ main {
   display: block; 
 }
 
+.code-box .ai-options:hover {
+  display: block; 
+}
+
 .code-box .ai-options li {
   margin: 5px 0;
 }
