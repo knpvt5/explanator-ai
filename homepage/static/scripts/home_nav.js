@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateUrl = (aiApi, aiTypeValue) => {
         const url = new URL(window.location);
         const urlParams = url.searchParams;
+        urlParams.set('ai', aiApi);
         urlParams.set('aiType', aiTypeValue);
         const urlParameters = urlParams.toString();
         history.pushState({ aiApi: aiApi }, '', `?${urlParameters}`);
@@ -143,7 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('popstate', (event) => {
         const url = new URL(window.location);
         const urlParams = url.searchParams;
-        const aiApi = event.state?.aiApi || "";
+        // const aiApi = event.state?.aiApi || "";
+        const aiApi = urlParams.get('ai');
         const aiTypeValue = urlParams.get('aiType');
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
@@ -154,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // initial load of this page
     const InitialLoad = () => {
-        const { aiApi = "" } = window.history.state || {};
+        // const { aiApi = "" } = window.history.state || {};
+        const aiApi = new URL(window.location).searchParams.get('ai');
         const aiTypeValue = new URL(window.location).searchParams.get('aiType');
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
