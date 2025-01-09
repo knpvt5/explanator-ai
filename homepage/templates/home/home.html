@@ -60,16 +60,16 @@
           <li>
             <i class="fa-solid fa-microchip"></i> FINE-TUNING
             <ul class="ai-types fine-tuning">
-              <li><a href="{% url 'fine_tuning_via_CPU' %}">FINE TUNING VIA CPU</a></li>
-              <li><a href="{% url 'fine_tuning_via_CUDA' %}">FINE TUNING VIA CUDA</a></li>
-              <li><a href="{% url 'fine_tuning_via_TPU' %}">FINE TUNING VIA TPU</a></li>
+              <li><a href="#fine-tuning-via-CPU" data-api="ai">FINE TUNING VIA CPU</a></li>
+              <li><a href="#fine-tuning-via-CUDA" data-api="ai">FINE TUNING VIA CUDA</a></li>
+              <li><a href="#fine-tuning-via-TPU" data-api="ai">FINE TUNING VIA TPU</a></li>
             </ul>
           </li>
           <li>
             <i class="fa-solid fa-laptop"></i> LOCAL MODELS
             <ul class="ai-types local-models">
-              <li><a href="{% url 'alibaba' %}">ALIBABA</a></li>
-              <li><a href="{% url 'meta' %}">META</a></li>
+              <li><a href="#alibaba" data-api="local_models">ALIBABA</a></li>
+              <li><a href="#meta" data-api="local_models">META</a></li>
               <li><a href="{% url 'openai' %}">OPENAI</a></li>
               <li><a href="{% url 'google' %}">GOOGLE</a></li>
               <li><a href="{% url 'custom_models' %}">CUSTOM MODELS</a></li>
@@ -118,10 +118,10 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="ai-options ds">
-              <li><a href="{% url 'nvidia_api_prompt_generator_ds' %}">NVIDIA PROMPT GENERATOR</a></li>
-              <li><a href="{% url 'gemini_api_prompt_generator_ds' %}">GEMINI PROMPT GENERATOR</a></li>
-              <li><a href="{% url 'non_tokenized_datasets' %}">NON TOKENIZED DATASET</a></li>
-              <li><a href="{% url 'tokenized_datasets' %}">TOKENIZED DATASET</a></li>
+              <li><a href="#nvidia-api-prompt-generator-ds" data-api="data_sets">NVIDIA PROMPT GENERATOR</a></li>
+              <li><a href="#gemini-api-prompt-generator-ds" data-api="data_sets">GEMINI PROMPT GENERATOR</a></li>
+              <li><a href="#non-tokenized-datasets" data-api="data_sets">NON TOKENIZED DATASET</a></li>
+              <li><a href="#tokenized-datasets" data-api="data_sets">TOKENIZED DATASET</a></li>
             </ul>
           </div>
           <textarea id="python-code-editor" style="display: none"></textarea>
