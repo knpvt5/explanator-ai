@@ -5,7 +5,6 @@ urlpatterns = [
     # path('', views.ai, name='ai'),
     # path('ai/', views.ai, name='ai'), 
                 
-    path('fine-tuning/', views.fine_tuning, name='fine_tuning'),
 
     path('fine-tuning-via-CPU/', views.fine_tuning_via_CPU, name='fine_tuning_via_CPU'), 
     
