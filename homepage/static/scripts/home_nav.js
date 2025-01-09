@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 // Parsing the fetched HTML
                 const parser = new DOMParser();
-                const doc = parser.parseFromString(data, "text/html");
+                const fetchedDocument = parser.parseFromString(data, "text/html");
 
                 document.querySelectorAll(".dynamic-css, .dynamic-js").forEach(dynamicCSSandJS => dynamicCSSandJS.remove());
 
                 // Load CSS
-                doc.querySelectorAll("link[rel='stylesheet']").forEach(newLink => {
+                fetchedDocument.querySelectorAll("link[rel='stylesheet']").forEach(newLink => {
                     if (!document.querySelector(`link[href="${newLink.href}"]`)) {
                         const newLinkElement = document.createElement("link");
                         newLinkElement.rel = "stylesheet";
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 // Load JS
-                doc.querySelectorAll("script[src]").forEach(newScript => {
+                fetchedDocument.querySelectorAll("script[src]").forEach(newScript => {
 
                     const newSrc = newScript.src.split("?")[0];
                     const oldScriptElements = document.querySelectorAll(`script[src^="${newSrc}"]`);
@@ -110,14 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         newScriptElement.defer = true;
                     }
                     document.body.appendChild(newScriptElement);
-                    console.log("new script added", newScriptElement);
                 });
 
                 // Update main content
-                const fetchedContent = doc.querySelector("#main-content");
+                const fetchedContent = fetchedDocument.querySelector("#main-content");
                 if (fetchedContent) {
                     mainContent.innerHTML = fetchedContent.innerHTML;
-                    document.title = doc.title;
+                    document.title = fetchedDocument.title;
                 } else {
                     console.error("Main content not found in the fetched HTML.");
                 }
@@ -126,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error:", error);
             })
             .finally(() => {
-                console.log("calling finally");
+                console.log("called finally");
             })
     };
 
@@ -136,9 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const urlParams = url.searchParams;
         urlParams.set('aiType', aiTypeValue);
         const urlParameters = urlParams.toString();
-        console.log("url params", urlParameters);
         history.pushState({ aiApi: aiApi }, '', `?${urlParameters}`);
-        console.log(history.state);
     };
 
 
