@@ -1,6 +1,6 @@
 let pythonEditor;
 
-// document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => { });
 // userInputTextarea and CodeMirror setup
 const textarea = document.getElementById("user-input");
 
@@ -91,7 +91,6 @@ if (inputFile) {
     }, 5000);
 }
 
-// });
 
 function fileInputNameChange() {
     try {

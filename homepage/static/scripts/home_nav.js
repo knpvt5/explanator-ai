@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    //  initial load of this page
+    // initial load of this page
     const checkInitialLoad = () => {
         const { aiApi = "" } = window.history.state || {};
         const aiTypeValue = new URL(window.location).searchParams.get('aiType');
