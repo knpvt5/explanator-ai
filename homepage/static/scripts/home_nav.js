@@ -66,8 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data, "text/html");
 
-                document.querySelectorAll(".dynamic-css").forEach(dynamicCss => dynamicCss.remove());
-                document.querySelectorAll(".dynamic-js").forEach(dynamicJs => dynamicJs.remove());
+                document.querySelectorAll(".dynamic-css, .dynamic-js").forEach(dynamicCSSandJS => dynamicCSSandJS.remove());
 
                 // Load CSS
                 doc.querySelectorAll("link[rel='stylesheet']").forEach(newLink => {
@@ -82,11 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Load JS
                 doc.querySelectorAll("script[src]").forEach(newScript => {
-                    // Remove any existing script with the same base src
-                    /* document.querySelectorAll(`script[src^="${newScript.src}"]`).forEach(oldScript => {
-                        oldScript.parentNode.removeChild(oldScript);
-                        console.log("Removed old script:", oldScript.src);
-                    }); */
 
                     const newSrc = newScript.src.split("?")[0];
                     const oldScriptElements = document.querySelectorAll(`script[src^="${newSrc}"]`);
@@ -105,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         newScriptElement.defer = true;
                         newScriptElement.onload = () => {
                             console.log('Script loaded successfully!', newScript.src);
-                            // document.body.style.backgroundColor = "red";
                         };
                         newScriptElement.onerror = (e) => {
                             console.error('Failed to load script:', newScript.src, e);
@@ -149,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    // Handle browser back/forward
+    // Handling browser back/forward
     window.addEventListener('popstate', (event) => {
         const url = new URL(window.location);
         const urlParams = url.searchParams;
@@ -158,17 +151,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
         } else {
-            console.warn("Missing data in state or query parameters");
             window.location.reload();
         }
     });
 
-    const url = new URL(window.location);
-    const urlParams = url.searchParams;
-    const aiApiTest = window.history.state?.aiApi || "";
-    const aiTypeValueTest = urlParams.get('aiType');
-    if (aiApiTest && aiTypeValueTest) {
-        updateContent(aiApiTest, aiTypeValueTest)
-    }
+    //  initial load of this page
+    const checkInitialLoad = () => {
+        const { aiApi = "" } = window.history.state || {};
+        const aiTypeValue = new URL(window.location).searchParams.get('aiType');
+        if (aiApi && aiTypeValue) {
+            updateContent(aiApi, aiTypeValue);
+        }
+    };
+    checkInitialLoad();
 
 });
