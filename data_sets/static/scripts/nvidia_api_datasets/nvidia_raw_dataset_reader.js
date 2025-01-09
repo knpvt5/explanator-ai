@@ -169,12 +169,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     userInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-            suggestedQuestionBox.remove();
-            userInput.value = "";
-            localStorage.removeItem("nvidiaApiRawDsReader");
-            userInputTextareaAutoResize(chatBoxTextarea)
+            if (!userInput.value.trim()) {
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                sendMessage();
+                suggestedQuestionBox.remove();
+                userInput.value = "";
+                localStorage.removeItem("nvidiaApiRawDsReader");
+                userInputTextareaAutoResize(chatBoxTextarea)
+            }
         }
     });
 });

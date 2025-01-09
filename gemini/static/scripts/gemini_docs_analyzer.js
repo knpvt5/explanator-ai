@@ -1,179 +1,182 @@
 // document.addEventListener("DOMContentLoaded", () => { });
-    const chatBox = document.querySelector(".chat-box");
-    const messagesContainer = chatBox.querySelector(".chat-messages");
-    const chatBoxTextarea = document.querySelector(".chat-box textarea");
-    const userInput = document.getElementById("user-input");
-    const sendButton = document.getElementById("send-button");
-    const suggestedQuestionBox = document.querySelector(".suggested-question-box");
+const chatBox = document.querySelector(".chat-box");
+const messagesContainer = chatBox.querySelector(".chat-messages");
+const chatBoxTextarea = document.querySelector(".chat-box textarea");
+const userInput = document.getElementById("user-input");
+const sendButton = document.getElementById("send-button");
+const suggestedQuestionBox = document.querySelector(".suggested-question-box");
 
-    // Input event for textarea with user input
-    document.querySelectorAll(".suggested-question").forEach((question) => {
-        question.addEventListener("click", function () {
-            const questionText = this.textContent.trim();
+// Input event for textarea with user input
+document.querySelectorAll(".suggested-question").forEach((question) => {
+    question.addEventListener("click", function () {
+        const questionText = this.textContent.trim();
 
-            chatBoxTextarea.value = questionText;
-            // manual Trigger 
-            chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
-            sendButton.click();
-        });
-
-        // Enable/Disable send button based on input
-        userInput.addEventListener("input", () => {
-            sendButton.disabled = userInput.value.trim() === "";
-        });
+        chatBoxTextarea.value = questionText;
+        // manual Trigger 
+        chatBoxTextarea.dispatchEvent(new Event("input", { bubbles: true }));
+        sendButton.click();
     });
 
-    // auto scrolling of the msg container
-    let userIsAtBottom = true;
-
-    messagesContainer.addEventListener("scroll", () => {
-        userIsAtBottom = messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight - 10;
+    // Enable/Disable send button based on input
+    userInput.addEventListener("input", () => {
+        sendButton.disabled = userInput.value.trim() === "";
     });
-    function messagesContainerAutoScroll() {
-        if (userIsAtBottom) {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+});
+
+// auto scrolling of the msg container
+let userIsAtBottom = true;
+
+messagesContainer.addEventListener("scroll", () => {
+    userIsAtBottom = messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight - 10;
+});
+function messagesContainerAutoScroll() {
+    if (userIsAtBottom) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+}
+
+function userInputTextareaAutoResize(chatBoxTextarea) {
+    if (!chatBoxTextarea) return;
+    chatBoxTextarea.style.height = "auto";
+    chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
+}
+
+// Storing and getting from local storage
+userInput.addEventListener("input", (e) => {
+    localStorage.setItem("geminiDocsAnalyzerTextInput", JSON.stringify(e.target.value));
+    userInputTextareaAutoResize(chatBoxTextarea);
+});
+const geminiDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("geminiDocsAnalyzerTextInput"));
+if (geminiDocsAnalyzerTextInput) {
+    userInput.value = geminiDocsAnalyzerTextInput;
+    userInputTextareaAutoResize(chatBoxTextarea);
+}
+// Initial send button state based on input
+sendButton.disabled = !userInput.value.trim();
+
+
+const backendAPI = "/gemini/gemini-docs-analyzer-api/";
+
+const appendMessage = (sender, message) => {
+    const messageBox = document.createElement("div");
+    messageBox.classList.add("chat-message", sender);
+    messageBox.textContent = message;
+    messagesContainer.appendChild(messageBox);
+    messagesContainerAutoScroll();
+    return messageBox;
+};
+
+const sendMessage = async () => {
+    const user_input = userInput.value.trim();
+    if (!user_input) return;
+
+    // Add user message
+    appendMessage("user", user_input);
+
+    // Create bot message container
+    const botMessageBox = appendMessage("bot", "Generating...", true); // Note the 'true' to enable markdown parsing
+
+    // Disable input during processing
+    userInput.disabled = true;
+    sendButton.disabled = true;
+
+    try {
+        const csrfToken = getCookie("csrftoken");
+        const response = await fetch(backendAPI, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+            body: JSON.stringify({
+                userInput: user_input,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    }
 
-    function userInputTextareaAutoResize(chatBoxTextarea) {
-        if (!chatBoxTextarea) return;
-        chatBoxTextarea.style.height = "auto";
-        chatBoxTextarea.style.height = chatBoxTextarea.scrollHeight + "px";
-    }
+        // Handle streaming response
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let responseText = "";
 
-    // Storing and getting from local storage
-    userInput.addEventListener("input", (e) => {
-        localStorage.setItem("geminiDocsAnalyzerTextInput", JSON.stringify(e.target.value));
-        userInputTextareaAutoResize(chatBoxTextarea);
-    });
-    const geminiDocsAnalyzerTextInput = JSON.parse(localStorage.getItem("geminiDocsAnalyzerTextInput"));
-    if (geminiDocsAnalyzerTextInput) {
-        userInput.value = geminiDocsAnalyzerTextInput;
-        userInputTextareaAutoResize(chatBoxTextarea);
-    }
-    // Initial send button state based on input
-    sendButton.disabled = !userInput.value.trim();
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
 
-    const backendAPI = "/gemini/gemini-docs-analyzer-api/";
-
-    const appendMessage = (sender, message) => {
-        const messageBox = document.createElement("div");
-        messageBox.classList.add("chat-message", sender);
-        messageBox.textContent = message;
-        messagesContainer.appendChild(messageBox);
-        messagesContainerAutoScroll();
-        return messageBox;
-    };
-
-    const sendMessage = async () => {
-        const user_input = userInput.value.trim();
-        if (!user_input) return;
-
-        // Add user message
-        appendMessage("user", user_input);
-
-        // Create bot message container
-        const botMessageBox = appendMessage("bot", "Generating...", true); // Note the 'true' to enable markdown parsing
-
-        // Disable input during processing
-        userInput.disabled = true;
-        sendButton.disabled = true;
-
-        try {
-            const csrfToken = getCookie("csrftoken");
-            const response = await fetch(backendAPI, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": csrfToken,
-                },
-                body: JSON.stringify({
-                    userInput: user_input,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            // Handle streaming response
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let responseText = "";
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                const chunk = decoder.decode(value);
-                const lines = chunk.split("\n");
-
-                for (const line of lines) {
-                    if (line.startsWith("data: ")) {
-                        try {
-                            const data = JSON.parse(line.slice(5));
-                            if (data.chunk) {
-                                responseText += data.chunk;
-                                // Use marked to parse and render markdown in real-time
-                                botMessageBox.innerHTML = marked.parse(responseText);
-                                messagesContainerAutoScroll();
-                            }
-                        } catch (e) {
-                            console.error("Error parsing chunk:", e);
+            for (const line of lines) {
+                if (line.startsWith("data: ")) {
+                    try {
+                        const data = JSON.parse(line.slice(5));
+                        if (data.chunk) {
+                            responseText += data.chunk;
+                            // Use marked to parse and render markdown in real-time
+                            botMessageBox.innerHTML = marked.parse(responseText);
+                            messagesContainerAutoScroll();
                         }
+                    } catch (e) {
+                        console.error("Error parsing chunk:", e);
                     }
                 }
             }
-        } catch (error) {
-            console.error("Error:", error);
-            botMessageBox.textContent = `Error: ${error.message}`;
-        } finally {
-            userInput.disabled = false;
-            sendButton.disabled = false;
-            userInput.value = "";
-            userInput.focus();
-            if (window.innerWidth < 768) {
-                userInput.blur();
-            }
         }
-    };
-
-    const getCookie = (name) => {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === name + "=") {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    };
-
-
-    sendButton.addEventListener("click", () => {
-        sendMessage();
-        suggestedQuestionBox.remove();
+    } catch (error) {
+        console.error("Error:", error);
+        botMessageBox.textContent = `Error: ${error.message}`;
+    } finally {
+        userInput.disabled = false;
+        sendButton.disabled = false;
         userInput.value = "";
-        localStorage.removeItem("geminiDocsAnalyzerTextInput");
-        userInputTextareaAutoResize(chatBoxTextarea);
-    });
+        userInput.focus();
+        if (window.innerWidth < 768) {
+            userInput.blur();
+        }
+    }
+};
 
-    userInput.addEventListener("keydown", (e) => {
-        // Handle Enter key without Shift 
-        if (e.key === "Enter" && !e.shiftKey) {
+const getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+};
+
+
+sendButton.addEventListener("click", () => {
+    sendMessage();
+    suggestedQuestionBox.remove();
+    userInput.value = "";
+    localStorage.removeItem("geminiDocsAnalyzerTextInput");
+    userInputTextareaAutoResize(chatBoxTextarea);
+});
+
+userInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        if (!userInput.value.trim()) {
+            e.preventDefault();
+        } else {
             e.preventDefault();
             sendMessage();
             suggestedQuestionBox.remove();
             userInput.value = "";
             localStorage.removeItem("geminiDocsAnalyzerTextInput");
-            userInputTextareaAutoResize(chatBoxTextarea);
+            userInputTextareaAutoResize(chatBoxTextarea)
         }
-    });
+    }
+});
 
 
 
