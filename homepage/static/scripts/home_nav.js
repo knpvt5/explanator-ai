@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mainContent = document.querySelector("#main-content");
 
-    document.querySelectorAll(".ai-types li a").forEach((aiType) => {
+    document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) => {
         const aiApi = aiType.dataset.api;
         const aiTypeValue = aiType.getAttribute("href").replace("#", "");
 
@@ -153,13 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // initial load of this page
-    const checkInitialLoad = () => {
+    const InitialLoad = () => {
         const { aiApi = "" } = window.history.state || {};
         const aiTypeValue = new URL(window.location).searchParams.get('aiType');
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
         }
     };
-    checkInitialLoad();
+    InitialLoad();
 
 });
