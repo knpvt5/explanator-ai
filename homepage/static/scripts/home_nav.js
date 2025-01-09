@@ -36,22 +36,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainContent = document.querySelector("#main-content");
 
     document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) => {
-        const aiApi = aiType.dataset.api;
+        const aiApi = aiType.dataset.api || "";
         const aiTypeValue = aiType.getAttribute("href").replace("#", "");
 
+        // Click event for each AI type
         aiType.addEventListener("click", (e) => {
             e.preventDefault();
             updateContent(aiApi, aiTypeValue);
             updateUrl(aiApi, aiTypeValue);
+            setActiveNav(aiTypeValue);
 
-            // menu button closing on click
+            // Mobile menu closing
             if (window.innerWidth < 480) {
                 leftAside.classList.toggle("menu-slide");
                 GlobalFunction.updateMenuButtonIcon();
             }
-
         });
     });
+
+    // Function to handle active navigation state
+    function setActiveNav(currentAiTypeValue) {
+        document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) => {
+            const aiTypeValue = aiType.getAttribute("href").replace("#", "");
+            if (aiTypeValue === currentAiTypeValue) {
+                aiType.classList.add("active");
+            } else {
+                aiType.classList.remove("active");
+            }
+        });
+    }
+    
+    //active navigation state on page load
+    const activeAiType = new URL(window.location.href).searchParams.get("aiType");
+    if (activeAiType) {
+        setActiveNav(activeAiType);
+    }
+
 
 
     function updateContent(aiApi, aiTypeValue) {

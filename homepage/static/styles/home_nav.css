@@ -109,11 +109,9 @@ header {
   background-color: #4a5d72;
 }
 
-.ai-selection .ai-types li a:active,
 .ai-selection .ai-types li a.active {
   background-color: #1abc9c;
 }
-
 
 
 /* Mobile styles */
