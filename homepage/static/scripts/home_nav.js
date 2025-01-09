@@ -62,8 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.text();
             })
             .then(data => {
-                // console.log(data);
-                // Parse the fetched HTML
+                // Parsing the fetched HTML
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data, "text/html");
 
@@ -171,105 +170,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (aiApiTest && aiTypeValueTest) {
         updateContent(aiApiTest, aiTypeValueTest)
     }
-
-    /* const urlParams = new URLSearchParams(window.location.search);
-       const aiTypeValueTest = urlParams.get('aiType');
-       console.log("url params", aiTypeValue);
-       console.log(history.state);
-       updateContent(aiApi, aiTypeValueTest); */
-
-    /*  fetch('/')
-         .then(response => {
-             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-             return response.text();
-         })
-         .then(data => {
-             // console.log(data);
-             const parser = new DOMParser();
-             const doc = parser.parseFromString(data, 'text/html')
-             const mainContent = doc.querySelector('#main-content')
-             console.log(mainContent.innerHTML);
-         }) */
-
-
-
-    /*  window.addEventListener('popstate', () => {
-         // updateContent(window.location);
-         const aiTypeValue = window.location.pathname.replace("/", "");
-         console.log(aiTypeValue);
-         const aiApi = window.history.state.api;
-         console.log(aiApi);
-         updateContent(aiApi, aiTypeValue);
-         console.log("called updateContent");
- 
-     }); */
-
-    /* window.addEventListener('load', () => {
-       const aiTypeValue = window.location.pathname.replace("/", "");
-       const aiApi = window.history.state?.api; 
-       if (aiApi) {
-           updateContent(aiApi, aiTypeValue);
-       }
-   }); */
-
-    //    const originalSrc = newScript.src.replace(/\?.*$/, "");
-
-    /* const originalSrc = newScript.src.split("?")[0];
-    const oldScriptElements = document.querySelectorAll(`script[src^="${originalSrc}"]`);
-    oldScriptElements.forEach(oldScript => {
-        oldScript.parentNode.removeChild(oldScript);
-        console.log("Removed old script:", oldScript.src);
-    }); */
-
-    /* const url = new URL(window.location.origin);
-    url.pathname = `${aiTypeValue}`.replace(/\/+/g, '/');
-    if (window.location.pathname !== url.pathname) {
-        window.history.pushState({ api: aiApi }, '', url);
-
-    } else {
-        window.history.replaceState({ api: aiApi }, '', url);
-    } */
-
-
-
-    // -------------------------------------------------------------
-
-    /* document.querySelectorAll("script").forEach(script => {
-        const scriptValue = script.getAttribute("src");
-        // const onlyJsName = scriptValue.split('/').pop();
-        // console.log("scripts value is: ",scriptValue);
-
-        if (scriptValue === "home.js") {
-            console.log("home.js script found");
-
-        } else {
-            console.log("home.js script not found");
-            // console.log(script.src);
-        }
-    }); */
-
-
-    /* document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-        const linkValue = link.getAttribute("href");
-        // const onlyCssName = linkValue.split('/').pop();
-        // console.log("link value is: ",linkValue);
-
-        if (linkValue === "home.css") {
-            console.log("home.css link found");
-            // link.remove();
-
-        } else {
-            console.log("home.css link not found");
-            // console.log(link.href);
-        }
-    }); */
-
-    /* const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams);
-    const categoryFromUrl = urlParams.get('category') || 'all';
-    const pageFromUrl = parseInt(urlParams.get('page')) || 1;
-    displayPostsByCategory(categoryFromUrl, pageFromUrl); */
-
-    // ------------------------------------------------------------
 
 });
