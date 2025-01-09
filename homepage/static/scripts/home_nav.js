@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // newScriptElement.src = newScript.src;
                         newScriptElement.className = "dynamic-js";
                         newScriptElement.type = "module";
-                        newScriptElement.defer = true;
+                        // newScriptElement.defer = true;
                         newScriptElement.onload = () => {
                             console.log('Script loaded successfully!', newScript.src);
                         };

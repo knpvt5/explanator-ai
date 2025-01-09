@@ -5,9 +5,7 @@ from .view import gemini_api_datasets_views
 
 urlpatterns = [
     # path('', views.data_sets, name='data_sets'),
-    
-    path('datasets/', views.datasets, name='datasets'), 
-    
+        
     path('tokenized-datasets/', views.tokenized_datasets, name='tokenized_datasets'), 
     
     path('non-tokenized-datasets/', views.non_tokenized_datasets, name='non_tokenized_datasets'),
