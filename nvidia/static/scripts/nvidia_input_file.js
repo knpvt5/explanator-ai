@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () { });
     const inputFile = document.getElementById("input_file");
     const fileNameSpan = document.getElementById("file-name");
     const removeFile = document.getElementById("remove-file");
@@ -103,4 +103,3 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         removeUploadedFiles();
     }
-});

@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => { });
     const inputFile = document.getElementById("input_file");
     const fileNameSpan = document.getElementById("file-name");
     const removeFile = document.getElementById("remove-file");
 
     if (!inputFile || !fileNameSpan || !removeFile) {
         console.error("Required DOM elements not found.", error);
-        return;
     }
 
     const backendAPI = "/gemini/gemini-docs-analyzer-api/";
@@ -113,4 +112,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }else{
         removeUploadedFiles();
     }
-});
+

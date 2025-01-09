@@ -1,71 +1,11 @@
-/* Add your CSS styles here */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #070034;
-}
 
-header {
-  background-color: #000;
-  color: #fff;
-  padding: 5px 10px;
-}
-header h1 {
-  cursor: pointer;
-}
 
-#brand-logo {
-  height: 60px;
-  width: auto;
-  padding: 15px 10px;
-  /* margin: 0 auto; */
-  /* border-radius: 10px; */
-  display: block;
-}
-
-@media (max-width: 480px) {
-  #brand-logo {
-    height: 50px;
-    width: auto;
-    padding: 0;
-    margin: 0 auto;
-    display: block;
-  }
-}
-
-nav {
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  /* justify-content: center; */
-  justify-content: start;
-  overflow-x: auto;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  padding: 15px 20px;
-  transition: 0.3s ease;
-  white-space: nowrap;
-}
-
-nav a:not(:last-child) {
-  border-right: 1px solid #fff;
-}
-
-nav a:hover {
-  background-color: #555;
-}
-
-.content {
+/* .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   padding: 20px;
-}
+} */
 .expand-collapse .content {
   grid-template-columns: 1fr;
 }
@@ -82,10 +22,10 @@ nav a:hover {
   resize: vertical;
 }
 .expand-collapse .chat-box{
-  height: 93vh;
-  width: 95%;
+  height: 90vh;
+  width: 98%;
   margin: 0 auto;
-  margin-top: -150px;
+  /* margin-top: -150px; */
 }
 
 .chat-box-header{
@@ -518,54 +458,7 @@ nav a:hover {
 }
 
 
-#markdown-preview {
-  min-height: 550px;
-  height: auto;
-  border: 1px solid #ccc;
-  color: #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 15px;
-  background: #333;
-  overflow-y: auto;
-  resize: vertical;
-}
-
-/* Markdown Preview Styles */
-#markdown-preview h1 {
-  font-size: 20px;
-  color: #4caf50;
-  margin-bottom: 1em;
-  text-align: center;
-  text-decoration: underline;
-}
-
-#markdown-preview h2 {
-  font-size: 16px;
-  color: #45a049;
-  margin: 0.8em 0;
-}
-
-#markdown-preview ul {
-  margin-left: 20px;
-}
-
-#markdown-preview li {
-  margin: 0.5em 0;
-  margin-left: -25px;
-}
-
-#markdown-preview code {
-  background: #242430;
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-
 @media (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr;
-    padding: 10px;
-  }
   .suggested-question-box {
     display: block;
   }

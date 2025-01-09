@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => { });
     const chatBox = document.querySelector(".chat-box");
     const messagesContainer = chatBox.querySelector(".chat-messages");
     const chatBoxTextarea = document.querySelector(".chat-box textarea");
@@ -175,5 +175,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-});
+
 

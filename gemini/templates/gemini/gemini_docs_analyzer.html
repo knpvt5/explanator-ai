@@ -5,34 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- CodeMirror CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
-
-    <!-- CodeMirror JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/edit/closebrackets.min.js"></script>
-
-    <!-- parsing markdown lib-->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />
-
-    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/styles/gemini_docs_analyzer.css' %}" />
     <title>GEMINI DOCUMENT ANALYZER</title>
   </head>
   <body>
-    <header>
-      <a href="{% url 'home' %}"><img id="brand-logo" src="{% static 'assets/logo/eai.webp' %}" alt="brand-logo" /></a>
-    </header>
-    <nav>
-      <a href="{% url 'nvidia_docs_analyzer' %}">NVIDIA DOCS ANALYZER</a>
-      <a href="{% url 'gemini_docs_analyzer' %}">GEMINI DOCS ANALYZER</a>
-    </nav>
-    <main>
+    <main id="main-content">
       <div class="content">
         <div class="chat-box">
           <div class="chat-box-header">
@@ -75,12 +52,13 @@
       </div>
 
       <div id="markdown-preview">
-        <h3>DOCUMENTATION</h3>
+        <div class="view-docs">
+          <h3>DOCUMENTATION</h3>
+          <button type="button" class="view-docs-btn"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
         <div id="markdown-data-container" data-markdown-url="{% static 'markdown/docs_analyzer.md' %}"></div>
       </div>
     </main>
-
-    <footer>{% include 'includes/footer.html' %}</footer>
 
     <script src="{% static 'scripts/gemini.js' %}"></script>
     <script src="{% static 'scripts/gemini_docs_analyzer.js' %}"></script>
