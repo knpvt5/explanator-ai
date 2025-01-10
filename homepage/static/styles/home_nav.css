@@ -111,6 +111,7 @@ header {
 
 .ai-selection .ai-types li a.active {
   background-color: #1abc9c;
+  font-weight: bold;
 }
 
 

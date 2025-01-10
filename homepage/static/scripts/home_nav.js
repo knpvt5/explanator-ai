@@ -65,13 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    
-    //active navigation state on page load
-    const activeAiType = new URL(window.location.href).searchParams.get("aiType");
-    if (activeAiType) {
-        setActiveNav(activeAiType);
-    }
-
 
 
     function updateContent(aiApi, aiTypeValue) {
@@ -156,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         urlParams.set('ai', aiApi);
         urlParams.set('aiType', aiTypeValue);
         const urlParameters = urlParams.toString();
-        history.pushState({ aiApi: aiApi }, '', `?${urlParameters}`);
+        history.pushState({}, '', `?${urlParameters}`);
     };
 
 
@@ -169,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const aiTypeValue = urlParams.get('aiType');
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
+            setActiveNav(aiTypeValue);
         } else {
             window.location.reload();
         }
@@ -181,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const aiTypeValue = new URL(window.location).searchParams.get('aiType');
         if (aiApi && aiTypeValue) {
             updateContent(aiApi, aiTypeValue);
+            setActiveNav(aiTypeValue);
         }
     };
     InitialLoad();
