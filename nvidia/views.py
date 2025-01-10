@@ -29,14 +29,14 @@ except Exception as e:
     return render(request, 'nvidia/nvidia.html') """
 
 def nvidia_api_cb(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'nvidia/nvidia_api_cb.html')
     else:
         return redirect('/?ai=nvidia&aiType=nvidia-api-cb')
 
 
 def nvidia_docs_analyzer(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'nvidia/nvidia_docs_analyzer.html')
     else:
         return redirect('/?ai=nvidia&aiType=nvidia-docs-analyzer')

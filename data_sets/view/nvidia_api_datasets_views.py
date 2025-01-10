@@ -30,14 +30,14 @@ except Exception as e:
 
 #views here.
 def nvidia_api_prompt_generator_ds(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'data_sets/nvidia_api_datasets/nvidia_api_prompt_generator_ds.html')
     else:
         return redirect('/?ai=nvidia&aiType=nvidia-api-prompt-generator-ds')
     
 
 def nvidia_raw_dataset_reader(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'data_sets/nvidia_api_datasets/nvidia_raw_dataset_reader.html')
     else:
         return redirect('/?ai=nvidia&aiType=nvidia-raw-dataset-reader')

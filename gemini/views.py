@@ -24,13 +24,13 @@ model = genai.GenerativeModel("gemini-1.5-flash")
     return render(request, 'gemini/gemini.html') """
 
 def gemini_api_cb(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'gemini/gemini_api_cb.html')
     else:
         return redirect('/?ai=gemini&aiType=gemini-api-cb')
 
 def gemini_docs_analyzer(request):
-    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+    if request.headers.get('API-request-from') == 'homeNavFetch':
         return render(request, 'gemini/gemini_docs_analyzer.html')
     else:
         return redirect('/?ai=gemini&aiType=gemini-docs-analyzer')

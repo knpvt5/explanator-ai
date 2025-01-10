@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`${aiApi}/${aiTypeValue}`, {
             method: 'GET',
             headers: {
-                'X-Requested-With': 'homeNavFetch', 
+                'API-request-from': 'homeNavFetch', 
             },
         })
             .then(response => {
