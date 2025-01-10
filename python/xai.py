@@ -1,5 +1,9 @@
 import os
 from openai import OpenAI
+from dotenv import load_dotenv 
+
+load_dotenv(override=True)
+# load_dotenv()
 
 XAI_API_KEY = os.getenv("XAI_API_KEY")
 client = OpenAI(
@@ -8,7 +12,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-    model="grok-2-latest",
+    model="grok-2-vision-1212",
     messages=[
         {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
         {"role": "user", "content": "What is the meaning of life, the universe, and everything?"},
