@@ -6,6 +6,14 @@ urlpatterns = [
     # path('ai/', views.ai, name='ai'), 
                 
 
+    path('about-us/', views.about_us, name='about_us'),
+    
+    path('contact-us/', views.contact_us, name='contact_us'),
+    
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    
+    path('terms-of-use/', views.terms_of_use, name='terms_of_use'),
+     
     path('fine-tuning-via-CPU/', views.fine_tuning_via_CPU, name='fine_tuning_via_CPU'), 
     
     path('fine-tuning-via-CUDA/', views.fine_tuning_via_CUDA, name='fine_tuning_via_CUDA'),

@@ -3,6 +3,18 @@ from django.shortcuts import render
 """ def ai(request):
     return render(request, 'ai/ai.html') """
 
+def about_us(request):
+    return render(request, 'ai/pages/about_us.html')
+
+def contact_us(request):
+    return render(request, 'ai/pages/contact_us.html')
+
+def privacy_policy(request):
+    return render(request, 'ai/pages/privacy_policy.html')
+
+def terms_of_use(request):
+    return render(request, 'ai/pages/terms_of_use.html')
+
 def fine_tuning_via_CPU(request):
     return render(request, 'ai/fine_tuning/fine_tuning_via_CPU.html')
 

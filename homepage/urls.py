@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('', views.home, name='home'),
     
-
+    # path('nvidia-api-cb/', views.nvidia_api_cb, name='nvidia_api_cb'), 
+        
 ]

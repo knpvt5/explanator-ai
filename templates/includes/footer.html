@@ -3,21 +3,30 @@
     <div class="footer-top">
       <div class="col one">
         <p>About Us</p>
-        <li><a href="/about/">About Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+        <li>
+          <a href="{% url 'about_us' %}">About Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </li>
       </div>
       <div class="col two">
-      <p>Support</p>
-        <li><a href="/contact/">Contact <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+        <p>Support</p>
+        <li>
+          <a href="{% url 'contact_us' %}">Contact Us<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </li>
       </div>
       <div class="col three">
-      <p>Privacy Policy</p>
-        <li><a href="/privacy-policy/">Privacy Policy <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+        <p>Privacy Policy</p>
+        <li>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </li>
       </div>
       <div class="col four">
-      <p>Terms of Service</p>
-        <li><a href="/terms/">Terms of Service <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+        <p>Terms of Use</p>
+        <li>
+          <a href="{% url 'terms_of_use' %}">Terms of Use <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </li>
       </div>
     </div>
+
     <div class="footer-vcenter">
       <p>Follow Us:</p>
       <ul class="social-links">
