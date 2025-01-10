@@ -149,7 +149,12 @@ document.addEventListener("DOMContentLoaded", () => {
         urlParams.set('ai', aiApi);
         urlParams.set('aiType', aiTypeValue);
         const urlParameters = urlParams.toString();
-        history.pushState({}, '', `?${urlParameters}`);
+        if(urlParams.get('aiType') != window.history.state?.aiType){
+            history.pushState({aiType: aiTypeValue}, '', `?${urlParameters}`);
+        }else{
+            history.replaceState({aiType: aiTypeValue}, '', `?${urlParameters}`);
+        }
+        console.log(history.state);
     };
 
 
