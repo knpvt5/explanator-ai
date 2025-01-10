@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import StreamingHttpResponse, JsonResponse
+from django.shortcuts import render, redirect
+from django.http import StreamingHttpResponse, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from openai import OpenAI
@@ -29,7 +29,11 @@ except Exception as e:
     return render(request, 'nvidia/nvidia.html') """
 
 def nvidia_api_cb(request):
-    return render(request, 'nvidia/nvidia_api_cb.html')
+    if request.headers.get('X-Requested-With') == 'Fetch':
+        return render(request, 'nvidia/nvidia_api_cb.html')
+    else:
+        return redirect('/?ai=nvidia&aiType=nvidia-api-cb')
+
 
 def nvidia_docs_analyzer(request):
     return render(request, 'nvidia/nvidia_docs_analyzer.html')

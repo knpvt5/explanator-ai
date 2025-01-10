@@ -69,7 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateContent(aiApi, aiTypeValue) {
 
-        fetch(`${aiApi}/${aiTypeValue}`)
+        fetch(`${aiApi}/${aiTypeValue}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'Fetch', 
+            },
+        })
             .then(response => {
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 return response.text();
@@ -149,10 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
         urlParams.set('ai', aiApi);
         urlParams.set('aiType', aiTypeValue);
         const urlParameters = urlParams.toString();
-        if(urlParams.get('aiType') != window.history.state?.aiType){
-            history.pushState({aiType: aiTypeValue}, '', `?${urlParameters}`);
-        }else{
-            history.replaceState({aiType: aiTypeValue}, '', `?${urlParameters}`);
+        if (urlParams.get('aiType') != window.history.state?.aiType) {
+            history.pushState({ aiType: aiTypeValue }, '', `?${urlParameters}`);
+        } else {
+            history.replaceState({ aiType: aiTypeValue }, '', `?${urlParameters}`);
         }
         console.log(history.state);
     };
