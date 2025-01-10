@@ -1,6 +1,6 @@
 # views.py in your 'nvidia' app
 import os
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
@@ -24,10 +24,16 @@ model = genai.GenerativeModel("gemini-1.5-flash")
     return render(request, 'gemini/gemini.html') """
 
 def gemini_api_cb(request):
-    return render(request, 'gemini/gemini_api_cb.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'gemini/gemini_api_cb.html')
+    else:
+        return redirect('/?ai=gemini&aiType=gemini-api-cb')
 
 def gemini_docs_analyzer(request):
-    return render(request, 'gemini/gemini_docs_analyzer.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'gemini/gemini_docs_analyzer.html')
+    else:
+        return redirect('/?ai=gemini&aiType=gemini-docs-analyzer')
 
 
 # Function to stream the chunks back to the client

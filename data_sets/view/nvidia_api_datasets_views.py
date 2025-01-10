@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import StreamingHttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -30,10 +30,18 @@ except Exception as e:
 
 #views here.
 def nvidia_api_prompt_generator_ds(request):
-    return render(request, 'data_sets/nvidia_api_datasets/nvidia_api_prompt_generator_ds.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'data_sets/nvidia_api_datasets/nvidia_api_prompt_generator_ds.html')
+    else:
+        return redirect('/?ai=nvidia&aiType=nvidia-api-prompt-generator-ds')
+    
 
 def nvidia_raw_dataset_reader(request):
-    return render(request, 'data_sets/nvidia_api_datasets/nvidia_raw_dataset_reader.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'data_sets/nvidia_api_datasets/nvidia_raw_dataset_reader.html')
+    else:
+        return redirect('/?ai=nvidia&aiType=nvidia-raw-dataset-reader')
+
 
 # Generator function to stream API response chunks
 def generate_stream_responses(response):

@@ -1,5 +1,5 @@
 import os
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators.http import require_http_methods
@@ -33,10 +33,17 @@ def generate_stream_responses(response):
         yield f"data: {json.dumps({'error': str(e)})}\n\n"
         
 def gemini_api_prompt_generator_ds(request):
-    return render(request, 'data_sets/gemini_api_datasets/gemini_api_prompt_generator_ds.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'data_sets/gemini_api_datasets/gemini_api_prompt_generator_ds.html')
+    else:
+        return redirect('/?ai=gemini&aiType=gemini-api-prompt-generator-ds')
+    
 
 def gemini_raw_dataset_reader(request):
-    return render(request, 'data_sets/gemini_api_datasets/gemini_raw_dataset_reader.html')
+    if request.headers.get('X-Requested-With') == 'homeNavFetch':
+        return render(request, 'data_sets/gemini_api_datasets/gemini_raw_dataset_reader.html')
+    else:
+        return redirect('/?ai=gemini&aiType=gemini-raw-dataset-reader')
 
 @csrf_exempt
 @require_http_methods(["POST"])
