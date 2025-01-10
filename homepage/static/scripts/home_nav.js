@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Close sidebar when clicking outside
         document.addEventListener('click', function (e) {
-            if (!leftAside.contains(e.target) && !menuBtn.contains(e.target) && (leftAside.classList.contains("menu-slide"))) {
+            if (!leftAside.contains(e.target) && (leftAside.classList.contains("menu-slide"))) {
                 leftAside.classList.remove('menu-slide');
                 GlobalFunction.updateMenuButtonIcon();
             }
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setActiveNav(aiTypeValue);
 
             // Mobile menu closing
-            if (window.innerWidth < 480) {
+            if ((window.innerWidth < 480) && (leftAside.classList.contains("menu-slide"))) {
                 leftAside.classList.toggle("menu-slide");
                 GlobalFunction.updateMenuButtonIcon();
             }
