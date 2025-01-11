@@ -1,5 +1,5 @@
-const header = document.querySelector('header');
-const nav = document.querySelector('nav');
+const pageHeader = document.querySelector('header');
+const pageNav = document.querySelector('nav');
 
 fetch('/', {
     method: 'GET',

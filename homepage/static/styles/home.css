@@ -47,7 +47,7 @@ main {
   border-radius: 10px;
 }
 
-#codeBox-above-space {
+.codeBox-above-space {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 10px;
