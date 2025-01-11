@@ -72,11 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`${aiApi}/${aiTypeValue}`, {
             method: 'GET',
             headers: {
-                'API-request-from': 'homeNavFetch', 
+                'API-request-from': 'homeNavFetch',
             },
         })
             .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 return response.text();
             })
             .then(data => {
