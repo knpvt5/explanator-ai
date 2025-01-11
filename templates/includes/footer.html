@@ -1,29 +1,39 @@
+{% load static %}
+
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-top">
       <div class="col one">
         <p>About Us</p>
-        <li>
-          <a href="{% url 'about_us' %}">About Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </li>
+        <ul>
+          <li>
+            <a href="{% url 'about_us' %}">About Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </li>
+        </ul>
       </div>
       <div class="col two">
         <p>Support</p>
-        <li>
-          <a href="{% url 'contact_us' %}">Contact Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </li>
+        <ul>
+          <li>
+            <a href="{% url 'contact_us' %}">Contact Us <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </li>
+        </ul>
       </div>
       <div class="col three">
         <p>Privacy Policy</p>
-        <li>
-          <a href="{% url 'privacy_policy' %}">Privacy Policy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </li>
+        <ul>
+          <li>
+            <a href="{% url 'privacy_policy' %}">Privacy Policy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </li>
+        </ul>
       </div>
       <div class="col four">
         <p>Terms of Use</p>
-        <li>
-          <a href="{% url 'terms_of_use' %}">Terms of Use <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </li>
+        <ul>
+          <li>
+            <a href="{% url 'terms_of_use' %}">Terms of Use <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -46,3 +56,5 @@
     </div>
   </div>
 </footer>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}" />

@@ -1,12 +1,21 @@
-console.log("hello homenav js");
+const header = document.querySelector('header');
+const nav = document.querySelector('nav');
 
-
-fetch('/',{
+fetch('/', {
     method: 'GET',
 })
-.then(response => {
-    if(!response.ok){
-        throw Error(response.statusText);
-    }
-    return response.text();
-})
+    .then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.log(error)
+    });
+
+    const parser = new DOMParser();
+    const fetchedDocument = parser.parseFromString(data, "text/html");

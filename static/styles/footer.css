@@ -12,7 +12,6 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   width: 100%;
-  list-style: none;
   margin-bottom: 20px;
 }
 
@@ -24,21 +23,32 @@
 
 .footer-top .col p {
   font-weight: bold;
-  margin-bottom: 0px;
   text-align: center;
+  margin-bottom: -15px;
 }
 
-.footer-top .col li a {
+.footer-top .col ul{
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+.footer-top .col ul li {
+  margin: 0px;
+  padding: 0px;
+}
+
+.footer-top .col ul li a {
   text-decoration: none;
   color: #4693ff;
   transition: all 0.3s ease-in-out;
 }
-.footer-top .col li a:hover {
+.footer-top .col ul li a:hover {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.footer-top li a i {
+.footer-top ul li a i {
   font-size: 13px;
 }
 
