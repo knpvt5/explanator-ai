@@ -18,7 +18,7 @@
         <p>Welcome to Explanator AI, a platform dedicated to simplifying complex information with the power of artificial intelligence.</p>
         <div class="about-details">
           <div class="about-image">
-            <img src="your-image.jpg" alt="Explanator AI">
+            {% comment %} <img src="your-image.jpg" alt="Explanator AI"> {% endcomment %}
           </div>
           <div class="about-text">
             <h2>Our Mission</h2>
@@ -36,8 +36,7 @@
       </div>
   </section>
 
-  <footer>
-    <p>&copy; 2024 Explanator AI. All rights reserved.</p>
-  </footer>
+  <script src="{% static 'scripts/dynamicHomeNav.js' %}"></script>
+
 </body>
 </html>
