@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Create a unique ID for the textarea if not already defined
         const textArea = codeBox.querySelector("textarea");
         if (textArea) {
-            textArea.id = `python-code-editor-${index}`;
+            textArea.className = `python-code-editor-${index}`;
         }
 
         // Initialize CodeMirror for the current code box
