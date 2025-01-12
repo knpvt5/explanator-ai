@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => { });
     const GlobalFunction = {};
     const menuBtn = document.querySelector(".menu-btn");
     const leftAside = document.querySelector(".left-aside");
@@ -192,4 +192,3 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     InitialLoad();
 
-});

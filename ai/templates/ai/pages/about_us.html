@@ -1,50 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
-  <link rel="stylesheet" href="{% static 'styles/pages/about_us.css' %}">
-  <title>About Us - Explanator AI</title>
-</head>
-<body>
-  <header>
-    {% comment %} dynamic header goes here {% endcomment %}
-  </header>
-  <nav class="left-aside">
-    {% comment %} dynamic nav goes here {% endcomment %}
-  </nav>
+    <!-- fontAwesome library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <section class="about-us">
-      <div class="about-container">
-        <h1>About Explanator AI</h1>
-        <p>Welcome to Explanator AI, a platform dedicated to simplifying complex information with the power of artificial intelligence.</p>
-        <div class="about-details">
-          <div class="about-image">
-            {% comment %} <img src="your-image.jpg" alt="Explanator AI"> {% endcomment %}
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'styles/pages/about_us.css' %}" />
+    <title>About Us - Explanator AI</title>
+  </head>
+  <body>
+    <header>{% comment %} dynamic header goes here {% endcomment %}</header>
+    <nav class="left-aside">{% comment %} dynamic nav goes here {% endcomment %}</nav>
+
+    <main id="main-content">
+      <div class="content">
+          <div class="about-container">
+            <h1>About Explanator AI</h1>
+            <p>Welcome to Explanator AI, a platform dedicated to simplifying complex information with the power of artificial intelligence.</p>
+            <div class="about-details">
+              <div class="about-image">{% comment %} <img src="your-image.jpg" alt="Explanator AI" /> {% endcomment %}</div>
+              <div class="about-text">
+                <h2>Our Mission</h2>
+                <p>At Explanator AI, our mission is to leverage cutting-edge AI technologies to make complex topics easy to understand for everyone. Whether you're exploring new technologies, financial concepts, or any other intricate subjects, we're here to break them down in simple, digestible formats.</p>
+                <h2>Our Vision</h2>
+                <p>We envision a world where information is accessible, and AI tools help bridge knowledge gaps, enabling users to learn, grow, and stay informed about the latest advancements.</p>
+                <h2>Why Choose Explanator AI?</h2>
+                <ul>
+                  <li>Accessible AI-powered explanations</li>
+                  <li>Easy-to-understand breakdowns of complex topics</li>
+                  <li>Focus on education and knowledge sharing</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="about-text">
-            <h2>Our Mission</h2>
-            <p>At Explanator AI, our mission is to leverage cutting-edge AI technologies to make complex topics easy to understand for everyone. Whether you're exploring new technologies, financial concepts, or any other intricate subjects, we're here to break them down in simple, digestible formats.</p>
-            <h2>Our Vision</h2>
-            <p>We envision a world where information is accessible, and AI tools help bridge knowledge gaps, enabling users to learn, grow, and stay informed about the latest advancements.</p>
-            <h2>Why Choose Explanator AI?</h2>
-            <ul>
-              <li>Accessible AI-powered explanations</li>
-              <li>Easy-to-understand breakdowns of complex topics</li>
-              <li>Focus on education and knowledge sharing</li>
-            </ul>
-          </div>
-        </div>
       </div>
-  </section>
+    </main>
 
-  <footer>{% include 'includes/footer.html' %}</footer>
+    <footer>{% include 'includes/footer.html' %}</footer>
 
-
-  <script src="{% static 'scripts/dynamicHomeNav.js' %}"></script>
-
-</body>
+    <script src="{% static 'scripts/dynamicHomeNav.js' %}"></script>
+  </body>
 </html>
