@@ -161,7 +161,6 @@
         } else {
             history.replaceState({ aiType: aiTypeValue }, '', `?${urlParameters}`);
         }
-        console.log(history.state);
     };
 
 
