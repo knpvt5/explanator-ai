@@ -1,65 +1,82 @@
-/* About Us Section */
 
+
+/* Section Styles */
 .about-container {
-    /* height: fit-content; */
-    background: #333;
-    color: #fff;
-    padding: 15px;
-    /* overflow-x: auto; */
-    border-radius: 10px;
+  background-color: #333;
+  color: #ddd;
+  border-radius: 8px;
+  padding: 15px;
 }
 
-.about-us h1 {
+.about-container h1 {
   font-size: 2.5rem;
+  text-align: center;
+  color: #fff;
+  /* margin-bottom: 20px; */
+}
+
+.about-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #ddd;
   margin-bottom: 20px;
 }
 
+/* About Details */
 .about-details {
   display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Image Container */
 .about-image img {
-  width: 100%;
-  max-width: 500px;
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Text Container */
 .about-text {
   flex: 1;
-  text-align: left;
+  min-width: 300px;
 }
 
 .about-text h2 {
   font-size: 1.8rem;
   margin-top: 20px;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
 .about-text p {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  line-height: 1.6;
+  margin-bottom: 10px;
 }
 
 .about-text ul {
-  margin-top: 20px;
-  list-style-type: disc;
+  margin-top: 10px;
   padding-left: 20px;
+  list-style: disc;
 }
 
+.about-text ul li {
+  margin-bottom: 8px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .about-details {
-    flex-direction: column;
-    align-items: center;
+      flex-direction: column;
   }
 
-  .about-text {
-    text-align: center;
+  .about-container h1 {
+      font-size: 2rem;
   }
 
-  .about-image img {
-    max-width: 100%;
+  .about-text h2 {
+      font-size: 1.5rem;
   }
 }

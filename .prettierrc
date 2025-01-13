@@ -3,5 +3,7 @@
   "trailingComma": "all",
   "singleQuote": true,
   "printWidth": 2000,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "htmlWhitespaceSensitivity": "ignore",
+  "bracketSameLine": true
 }

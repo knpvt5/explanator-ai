@@ -1,0 +1,43 @@
+/* General Styles */
+
+/* Main Privacy Policy Styles */
+.privacy-policy {
+    padding: 20px;
+    border-radius: 8px;
+    background: #333;
+    color: #ddd;
+}
+
+.privacy-policy h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.privacy-policy h2 {
+    margin-top: 20px;
+    color: #fff;
+}
+
+.privacy-policy p {
+    margin: 10px 0;
+}
+
+.privacy-policy ul {
+    margin: 10px 0 20px 20px;
+    list-style-type: disc;
+}
+
+.privacy-policy ul li {
+    margin: 5px 0;
+}
+
+.privacy-policy a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.privacy-policy a:hover {
+    text-decoration: underline;
+}

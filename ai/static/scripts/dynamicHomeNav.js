@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (navElement) {
         observer.observe(navElement, { childList: true, subtree: true });
-        console.log("Element observed:", navElement.tagName);
+        // console.log("Element observed:", navElement.tagName);
     } else {
-        console.error("Neither header nor nav element found!");
+        console.error("No nav element found!");
     }
 
 });

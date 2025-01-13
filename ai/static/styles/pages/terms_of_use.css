@@ -1,0 +1,55 @@
+/* Terms Container */
+.terms-container {
+  padding: 20px;
+  background: #333;
+  /* color: #fff; */
+  border-radius: 8px;
+}
+
+.terms-container h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.terms-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  margin-left: 25px;
+  color: #ddd;
+}
+
+/* Section Headings */
+.terms-section h2 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Links */
+.terms-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.terms-container a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #terms-of-use {
+    padding: 20px 10px;
+  }
+
+  .terms-container h1 {
+    font-size: 2rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.5rem;
+  }
+}

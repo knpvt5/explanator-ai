@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontAwesome library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'styles/pages/privacy_policy.css' %}" />
+    <title>Privacy Policy - Explanator AI</title>
+  </head>
+  <body>
+    <header>{% comment %} dynamic header goes here {% endcomment %}</header>
+    <nav class="left-aside">{% comment %} dynamic nav goes here {% endcomment %}</nav>
+
+    <main id="main-content">
+      <div class="content">
+        <section class="privacy-policy">
+          <h1>Privacy Policy</h1>
+          <p>Welcome to Explanator AI! Your privacy is of utmost importance to us. This Privacy Policy outlines the types of information we collect, how it is used, and the steps we take to protect your information.</p>
+
+          <h2>Information We Collect</h2>
+          <p>We may collect the following types of information:</p>
+          <ul>
+            <li>
+              <strong>Personal Information:</strong>
+              Such as your name, email address, and any other information you provide when contacting us or signing up for services.
+            </li>
+            <li>
+              <strong>Usage Data:</strong>
+              Details about your interactions with our platform, including visited pages, time spent on pages, chat data, and other diagnostic data.
+            </li>
+          </ul>
+
+          <h2>How We Use Your Information</h2>
+          <p>We use the collected information to:</p>
+          <ul>
+            <li>Provide, maintain, and improve our services.</li>
+            <li>Respond to inquiries or support requests.</li>
+            <li>Analyze usage trends to enhance user experience.</li>
+          </ul>
+
+          <h2>Data Security</h2>
+          <p>We implement appropriate technical and organizational measures to protect your data from unauthorized access, loss, or misuse. However, please note that no method of data transmission or storage is completely secure.</p>
+
+          <h2>Contact Us</h2>
+          <p>
+            If you have any questions about this Privacy Policy or how we handle your data, please contact us at
+            <a href="mailto:support@explanatorai.com">support@explanatorai.com</a>
+            .
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>{% include 'includes/footer.html' %}</footer>
+
+    <script src="{% static 'scripts/dynamicHomeNav.js' %}"></script>
+  </body>
+</html>
