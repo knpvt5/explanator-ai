@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontAwesome library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+    <link rel="icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'styles/pages/contact_us.css' %}" />
+    <title>About Us - Explanator AI</title>
+  </head>
+  <body>
+    <header>{% comment %} dynamic header goes here {% endcomment %}</header>
+    <nav class="left-aside">{% comment %} dynamic nav goes here {% endcomment %}</nav>
+
+    <main id="main-content">
+      <div class="content">
+        <section>
+          <div class="contact-container">
+            <h1>Contact Us</h1>
+            <p>We’d love to hear from you! Whether you have a question, feedback, or need support, feel free to reach out.</p>
+
+            <div class="contact-details">
+              <h2>Get in Touch</h2>
+              <ul>
+                <li>
+                  <strong>Email:</strong>
+                  <a href="mailto:support@explanator.ai">support@explanatorai.site</a>
+                </li>
+                <li>
+                  <strong>Phone:</strong>
+                  +91 N/A
+                </li>
+                <li>
+                  <strong>Address:</strong>
+                  Delhi, North Delhi - 110054
+                </li>
+              </ul>
+            </div>
+
+            <div class="contact-form">
+              <h2>Send Us a Message</h2>
+              <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__UJF8BdUQ0kyN1ZFSjRRUFFDWEM0SDlYTzRVNkMxSS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>{% include 'includes/footer.html' %}</footer>
+
+    <script src="{% static 'scripts/dynamicHomeNav.js' %}"></script>
+  </body>
+</html>
