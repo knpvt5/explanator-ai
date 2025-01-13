@@ -64,99 +64,40 @@ fetch('/', {
     });
 
 
-setTimeout(() => {
-    document.querySelectorAll(".ai-types li a").forEach((aiType) => {
-        console.log("eventListener registered")
-
-        // Click event for each AI type
-        aiType.addEventListener("click", (e) => {
-            e.preventDefault();
-            window.location.pathname = "/";
-        });
-    });
-}, 3000);
-
-
-/* document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const observer = new MutationObserver((mutationsList, observer) => {
         document.querySelectorAll(".ai-types li a").forEach((aiType) => {
             const aiApi = aiType.dataset.api || "";
             const aiTypeValue = aiType.getAttribute("href").replace("#", "");
-            console.log("eventListener registered");
 
             // Click event for each AI type
             aiType.addEventListener("click", (e) => {
                 e.preventDefault();
                 const url = new URL(window.location);
-                const urlPathName = url.pathname;
-                console.log(urlPathName);
-                // window.history.pushState({}, '', '/newPath');
-                window.location.pathname = "/";
+                // window.location.pathname = "/";
+                path = `?ai=${aiApi}&aiType=${aiTypeValue}`;
+                console.log("pathname", path);
+                url.pathname = '/';
+                // url.search = '?ai=gemini&aiType=gemini-api-cb';
+                url.search = path;
+                window.location.href = url.href;
             });
         });
         observer.disconnect();
     });
 
     // observation target to 'header' using querySelector
-    const header = document.querySelector('header');
-    const nav = document.querySelector('nav');
-    const elementToObserve = header && nav;
+    const navElement = document.querySelector('nav');
 
-    if (elementToObserve) {
-        observer.observe(elementToObserve, { childList: true, subtree: true });
-        console.log("Element observed:", elementToObserve.tagName);
+    if (navElement) {
+        observer.observe(navElement, { childList: true, subtree: true });
+        console.log("Element observed:", navElement.tagName);
     } else {
         console.error("Neither header nor nav element found!");
     }
 
-}); */
-
-
-
-/* window.addEventListener('popstate', (event) => {
-    // const url = new URL(window.location);
-    window.location.pathname = "/";
-    console.log("popstate clicked");
-}); */
-
-
-
-// document.addEventListener('DOMContentLoaded', () => { });
-/* const observer = new MutationObserver((mutationsList, observer) => {
-
-    document.querySelectorAll(".ai-types li a").forEach((aiType) => {
-        const aiApi = aiType.dataset.api || "";
-        const aiTypeValue = aiType.getAttribute("href").replace("#", "");
-        console.log("eventListener registered");
-
-        // Click event for each AI type
-        aiType.addEventListener("click", (e) => {
-            e.preventDefault();
-            const url = new URL(window.location);
-            console.log(url.pathname);
-            
-            url.pathname = "/";
-            console.log("pathname set", url.pathname);
-            console.log(url.toString());
-
-        });
-    });
-
-    observer.disconnect();
-
 });
 
-// observation target to 'header' using querySelector
-const header = document.querySelector('header');
-const nav = document.querySelector('nav');
-const elementToObserve = header && nav;
-
-if (elementToObserve) {
-    observer.observe(elementToObserve, { childList: true, subtree: true });
-    console.log("Element observed:", elementToObserve.tagName);
-} else {
-    console.error("Neither header nor nav element found!");
-} */
 
 
 
