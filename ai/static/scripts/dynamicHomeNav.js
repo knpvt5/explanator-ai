@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new MutationObserver((mutationsList, observer) => {
         document.querySelectorAll(".ai-types li a").forEach((aiType) => {
             const aiApi = aiType.dataset.api || "";
-            const aiTypeValue = aiType.getAttribute("href").replace("#", "");
+            const aiTypeValue = aiType.getAttribute("href").replace("#", "");            
 
             // Click event for each AI type
             aiType.addEventListener("click", (e) => {
