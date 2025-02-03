@@ -44,7 +44,7 @@ document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) =
         e.preventDefault();
         updateContent(aiApi, aiTypeValue);
         updateUrl(aiApi, aiTypeValue);
-        setActiveNav(aiTypeValue);
+        setActiveNav();
 
         // Mobile menu closing
         if ((window.innerWidth < 480) && (leftAside.classList.contains("menu-slide"))) {
@@ -55,13 +55,16 @@ document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) =
 });
 
 // Function to handle active navigation state
-function setActiveNav(currentAiTypeValue) {
-    const aiTypeValue = new URL(window.location).searchParams.get('aiType');
-    if (aiTypeValue === currentAiTypeValue) {
-        aiType.classList.add("active");
-    } else {
-        aiType.classList.remove("active");
-    }
+function setActiveNav() {
+    document.querySelectorAll(".ai-types li a, .ai-options li a").forEach((aiType) => {
+        const aiTypeValue = aiType.getAttribute("href").replace("#", "");
+        const activAiTypeValue = new URL(window.location).searchParams.get('aiType');
+        if (aiTypeValue === activAiTypeValue) {
+            aiType.classList.add("active");
+        } else {
+            aiType.classList.remove("active");
+        }
+    });
 }
 
 
@@ -116,10 +119,10 @@ function updateContent(aiApi, aiTypeValue) {
                     newScriptElement.type = "module";
                     // newScriptElement.defer = true;
                     newScriptElement.onload = () => {
-                        console.log('Script loaded successfully!', newScript.src);
+                        // console.log('Script loaded successfully!', newScript.src);
                     };
                     newScriptElement.onerror = (e) => {
-                        console.error('Failed to load script:', newScript.src, e);
+                        // console.error('Failed to load script:', newScript.src, e);
                     };
                 } else {
                     newScriptElement.textContent = newScript.textContent;
@@ -171,10 +174,10 @@ window.addEventListener('popstate', (event) => {
     const aiTypeValue = urlParams.get('aiType');
     if (aiApi && aiTypeValue) {
         updateContent(aiApi, aiTypeValue);
-        setActiveNav(aiTypeValue);
     } else {
         window.location.reload();
     }
+    setActiveNav();
 });
 
 // initial load of this page
@@ -184,8 +187,8 @@ const InitialLoad = () => {
     const aiTypeValue = new URL(window.location).searchParams.get('aiType');
     if (aiApi && aiTypeValue) {
         updateContent(aiApi, aiTypeValue);
-        setActiveNav(aiTypeValue);
     }
+    setActiveNav();
 };
 InitialLoad();
 
