@@ -1,4 +1,4 @@
-# 📖 [Explanator AI](https://explanatorai.site/)
+# 📖 [🔗Explanator AI](https://explanatorai.site/)
 
 ## 🚀 Overview
 Explanator AI provides tools for chatbots, document analysis, datasets, fine-tuning, and local AI model deployment.
