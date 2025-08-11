@@ -1,17 +1,6 @@
 # Security Policy
 
-## Supported Versions
-
-The following versions of Explanator AI are currently supported with security updates:
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
-Only versions 5.1.x and 4.0.x are actively maintained for security issues. Older versions will not receive patches.
+Reporting security vulnerabilities is crucial for maintaining the integrity and safety of Explanator AI. We take security seriously and encourage responsible disclosure of any vulnerabilities you may find.
 
 ## Reporting a Vulnerability
 
