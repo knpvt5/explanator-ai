@@ -7,7 +7,7 @@ Reporting security vulnerabilities is crucial for maintaining the integrity and 
 If you discover a security vulnerability in Explanator AI, please follow these steps:
 
 1. **Contact Us Privately:**  
-   Email your findings to [security@explanator.ai](mailto:security@explanator.ai). Do not create a public issue.
+   Email your findings to [security@explanator.ai](mailto:security@explanatorai.site). Do not create a public issue.
 
 2. **Include Details:**  
    Provide a clear description of the vulnerability, affected versions, steps to reproduce, and any relevant logs or code snippets.
