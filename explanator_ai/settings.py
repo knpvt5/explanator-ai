@@ -36,7 +36,7 @@ ALLOWED_HOSTS = (
         "explanator-ai.onrender.com",
         "explanator-ai-production.up.railway.app",
         "healthcheck.railway.app",
-        "https://explanator-ai-ssjd.onrender.com",
+        "explanator-ai-ssjd.onrender.com",
         ".aigalaxy.tech",
     ]
     if ENVIRONMENT == "production"
