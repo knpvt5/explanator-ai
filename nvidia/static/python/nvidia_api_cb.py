@@ -32,8 +32,7 @@ print("Using model:", model_name)
 
 client = OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
-    # api_key=os.getenv("NVIDIA_API")
-    api_key="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"
+    api_key=os.getenv("NVIDIA_API")
 )
 # print(os.getenv("NVIDIA_API")) 
 
